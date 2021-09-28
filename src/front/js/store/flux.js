@@ -44,7 +44,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					lat: -33.418,
 					lng: -70.6064,
 					zone: "Norte"
-				},
+				}
+			],
+			puntosDeEntrega: [
 				{
 					name: "Raul Perez",
 					address: "Portal La Reina",

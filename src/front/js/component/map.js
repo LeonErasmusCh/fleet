@@ -32,8 +32,26 @@ export const Map = () => {
 								<Marker
 									key={position}
 									position={{ lat: person.lat, lng: person.lng }}
-									data-toggle="modal"
-									data-target="#exampleModal"
+									icon={{
+										url: require("../../img/box-icon.png")
+									}}
+									onClick={() => {
+										alert("Cliente " + person.name + " esta en punto de retiro " + person.address);
+									}}
+								/>
+							);
+						})}
+						{store.puntosDeEntrega.map((person, position) => {
+							return (
+								<Marker
+									key={position}
+									position={{ lat: person.lat, lng: person.lng }}
+									icon={{
+										url: require("../../img/destination.png")
+									}}
+									onClick={() => {
+										alert("Nombre: " + person.name + "  " + " Punto de entrega: " + person.address);
+									}}
 								/>
 							);
 						})}
