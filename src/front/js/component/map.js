@@ -18,23 +18,30 @@ const center = {
 	lng: -70.6344
 };
 
-function getLocation() {
-	if (navigator.geolocation) {
-		console.log(navigator.geolocation.getCurrentPosition(showPosition));
-	} else {
-		console.log("geolocation not activated");
-	}
-}
-
-function showPosition(position) {
-	console.log("Mi Lat es: " + position.coords.latitude);
-	console.log("Mi Lng es: " + position.coords.longitude);
-}
-
 export const Map = () => {
 	const { store, actions } = useContext(Context);
-	const [lat, setLat] = useState(0);
-	const [long, setLong] = useState(0);
+	const [userLat, setUserLat] = useState(null);
+	const [userLng, setUserLng] = useState(null);
+	const [status, setStatus] = useState(null);
+
+	const getLocation = () => {
+		if (!navigator.geolocation) {
+			setStatus("Geolocation is not supported by your browser");
+		} else {
+			setStatus("Locating...");
+			navigator.geolocation.getCurrentPosition(
+				position => {
+					setStatus();
+					setUserLat(position.coords.latitude);
+					setUserLng(position.coords.longitude);
+				},
+				() => {
+					setStatus("Unable to retrieve your location");
+				}
+			);
+		}
+	};
+
 	return (
 		<LoadScript googleMapsApiKey="AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0">
 			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
@@ -60,14 +67,18 @@ export const Map = () => {
 						{/* button for user position */}
 						<button
 							className="btn btn-secondary mx-auto"
-							onClick={(lat, long) => {
+							onClick={() => {
 								getLocation();
-								console.log(showPosition);
+								console.log("User Status", status);
+								console.log("User lat", userLat);
+								console.log("User lng", userLng);
 							}}
 							style={{ position: "absolute" }}>
 							mi ubicación actual
 						</button>
-						{/* __________________________ */}
+						{/*  El Merker abajo se pinta despues el onClick en boton "mi ubicacion", para pintar ubicacion del USARIO*/}
+						<Marker position={{ lat: userLat, lng: userLng }} />
+
 						{store.puntosDeEntrega.map((person, position) => {
 							return (
 								<Marker
