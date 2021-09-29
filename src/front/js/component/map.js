@@ -66,14 +66,18 @@ export const Map = () => {
 						})}
 						{/* button for user position */}
 						<button
-							className="btn btn-secondary mx-auto"
+							className="btn btn-success"
+							style={{
+								position: "absolute",
+								marginLeft: "10px",
+								bottom: "10px"
+							}}
 							onClick={() => {
 								getLocation();
 								console.log("User Status", status);
 								console.log("User lat", userLat);
 								console.log("User lng", userLng);
-							}}
-							style={{ position: "absolute" }}>
+							}}>
 							mi ubicación actual
 						</button>
 						{/*  El Merker abajo se pinta despues el onClick en boton "mi ubicacion", para pintar ubicacion del USARIO*/}
