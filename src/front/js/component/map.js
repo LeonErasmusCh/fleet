@@ -57,6 +57,7 @@ export const Map = () => {
 								/>
 							);
 						})}
+
 						{/* button for user position */}
 						<button
 							className="btn btn-secondary mx-auto"
