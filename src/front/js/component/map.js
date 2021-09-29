@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { useContext } from "react";
 
 /* Tamaño del mapa */
 const containerStyle = {
@@ -44,7 +43,7 @@ export const Map = () => {
 
 	return (
 		<LoadScript googleMapsApiKey="AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0">
-			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
+			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={11}>
 				{/* Child components, such as markers, info windows, etc. */}
 				<>
 					{/* Markers son los pins en el mapa */}
@@ -60,6 +59,7 @@ export const Map = () => {
 									}}
 									onClick={() => {
 										alert("Cliente " + person.name + " esta en punto de retiro " + person.address);
+										actions.addressToLatLong();
 									}}
 								/>
 							);
