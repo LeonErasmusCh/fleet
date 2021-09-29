@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { useContext } from "react";
 
 /* Tamaño del mapa */
 const containerStyle = {
@@ -18,26 +17,33 @@ const center = {
 	lng: -70.6344
 };
 
-function getLocation() {
-	if (navigator.geolocation) {
-		console.log(navigator.geolocation.getCurrentPosition(showPosition));
-	} else {
-		console.log("geolocation not activated");
-	}
-}
-
-function showPosition(position) {
-	console.log("Mi Lat es: " + position.coords.latitude);
-	console.log("Mi Lng es: " + position.coords.longitude);
-}
-
 export const Map = () => {
 	const { store, actions } = useContext(Context);
-	const [lat, setLat] = useState(0);
-	const [long, setLong] = useState(0);
+	const [userLat, setUserLat] = useState(null);
+	const [userLng, setUserLng] = useState(null);
+	const [status, setStatus] = useState(null);
+
+	const getLocation = () => {
+		if (!navigator.geolocation) {
+			setStatus("Geolocation is not supported by your browser");
+		} else {
+			setStatus("Locating...");
+			navigator.geolocation.getCurrentPosition(
+				position => {
+					setStatus();
+					setUserLat(position.coords.latitude);
+					setUserLng(position.coords.longitude);
+				},
+				() => {
+					setStatus("Unable to retrieve your location");
+				}
+			);
+		}
+	};
+
 	return (
 		<LoadScript googleMapsApiKey="AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0">
-			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
+			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={11}>
 				{/* Child components, such as markers, info windows, etc. */}
 				<>
 					{/* Markers son los pins en el mapa */}
@@ -53,6 +59,7 @@ export const Map = () => {
 									}}
 									onClick={() => {
 										alert("Cliente " + person.name + " esta en punto de retiro " + person.address);
+										actions.addressToLatLong();
 									}}
 								/>
 							);
@@ -60,15 +67,23 @@ export const Map = () => {
 
 						{/* button for user position */}
 						<button
-							className="btn btn-secondary mx-auto"
-							onClick={(lat, long) => {
-								getLocation();
-								console.log(showPosition);
+							className="btn btn-success"
+							style={{
+								position: "absolute",
+								marginLeft: "10px",
+								bottom: "10px"
 							}}
-							style={{ position: "absolute" }}>
+							onClick={() => {
+								getLocation();
+								console.log("User Status", status);
+								console.log("User lat", userLat);
+								console.log("User lng", userLng);
+							}}>
 							mi ubicación actual
 						</button>
-						{/* __________________________ */}
+						{/*  El Merker abajo se pinta despues el onClick en boton "mi ubicacion", para pintar ubicacion del USARIO*/}
+						<Marker position={{ lat: userLat, lng: userLng }} />
+
 						{store.puntosDeEntrega.map((person, position) => {
 							return (
 								<Marker

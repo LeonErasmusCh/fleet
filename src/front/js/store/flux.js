@@ -70,6 +70,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			]
 		},
+		allVendedores: [],
+		geocodedVendedores: [],
+
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -121,6 +124,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			//Traer todos Vendedores
+			loadAllVendedores: () => {
+				const store = getStore();
+				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/perfilTransportista")
+					.then(response => response.json())
+					.then(result => {
+						setStore({ allVendedores: result });
+						console.log("*** allVendedores ***", store.allVendedores);
+					})
+					.catch(error => console.log("error", error));
+			},
+			//funcion para convertir direccciones a LAT LNG
+			addressToLatLong: () => {
+				const store = getStore();
+				let url = "https://maps.googleapis.com/maps/api/geocode/json?";
+				let country = "&components=country:CL";
+				let googleKey = "&key=AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0";
+				//CONCATENATE URL + ADDRESS + APIkey  TO DO GEOCODING
+				let address;
+				for (address = 0; address < store.allVendedores.length; address++) {
+					console.log("ALL VENDEDORES DIRECCIONES: " + store.allVendedores[address].transAddress);
+					// Remove , and " "
+					let initialString = store.allVendedores[address].transAddress.replace(/ /g, "+");
+					let concatString = initialString.replace(/,/g, "");
+					console.log(concatString);
+					let geoCoded = url + concatString + country + googleKey;
+					// Concat
+					console.log("geoCoded url:" + geoCoded);
+					// Save in store
+					setStore({ geocodedVendedores: geoCoded });
+					console.log(store.geocodedVendedores);
+				}
 			}
 		}
 	};
