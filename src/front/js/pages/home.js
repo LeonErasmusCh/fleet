@@ -13,7 +13,14 @@ export const Home = () => {
 	return (
 		<div>
 			<HeroSection />
-			<TeamMembers />
+			<div className="row">
+				<TeamMembers />
+				<TeamMembers />
+				<TeamMembers />
+				<TeamMembers />
+				<TeamMembers />
+			</div>
+
 			<Contacts />
 			<FrequentlyAsked />
 			<Allseller />

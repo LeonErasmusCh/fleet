@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { Link, useParams } from "react-router-dom";
@@ -18,14 +18,30 @@ const center = {
 	lng: -70.6344
 };
 
+function getLocation() {
+	if (navigator.geolocation) {
+		console.log(navigator.geolocation.getCurrentPosition(showPosition));
+	} else {
+		console.log("geolocation not activated");
+	}
+}
+
+function showPosition(position) {
+	console.log("Mi Lat es: " + position.coords.latitude);
+	console.log("Mi Lng es: " + position.coords.longitude);
+}
+
 export const Map = () => {
 	const { store, actions } = useContext(Context);
+	const [lat, setLat] = useState(0);
+	const [long, setLong] = useState(0);
 	return (
 		<LoadScript googleMapsApiKey="AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0">
 			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
 				{/* Child components, such as markers, info windows, etc. */}
 				<>
 					{/* Markers son los pins en el mapa */}
+
 					<div>
 						{store.vendedores.map((person, position) => {
 							return (
@@ -41,6 +57,17 @@ export const Map = () => {
 								/>
 							);
 						})}
+						{/* button for user position */}
+						<button
+							className="btn btn-secondary mx-auto"
+							onClick={(lat, long) => {
+								getLocation();
+								console.log(showPosition);
+							}}
+							style={{ position: "absolute" }}>
+							mi ubicación actual
+						</button>
+						{/* __________________________ */}
 						{store.puntosDeEntrega.map((person, position) => {
 							return (
 								<Marker
