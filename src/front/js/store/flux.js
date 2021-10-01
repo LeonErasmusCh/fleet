@@ -70,8 +70,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			]
 		},
+		//Vendedores desde api, direccion sin geocode
 		allVendedores: [],
-		geocodedVendedores: [],
+		//Url en formato google para traer lat: lng: de google api
+		geocodedVendedores_url: [],
+		// Lat: lng: de cada usario para pintar markers en map
+		vendedoresLatLng: [],
+		//probando lat lng
+		test: [],
 
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -94,7 +100,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(result => {
 						setStore({ seller: result });
-						console.log(store.seller);
+						//console.log(store.seller);
 					})
 					.catch(error => console.log("error", error));
 			},
@@ -106,7 +112,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(result => {
 						setStore({ detailseller: result });
-						console.log("ddetailseller", store.detailseller);
+						//console.log("ddetailseller", store.detailseller);
 					})
 					.catch(error => console.log("error", error));
 			},
@@ -125,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			//Traer todos Vendedores
+			//Traer todos Vendedores desde nuestro api
 			loadAllVendedores: () => {
 				const store = getStore();
 				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/perfilTransportista")
@@ -149,14 +155,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// Remove , and " "
 					let initialString = store.allVendedores[address].transAddress.replace(/ /g, "+");
 					let concatString = initialString.replace(/,/g, "");
-					console.log(concatString);
+					//console.log(concatString);
+					// Concatenate
 					let geoCoded = url + concatString + country + googleKey;
-					// Concat
-					console.log("geoCoded url:" + geoCoded);
+					//console.log("geoCoded url:" + geoCoded);
 					// Save in store
-					setStore({ geocodedVendedores: geoCoded });
-					console.log(store.geocodedVendedores);
+					setStore({ geocodedVendedores_url: geoCoded });
+					console.log(store.geocodedVendedores_url);
 				}
+			},
+
+			fetchUrlVendedores: () => {
+				const store = getStore();
+				fetch(store.geocodedVendedores_url)
+					.then(response => response.json())
+					.then(result => {
+						setStore({ vendedoresLatLng: result.results[0].geometry.location });
+						setStore({ test: [result.results[0].geometry.location] });
+					})
+					.catch(error => console.log("error", error));
+				console.log("Nombre: ", store.allVendedores[0].lastName);
+				console.log("Fetch de geocode url para cada vendedor", store.vendedoresLatLng);
+				console.log("test", store.test);
 			}
 		}
 	};

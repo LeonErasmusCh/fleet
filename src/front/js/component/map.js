@@ -3,6 +3,7 @@ import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { BtnVendedors } from "./btn-show-vendedores";
 
 /* Tamaño del mapa */
 const containerStyle = {
@@ -59,7 +60,6 @@ export const Map = () => {
 									}}
 									onClick={() => {
 										alert("Cliente " + person.name + " esta en punto de retiro " + person.address);
-										actions.addressToLatLong();
 									}}
 								/>
 							);
@@ -83,6 +83,10 @@ export const Map = () => {
 						</button>
 						{/*  El Merker abajo se pinta despues el onClick en boton "mi ubicacion", para pintar ubicacion del USARIO*/}
 						<Marker position={{ lat: userLat, lng: userLng }} />
+
+						<BtnVendedors />
+						{/*  Mostrar vendedores
+						<Marker position={{ lat: store.test.lat, lng: store.test.lng }} />  */}
 
 						{store.puntosDeEntrega.map((person, position) => {
 							return (
