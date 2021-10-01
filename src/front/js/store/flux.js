@@ -76,6 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		geocodedVendedores_url: [],
 		// Lat: lng: de cada usario para pintar markers en map
 		vendedoresLatLng: [],
+		//probando lat lng
 		test: [],
 
 		actions: {
@@ -166,25 +167,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			fetchUrlVendedores: () => {
 				const store = getStore();
-				for (let i = 0; i <= store.geocodedVendedores_url[i].length; i++) {
-					console.log(i);
-					//Fetch out newly constructed URL.
-					{
-						/* 
-					fetch(store.geocodedVendedores_url)
-						.then(response => response.json())
-						.then(result => {
-							setStore({ vendedoresLatLng: result.results });
-							setStore({ test: result.results[i].geometry.location });
-
-							console.log("Fetch de geocode url para cada vendedor", store.vendedoresLatLng);
-							console.log("test", store.test);
-						})
-						.catch(error => console.log("error", error));
-					console.log(store.vendedores);
-				*/
-					}
-				}
+				fetch(store.geocodedVendedores_url)
+					.then(response => response.json())
+					.then(result => {
+						setStore({ vendedoresLatLng: result.results });
+						setStore({ test: result.results.geometry.location });
+					})
+					.catch(error => console.log("error", error));
+				console.log("Fetch de geocode url para cada vendedor", store.vendedoresLatLng);
+				console.log("test", store.test);
 			}
 		}
 	};

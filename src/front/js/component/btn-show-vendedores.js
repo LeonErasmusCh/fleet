@@ -16,6 +16,7 @@ export const BtnVendedors = () => {
 				}}
 				onClick={() => {
 					actions.addressToLatLong();
+					actions.fetchUrlVendedores();
 				}}>
 				muestra vendedores
 			</button>
