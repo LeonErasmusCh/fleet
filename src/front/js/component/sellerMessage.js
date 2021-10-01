@@ -36,7 +36,7 @@ export const SellerMessage = () => {
 						type="submit"
 						className="btn btn-primary"
 						onClick={() => {
-							actions.getSolicitud(sellerText);
+							actions.getMessage(sellerText);
 							console.log("Variable input: ", sellerText);
 						}}>
 						Enviar Solicitud
