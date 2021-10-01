@@ -14,11 +14,11 @@ export const Home = () => {
 		<div>
 			<HeroSection />
 			<div className="row">
-				<TeamMembers />
-				<TeamMembers />
-				<TeamMembers />
-				<TeamMembers />
-				<TeamMembers />
+				<TeamMembers name=" Constanza" />
+				<TeamMembers name=" Leon" />
+				<TeamMembers name=" Alondra" />
+				<TeamMembers name=" Sebastian" />
+				<TeamMembers name=" Renato" />
 			</div>
 
 			<Contacts />
