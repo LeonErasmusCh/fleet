@@ -30,6 +30,7 @@ export const SellerMessage = () => {
 							setSellerText(e.target.value);
 						}}
 					/>
+
 					{/* value=
 					{sellerText} */}
 					<button
