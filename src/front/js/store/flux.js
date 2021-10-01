@@ -14,6 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
+			solicitud: [],
 			seller: [],
 			detailseller: [],
 			vendedores: [
@@ -85,12 +86,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
+			// getMessage: () => {
+			// 	// fetching data from the backend
+			// 	fetch(process.env.BACKEND_URL + "/api/hello")
+			// 		.then(resp => resp.json())
+			// 		.then(data => setStore({ message: data.message }))
+			// 		.catch(error => console.log("Error loading message from backend", error));
+			// },
+
+			getMessage: message => {
+				const store = getStore();
+				setStore({ solicitud: [...store.solicitud, message] });
 			},
 
 			//Funcion llamar usuarios, (API FAKE)

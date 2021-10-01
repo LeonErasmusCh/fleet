@@ -36,6 +36,7 @@ class PerfilVendedor(db.Model):
         return {
             "id_vendor": self.id_vendor,
             "email": self.email,
+            "name": self.name,
             "lastName": self.lastName,
             "email": self.email,
             "rut": self.rut,
@@ -116,7 +117,7 @@ class PerfilTransportista(db.Model):
     transAddress = db.Column(db.String(50), unique=False, nullable=False)
     phone = db.Column(db.String(50), unique=True, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    rel = db.relationship('Tarifas')
+    relationship = db.relationship('Tarifas')
     #rel2 = db.relationship("Tarifas", foreign_keys=[phone])
 
 
