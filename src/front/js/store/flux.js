@@ -170,10 +170,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(store.geocodedVendedores_url)
 					.then(response => response.json())
 					.then(result => {
-						setStore({ vendedoresLatLng: result.results[0] });
-						setStore({ test: result.results[0].geometry.location });
+						setStore({ vendedoresLatLng: result.results[0].geometry.location });
+						setStore({ test: [result.results[0].geometry.location] });
 					})
 					.catch(error => console.log("error", error));
+				console.log("Nombre: ", store.allVendedores[0].lastName);
 				console.log("Fetch de geocode url para cada vendedor", store.vendedoresLatLng);
 				console.log("test", store.test);
 			}
