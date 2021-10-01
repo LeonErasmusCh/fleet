@@ -22,7 +22,6 @@ def all_vendedores():
     all_perfilVendedor = list(map(lambda x: x.serialize(), all_perfilVendedor))
     return jsonify(all_perfilVendedor), 200
 
-  
 
 @api.route('/encomiendas', methods=['GET'])
 def all_encomiendas():
