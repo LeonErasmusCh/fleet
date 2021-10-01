@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { Link, useParams } from "react-router-dom";
@@ -24,7 +24,7 @@ export const Map = () => {
 	const [userLng, setUserLng] = useState(null);
 	const [status, setStatus] = useState(null);
 
-	const getLocation = () => {
+	const getUserLocation = () => {
 		if (!navigator.geolocation) {
 			setStatus("Geolocation is not supported by your browser");
 		} else {
@@ -74,7 +74,7 @@ export const Map = () => {
 								bottom: "10px"
 							}}
 							onClick={() => {
-								getLocation();
+								getUserLocation();
 								console.log("User Status", status);
 								console.log("User lat", userLat);
 								console.log("User lng", userLng);

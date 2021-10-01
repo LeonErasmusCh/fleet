@@ -27,6 +27,8 @@ class PerfilVendedor(db.Model):
     password = db.Column(db.String(50), unique=False, nullable=False)
     rut = db.Column(db.String(50), unique=True, nullable=False)
     initialAddress = db.Column(db.String(50),unique=True)
+    lat = db.Column(db.Integer,unique=True)
+    lng = db.Column(db.Integer,unique=True)
     phone = db.Column(db.String(50), unique=True, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     
@@ -38,6 +40,8 @@ class PerfilVendedor(db.Model):
             "email": self.email,
             "rut": self.rut,
             "initialAddress": self.initialAddress,
+            "lat": self.lat,
+            "lng": self.lng,
             "phone": self.phone,
             # do not serialize the password, its a security breach
         }
