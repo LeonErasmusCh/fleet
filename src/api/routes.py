@@ -16,6 +16,7 @@ from flask_jwt_extended import jwt_required
 api = Blueprint('api', __name__)
 
 
+
 @api.route('/perfilVendedor', methods=['POST', 'GET'])
 def all_perfilVendedor():
 
@@ -100,6 +101,23 @@ def all_perfilTransportista():
             return(jsonify({"mensaje":"mail no se encuentra registrado"}))
 
 
+@api.route('/hello', methods=['POST', 'GET'])
+def handle_hello():
+
+   response_body = {
+        "message": "Hello! I'm a message that came from the backend"
+    }
+
+   return jsonify(response_body), 200
+
+@api.route('/perfilVendedor', methods=['GET'])
+def all_vendedores():
+    all_perfilVendedor = PerfilVendedor.query.all()    
+    all_perfilVendedor = list(map(lambda x: x.serialize(), all_perfilVendedor))
+    return jsonify(all_perfilVendedor), 200
+
+
+  
 
 @api.route('/encomiendas', methods=['GET'])
 def all_encomiendas():

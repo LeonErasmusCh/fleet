@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { BtnVendedors } from "./btn-show-vendedores";
 
 /* Tamaño del mapa */
 const containerStyle = {
@@ -23,7 +24,7 @@ export const Map = () => {
 	const [userLng, setUserLng] = useState(null);
 	const [status, setStatus] = useState(null);
 
-	const getLocation = () => {
+	const getUserLocation = () => {
 		if (!navigator.geolocation) {
 			setStatus("Geolocation is not supported by your browser");
 		} else {
@@ -59,7 +60,6 @@ export const Map = () => {
 									}}
 									onClick={() => {
 										alert("Cliente " + person.name + " esta en punto de retiro " + person.address);
-										actions.addressToLatLong();
 									}}
 								/>
 							);
@@ -74,7 +74,7 @@ export const Map = () => {
 								bottom: "10px"
 							}}
 							onClick={() => {
-								getLocation();
+								getUserLocation();
 								console.log("User Status", status);
 								console.log("User lat", userLat);
 								console.log("User lng", userLng);
@@ -83,6 +83,10 @@ export const Map = () => {
 						</button>
 						{/*  El Merker abajo se pinta despues el onClick en boton "mi ubicacion", para pintar ubicacion del USARIO*/}
 						<Marker position={{ lat: userLat, lng: userLng }} />
+
+						<BtnVendedors />
+						{/*  Mostrar vendedores
+						<Marker position={{ lat: store.test.lat, lng: store.test.lng }} />  */}
 
 						{store.puntosDeEntrega.map((person, position) => {
 							return (

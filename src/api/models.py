@@ -27,6 +27,8 @@ class PerfilVendedor(db.Model):
     password = db.Column(db.String(50), unique=False, nullable=False)
     rut = db.Column(db.String(50), unique=True, nullable=False)
     initialAddress = db.Column(db.String(50),unique=True)
+    lat = db.Column(db.Integer,unique=True)
+    lng = db.Column(db.Integer,unique=True)
     phone = db.Column(db.String(50), unique=True, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     
@@ -34,10 +36,13 @@ class PerfilVendedor(db.Model):
         return {
             "id_vendor": self.id_vendor,
             "email": self.email,
+            "name": self.name,
             "lastName": self.lastName,
             "email": self.email,
             "rut": self.rut,
             "initialAddress": self.initialAddress,
+            "lat": self.lat,
+            "lng": self.lng,
             "phone": self.phone,
             # do not serialize the password, its a security breach
         }
@@ -112,7 +117,7 @@ class PerfilTransportista(db.Model):
     transAddress = db.Column(db.String(50), unique=False, nullable=False)
     phone = db.Column(db.String(50), unique=True, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    rel = db.relationship('Tarifas')
+    relationship = db.relationship('Tarifas')
     #rel2 = db.relationship("Tarifas", foreign_keys=[phone])
 
 

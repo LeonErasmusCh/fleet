@@ -6,6 +6,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
+import { TransportDetail } from "./pages/transportDetail";
 import { Single } from "./pages/single";
 import { LoginSell } from "./pages/loginSell";
 import injectContext from "./store/appContext";
@@ -41,6 +42,11 @@ const Layout = () => {
 						<Route exact path="/seller">
 							<NavbarSell />
 							<Seller />
+						</Route>
+
+						<Route exact path="/transportdetail">
+							<NavbarSell />
+							<TransportDetail />
 						</Route>
 
 						<Route exact path="/map">
