@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import Transportista from "../../img/Transportista.jpg";
+import vendedor from "../../img/vendedor.jpg";
 
 import { Context } from "../store/appContext";
 
@@ -10,39 +12,46 @@ export const Login = () => {
 
 	return (
 		<>
-			{/* <h1 style={{ color: "black", textAlign: "center" }}>Bienvenido!</h1> */}
-			<div className="row" id="divSignin">
-				<div id="loginBox" className="col">
-					<form>
-						<h1>Acceso</h1>
-						<select className="custom-select" id="inputGroupSelect01">
-							<option selected>Selecciona tu Perfil</option>
-							<option value="1">Transportista</option>
-							<option value="2">Vendedor</option>
-						</select>
+			{/* <h1 style={{ color: "black", textAlign: "center" }}>Bienvenido!</h1> <div className="row" id="divSignin">*/}
+			<div className="container-fluid text-center mt-5">
+				<div id="loginBox" className="col-8">
+					<h2>Iniciar sesion</h2>
+					<div className="row justify-content-center mx-5 mt-5">
+						<div className="col-4 ml-5 card" style={{ width: "18rem" }}>
+							<img src={"vendedor.jpg"} className="card-img-top" alt="..." />
+							<div className="card-body">
+								<h5 className="card-title">vendedor</h5>
+								<p className="card-text" />
+								<Link to="/loginsell">
+									<button
+										id="signupButton"
+										type="submit"
+										style={{ marginTop: "10px" }}
+										className="btn btn-primary">
+										Iniciar sesion
+									</button>
+								</Link>
+							</div>
+						</div>
 
-						<input type="text" className="form-control" name="mail" placeholder="E-mail" />
+						<div className="col-4 mx-4 card" style={{ width: "18rem" }}>
+							<img src={"Transportista.jpg"} className="card-img-top" alt="..." />
+							<div className="card-body">
+								<h5 className="card-title">Transportista </h5>
+								<p className="card-text" />
+								<button
+									id="signupButton"
+									type="submit"
+									style={{ marginTop: "10px" }}
+									className="btn btn-primary">
+									Iniciar sesion
+								</button>
+							</div>
+						</div>
+					</div>
 
-						<input type="password" className="form-control" name="password" placeholder="Contraseña" />
-						<button type="submit" style={{ backgroundColor: "transparent" }} className="btn btn-primary">
-							Iniciar Sesión
-						</button>
-						<br />
-						<br />
-						<h6 style={{ color: "white" }}>¿Olvidaste tu Contraseña?</h6>
-
-						<select className="custom-select" id="inputGroupSelect02">
-							<option selected> Pregunta seguridad</option>
-							<option value="1">Película Favorita</option>
-							<option value="2">Nombre de tu última mascota</option>
-							<option value="1">Animal Favorito</option>
-						</select>
-						<input type="password" className="form-control" name="" placeholder="Respuesta" />
-						<button type="submit" style={{ backgroundColor: "transparent" }} className="btn btn-primary">
-							Recuperar Contraseña
-						</button>
-						<br />
-					</form>
+					<br />
+					<br />
 				</div>
 				<div className="col" style={{ marginTop: "100px" }}>
 					<h2 style={{ color: "black" }}>
@@ -71,7 +80,6 @@ export const Login = () => {
 					</Link>
 				</div>
 			</div>
-
 			{/* <Link to="/">
 				<button className="btn btn-primary">Back home</button>
 			</Link> */}
