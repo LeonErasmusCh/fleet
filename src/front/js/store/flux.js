@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			logged: false,
 			message: null,
 			demo: [
 				{
@@ -14,9 +15,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
+
+
+
 			solicitud: [],
 			seller: [],
 			detailseller: [],
+
 			vendedores: [
 				{
 					name: "John Doe",
@@ -90,10 +95,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 		],
 
 		actions: {
+			enviarDatos: (e, mail, password) => {
+				//e.preventDefault();
+				console.log("mail", mail);
+				console.log("password", password);
+
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var raw = JSON.stringify({
+					email: mail,
+					password: password
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/perfilVendedor", requestOptions)
+					.then(response => response.json())
+					.then(result => {
+						if (result.token != undefined) {
+							sessionStorage.setItem("token", result.token);
+							setStore({ logged: true });
+						}
+					})
+					.catch(error => console.log("error", error));
+			},
+
+			logout: () => {
+				sessionStorage.removeItem("token");
+				console.log("login out"), setStore({ logged: false });
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+
+
+			/*getMessage: () => {
+				// fetching data from the backend
+				fetch(process.env.BACKEND_URL + "/api/hello")
+					.then(resp => resp.json())
+					.then(data => setStore({ message: data.message }))
+					.catch(error => console.log("Error loading message from backend", error));
+			},*/
 
 			// getMessage: () => {
 			// 	// fetching data from the backend
@@ -108,8 +157,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ solicitud: [...store.solicitud, message] });
 			},
 
+
 			//Funcion llamar usuarios, (API FAKE)
-			loadSeller: () => {
+			/*loadSeller: () => {
 				const store = getStore();
 				fetch("https://jsonplaceholder.typicode.com/users")
 					.then(response => response.json())
@@ -118,10 +168,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						//console.log(store.seller);
 					})
 					.catch(error => console.log("error", error));
-			},
+			},*/
 
 			//Funcion llamar detalle de usuarios (API FAKE)
-			loadDetailseller: id => {
+			/*loadDetailseller: id => {
 				const store = getStore();
 				fetch("https://jsonplaceholder.typicode.com/users/" + id)
 					.then(response => response.json())
@@ -130,7 +180,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						//console.log("ddetailseller", store.detailseller);
 					})
 					.catch(error => console.log("error", error));
-			},
+			},*/
 
 			changeColor: (index, color) => {
 				//get the store
@@ -157,6 +207,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log("error", error));
 			},
+
 			//funcion para convertir direccciones a LAT LNG
 			addressToLatLong: () => {
 				const store = getStore();
