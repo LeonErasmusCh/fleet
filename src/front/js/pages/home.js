@@ -6,6 +6,7 @@ import { TeamMembers } from "../component/about-us";
 import { Contacts } from "../component/contacts";
 import { FrequentlyAsked } from "../component/frequently-asked";
 
+
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
@@ -13,15 +14,19 @@ export const Home = () => {
 		<div>
 			<HeroSection />
 			<div className="row">
-				<TeamMembers />
-				<TeamMembers />
-				<TeamMembers />
-				<TeamMembers />
-				<TeamMembers />
+				<TeamMembers name=" Constanza" />
+				<TeamMembers name=" Leon" />
+				<TeamMembers name=" Alondra" />
+				<TeamMembers name=" Sebastian" />
+				<TeamMembers name=" Renato" />
 			</div>
 
 			<Contacts />
 			<FrequentlyAsked />
+
+			<Allseller />
+			
+
 		</div>
 	);
 };
