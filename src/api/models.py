@@ -27,8 +27,10 @@ class PerfilVendedor(db.Model):
     password = db.Column(db.String(50), unique=False, nullable=False)
     rut = db.Column(db.String(50), unique=True, nullable=False)
     initialAddress = db.Column(db.String(50),unique=True)
-    lat = db.Column(db.Float())
-    lng = db.Column(db.Float())
+
+    lat = db.Column(db.Float,unique=False, nullable=False)
+    lng = db.Column(db.Float,unique=False, nullable=False)
+
     phone = db.Column(db.String(50), unique=True, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     
