@@ -85,6 +85,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 		//probando lat lng
 		test: [],
 
+		//generar pedido desde componente ORDER
+		order: [],
+		orderToConfirm: [
+			{
+				message: "Hola.Santiago centro a las condes. Seria para mañana si puedes.",
+				name: "Bla bla"
+			}
+		],
+
 		actions: {
 			enviarDatos: (e, mail, password) => {
 				//e.preventDefault();
@@ -234,6 +243,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("Nombre: ", store.allVendedores[0].lastName);
 				console.log("Fetch de geocode url para cada vendedor", store.vendedoresLatLng);
 				console.log("test", store.test);
+			},
+
+			generateOrder: input => {
+				const store = getStore();
+				setStore({ order: input });
+				console.log("STORE => Order message: ", store.order);
 			}
 		}
 	};

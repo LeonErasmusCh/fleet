@@ -117,7 +117,6 @@ def all_vendedores():
     return jsonify(all_perfilVendedor), 200
 
 
-  
 
 @api.route('/encomiendas', methods=['GET'])
 def all_encomiendas():
