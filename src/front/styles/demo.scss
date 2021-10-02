@@ -8,15 +8,24 @@
 
 
 #loginBox {
-    width: 400px;
+    //width: 400px;
     padding: 20px;
-    background: rgb(24, 4, 49); // rgba(0,0,0,0.4);
+    background: rgb(203, 194, 214); // rgba(0,0,0,0.4);
+    margin:auto;
     text-align: center;
     border-radius: 5px;
-    margin-left: 40px;
-
-    
+    //margin-left: 40px;
 }
+
+#loginBox2 {
+    width: 200px;
+    padding: 20px;
+    background: rgb(203, 194, 214); // rgba(0,0,0,0.4);
+    margin:auto;
+    border-radius: 5px;
+    margin-left: 40px;
+}
+    
 .signinBox {
     text-align: center;
     border-radius: 5px;
@@ -68,6 +77,8 @@ margin-bottom: 10px ;
     text-align: center;
     align-content: center;
     margin-top: 50px;
+    width: 600px;
+    margin:auto;
 
 }
 .col-6 {
