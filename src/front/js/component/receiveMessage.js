@@ -6,7 +6,7 @@ export const ReceiveMessage = () => {
 	const [accept, setAccept] = useState(null);
 
 	return (
-		<div className="text-center mt-5">
+		<div className="container text-center float-right">
 			<div className="col-4">
 				<h5>Tienes un mensaje</h5>
 				{/* Recibir mensaje */}
