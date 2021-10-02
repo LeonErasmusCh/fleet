@@ -7,6 +7,7 @@ import { Demo } from "./pages/demo";
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
 import { Single } from "./pages/single";
+import { LoginSell } from "./pages/loginSell";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -18,8 +19,6 @@ import { DashTrans } from "./pages/DashTrans";
 import { NavbarDelivery } from "./component/navbar-delivery";
 import { NavbarSell } from "./component/ navbarSell";
 import { Sidebar } from "./component/sidebar";
-import { Something } from "./pages/something";
-import { Allseller } from "./component/allseller";
 
 //create your first component
 const Layout = () => {
@@ -39,13 +38,11 @@ const Layout = () => {
 						<Route exact path="/test">
 							<Test />
 						</Route>
-						<Route exact path="/something">
-							<Something />
-						</Route>
-						<Route exact path="/seller/:idseller">
+						<Route exact path="/seller">
 							<NavbarSell />
 							<Seller />
 						</Route>
+
 						<Route exact path="/map">
 							<NavbarDelivery />
 							<DeliveryMap />
@@ -61,6 +58,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/login">
 							<Login />
+						</Route>
+						<Route exact path="/loginsell">
+							<LoginSell />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />

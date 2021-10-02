@@ -5,7 +5,6 @@ import { HeroSection } from "../component/landing-hero";
 import { TeamMembers } from "../component/about-us";
 import { Contacts } from "../component/contacts";
 import { FrequentlyAsked } from "../component/frequently-asked";
-import { Allseller } from "../component/allseller";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -23,7 +22,6 @@ export const Home = () => {
 
 			<Contacts />
 			<FrequentlyAsked />
-			<Allseller />
 		</div>
 	);
 };
