@@ -27,8 +27,10 @@ class PerfilVendedor(db.Model):
     password = db.Column(db.String(50), unique=False, nullable=False)
     rut = db.Column(db.String(50), unique=True, nullable=False)
     initialAddress = db.Column(db.String(50),unique=True)
+
     lat = db.Column(db.Float,unique=False, nullable=False)
     lng = db.Column(db.Float,unique=False, nullable=False)
+
     phone = db.Column(db.String(50), unique=True, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     
@@ -48,20 +50,25 @@ class PerfilVendedor(db.Model):
         }
 
 class Encomiendas(db.Model):
+    __tablename__= 'encomiendas'
     id_package = db.Column(db.Integer,  primary_key=True, unique=True)
-    status = db.Column(db.String(50), unique=True, nullable=False)
-    destinationAddress = db.Column(db.String(50), unique=True)
+    status = db.Column(db.String(50), unique=False, nullable=False)
+    lat = db.Column(db.DECIMAL(5, 5),unique=True)
+    lng = db.Column(db.DECIMAL(5, 5),unique=True)
     originAddress = db.Column(db.String(50), db.ForeignKey('perfilvendedor.initialAddress'), unique=True, nullable=False)
-    zone = db.Column(db.String(50), unique=True, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=True, nullable=False)
+    destinationAddress = db.Column(db.String(50), unique=True)
+    zone = db.Column(db.String(50), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     rel = db.relationship("PerfilVendedor")
 
     def serialize(self):
         return {
             "id_package": self.id_package,
             "status": self.status,
-            "destinationAddress": self.destinationAddress,
+            "lat": self.lat,
+            "lng": self.lng,
             "originAddress": self.originAddress,
+            "destinationAddress": self.destinationAddress,
             "zone": self.zone,
         }
 
