@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-export const Dispatchstatus = () => {
+export const Dispatchpendings = () => {
 	return (
 		<div className="" style={{ width: "18rem" }}>
 			<table className="table table-bordered table-dark">
@@ -10,7 +10,7 @@ export const Dispatchstatus = () => {
 					</tr>
 					<tr>
 						<th scope="row">Nombre Pyme Transportista </th>
-						<td>Pedido Aceptado</td>
+						<td>Estado Pendiente</td>
 					</tr>
 					<tr>
 						<th scope="row">Nombre Pyme Transportista </th>
