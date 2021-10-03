@@ -6,6 +6,7 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
+import { TransportDetail } from "./pages/transportDetail";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -18,6 +19,11 @@ import { DashTrans } from "./pages/DashTrans";
 import { NavbarDelivery } from "./component/navbar-delivery";
 import { NavbarSell } from "./component/ navbarSell";
 import { Sidebar } from "./component/sidebar";
+import { Something } from "./pages/something";
+import { Allseller } from "./component/allseller";
+import { SellerDetail } from "./pages/sellerDetail";
+
+
 
 //create your first component
 const Layout = () => {
@@ -41,6 +47,17 @@ const Layout = () => {
 							<NavbarSell />
 							<Seller />
 						</Route>
+
+						<Route exact path="/transportdetail">
+							<NavbarSell />
+							<TransportDetail />
+						</Route>
+        
+						<Route exact path="/sellerdetail">
+							<NavbarSell />
+							<SellerDetail />
+						</Route>
+
 
 						<Route exact path="/map">
 							<NavbarDelivery />
