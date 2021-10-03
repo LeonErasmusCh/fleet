@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router-dom";
 
 export const NavbarSell = () => {
 	const { store, actions } = useContext(Context);
+	const history = useHistory();
+	const logouts = () => {
+		actions.logout();
+		history.push("/login");
+	};
+
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
 			<div className="row col-4 mx-3">
@@ -13,8 +20,8 @@ export const NavbarSell = () => {
 					</button>
 				</Link>
 			</div>
-			<div className="row col-3 ml-auto">
-				<button onClick={() => actions.logout()} type="button" className="btn btn-secondary">
+			<div className="ml-auto">
+				<button onClick={logouts} type="button" className="btn btn-secondary">
 					logout
 				</button>
 			</div>

@@ -8,7 +8,6 @@ import { Login } from "./pages/login";
 import { Signup } from "./pages/signup";
 import { TransportDetail } from "./pages/transportDetail";
 import { Single } from "./pages/single";
-import { LoginSell } from "./pages/loginSell";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -68,6 +67,7 @@ const Layout = () => {
 							<Demo />
 						</Route>
 						<Route exact path="/DashTransport">
+							<NavbarSell />
 							<DashTrans />
 						</Route>
 						<Route exact path="/signup">
@@ -76,9 +76,7 @@ const Layout = () => {
 						<Route exact path="/login">
 							<Login />
 						</Route>
-						<Route exact path="/loginsell">
-							<LoginSell />
-						</Route>
+
 						<Route exact path="/single/:theid">
 							<Single />
 						</Route>
