@@ -62,3 +62,33 @@ a.nav-link.active{
     height: 100%;
 }
 
+.login-container{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin:auto;
+}
+.login-form-1{
+    padding: 1%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    margin:auto;
+}
+.login-form-1 h3{
+    text-align: center;
+    color: #333;
+}
+
+.login-container form{
+    padding: 1%;
+}
+
+.login-form-2{
+    padding: 1%;
+    background: #c1a0ce;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    margin:auto;
+}
+.login-form-2 h3{
+    text-align: center;
+    color: #fff;
+}
+

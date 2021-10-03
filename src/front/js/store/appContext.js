@@ -25,7 +25,6 @@ const injectContext = PassedComponent => {
 			//state.actions.loadSeller();
 			//state.actions.loadDetailseller();
 			state.actions.loadAllVendedores();
-			state.actions.enviarDatos();
 
 			/* EDIT THIS!
 			 * This function is the equivalent to "window.onLoad", it only runs once on the entire application lifetime
@@ -33,6 +32,7 @@ const injectContext = PassedComponent => {
 			 * store, instead use actions, like this:*/
 
 			//state.actions.getMessage(); // <---- calling this function from the flux.js actions
+			state.actions.syncTokenFromSessionStore();
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

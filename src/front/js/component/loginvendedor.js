@@ -1,13 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
-import "../../styles/demo.scss";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { LoginTransportista } from "../component/logintransportista";
-import { LoginVendedor } from "../component/loginvendedor";
 
-export const Login = () => {
+export const LoginVendedor = () => {
 	const [mail, setMail] = useState("");
 	const [password, setPassword] = useState("");
 	const { store, actions } = useContext(Context);
@@ -33,27 +30,34 @@ export const Login = () => {
 	};
 
 	//llama login transportista
-	const handleClick2 = () => {
-		actions.login2(mail, password);
-	};
 
 	//condicional para que rediriga una vez iniciada session vendedor a seller
 	if (store.token && store.token != "" && store.token != undefined) history.push("/seller");
 	return (
 		<>
 			<div className="text-center mt-5">
-				<div id="divSignin">
-					<div className="signinBox">
-						<div id="loginBox">
-							<h1>login</h1>
-							<br />
-							<br />
-							<div className="botones">
-								<button onClick={traeriniciosessionvendedor}>vendedor</button>
-								<button onClick={traeriniciosessiontransportista}>transportista</button>
-							</div>
-							<div className="container login-container">
-								<div>{store.session ? <LoginVendedor /> : <LoginTransportista />}</div>
+				<div>
+					<div className="container login-container">
+						<div className="row">
+							<div className="col-8 justify-content-center login-form-1">
+								<h3>Login Vendedor </h3>
+								<div className="form-group">
+									<input
+										type="text"
+										placeholder="mail"
+										value={mail}
+										onChange={e => setMail(e.target.value)}
+									/>
+								</div>
+								<div className="form-group">
+									<input
+										type="text"
+										placeholder="password"
+										value={password}
+										onChange={e => setPassword(e.target.value)}
+									/>
+								</div>
+								<button onClick={handleClick}>Login</button>
 							</div>
 						</div>
 					</div>

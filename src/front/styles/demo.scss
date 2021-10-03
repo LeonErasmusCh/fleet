@@ -8,13 +8,12 @@
 
 
 #loginBox {
-    //width: 400px;
+    width: 400px;
     padding: 20px;
-    background: rgb(203, 194, 214); // rgba(0,0,0,0.4);
+    background: rgb(239, 236, 243); // rgba(0,0,0,0.4);
     margin:auto;
     text-align: center;
     border-radius: 5px;
-    //margin-left: 40px;
 }
 
 #loginBox2 {
@@ -32,12 +31,11 @@
     margin: 0px auto;
     width: 500px;
     padding: 20px;
-    background: rgb(24, 4, 49); // rgba(0,0,0,0.4);
-
-    
+    background: rgb(44, 10, 85); // rgba(0,0,0,0.4);
 }
+
 h1 {
-    color: white;
+    color: rgba(10, 10, 10, 0.219);
 }
 
 .form-control {
@@ -50,6 +48,7 @@ margin-right: 5px;
 margin-top: 10px ;
 margin-bottom: 10px ;
 }
+
 .custom-select {
     
     border: 2px solid #ff1dff;

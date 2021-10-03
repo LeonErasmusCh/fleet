@@ -1,8 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			logged: false,
+			token: null,
 			message: null,
+			session: null,
 			demo: [
 				{
 					title: "FIRST",
@@ -70,12 +71,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			]
 		},
-		allVendedores: [],
-		geocodedVendedores: [],
+		/*allVendedores: [],
+		geocodedVendedores: [],*/
 
 		actions: {
-			enviarDatos: (e, mail, password) => {
-				//e.preventDefault();
+			//FUNCION PARA MANTENER TOKEN OPERATIVO
+			syncTokenFromSessionStore: () => {
+				const token = sessionStorage.getItem("token");
+				console.log("aplication just loaded");
+				if (token && token != "" && token != undefined) setStore({ token: token });
+			},
+			//login con metodo POST para vendedores
+			login: async (mail, password) => {
 				console.log("mail", mail);
 				console.log("password", password);
 
@@ -94,21 +101,79 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/perfilVendedor", requestOptions)
-					.then(response => response.json())
-					.then(result => {
-						if (result.token != undefined) {
-							sessionStorage.setItem("token", result.token);
-							setStore({ logged: true });
-						}
-					})
-					.catch(error => console.log("error", error));
+				try {
+					const response = await fetch(
+						"https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/perfilVendedor",
+						requestOptions
+					);
+					if (response.status !== 200) {
+						alert("There has been an error");
+						return false;
+					}
+
+					const data = await response.json();
+					console.log("this came from the backend", data);
+					sessionStorage.setItem("token", data.token);
+					setStore({ token: data.token });
+					return true;
+				} catch (error) {
+					console.log("there was en error", error);
+				}
 			},
 
+			//LOGIN PARA TRANSPORTISTAS
+			login2: async (mail, password) => {
+				console.log("mail", mail);
+				console.log("password", password);
+
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var raw = JSON.stringify({
+					email: mail,
+					password: password
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: raw,
+					redirect: "follow"
+				};
+
+				try {
+					const response = await fetch(
+						"https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/perfilTransportista",
+						requestOptions
+					);
+					if (response.status !== 200) {
+						alert("There has been an error");
+						return false;
+					}
+
+					const data = await response.json();
+					console.log("this came from the backend", data);
+					sessionStorage.setItem("token", data.token);
+					setStore({ token: data.token });
+					return true;
+				} catch (error) {
+					console.log("there was en error", error);
+				}
+			},
+			//LOG OUT PARA AMBOS (SE LLAMA EN NAVBARSELL)
 			logout: () => {
 				sessionStorage.removeItem("token");
-				console.log("login out"), setStore({ logged: false });
+				console.log("login out"), setStore({ token: null });
 			},
+			//funciones para el boleano de los inicios de sesion
+			iniciarsessionvendedor: () => {
+				setStore({ session: true });
+			},
+
+			iniciarsessiontransportista: () => {
+				setStore({ session: false });
+			},
+
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

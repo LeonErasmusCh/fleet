@@ -38,18 +38,18 @@ def all_perfilVendedor():
         if oneSeller:
             if (oneSeller.password == body["password"] ):
                 #CUANDO VALIDAMOS LA PASSWORD CREAREMOS EL TOKEN
-                expira = datetime.timedelta(minutes=2)
-                access_token = create_access_token(identity=oneSeller.email, expires_delta=expira)
+               
+                access_token = create_access_token(identity=oneSeller.email)
                 data = {
                     "info_user": oneSeller.serialize(),
                     "token": access_token,
-                    "expires": expira.total_seconds()
+                    
                 }
                 return(jsonify(data))
             else:
-                return(jsonify({"mensaje":False}))
+                return jsonify({"mensaje":False}), 401
         else:
-            return(jsonify({"mensaje":"mail no se encuentra registrado"}))
+            return jsonify({"mensaje":"mail no se encuentra registrado"}), 401
 
 
 @api.route("/seller", methods=['GET'])
@@ -86,18 +86,16 @@ def all_perfilTransportista():
         if oneTrans:
             if (oneTrans.password == body["password"] ):
                 #CUANDO VALIDAMOS LA PASSWORD CREAREMOS EL TOKEN
-                expira = datetime.timedelta(minutes=2)
-                access_token = create_access_token(identity=oneTrans.email, expires_delta=expira)
+                access_token = create_access_token(identity=oneTrans.email)
                 data = {
                     "info_user": oneTrans.serialize(),
                     "token": access_token,
-                    "expires": expira.total_seconds()
                 }
                 return(jsonify(data))
             else:
-                return(jsonify({"mensaje":False}))
+                return jsonify({"mensaje":False}), 401
         else:
-            return(jsonify({"mensaje":"mail no se encuentra registrado"}))
+            return jsonify({"mensaje":"mail no se encuentra registrado"}), 401
 
 
 
