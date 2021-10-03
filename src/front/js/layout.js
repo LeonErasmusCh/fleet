@@ -19,12 +19,7 @@ import { DeliveryMap } from "./pages/delivery-map";
 import { DashTrans } from "./pages/DashTrans";
 import { NavbarDelivery } from "./component/navbar-delivery";
 import { NavbarSell } from "./component/ navbarSell";
-import { Sidebar } from "./component/sidebar";
-import { Something } from "./pages/something";
-import { Allseller } from "./component/allseller";
 import { SellerDetail } from "./pages/sellerDetail";
-
-
 
 //create your first component
 const Layout = () => {
@@ -53,12 +48,11 @@ const Layout = () => {
 							<NavbarSell />
 							<TransportDetail />
 						</Route>
-        
+
 						<Route exact path="/sellerdetail">
 							<NavbarSell />
 							<SellerDetail />
 						</Route>
-
 
 						<Route exact path="/map">
 							<NavbarDelivery />
