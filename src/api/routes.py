@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os 
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, PerfilVendedor, Encomiendas , PedidoAceptado, Tarifas, PerfilTransportista
+from api.models import db, PerfilVendedor, Encomiendas, PedidoAceptado, Tarifas, PerfilTransportista
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import datetime
@@ -57,12 +57,17 @@ def all_perfilVendedor():
 @jwt_required()
 def profile():
     if request.method == 'GET':
-        token = get_jwt_identity()
+        identity = get_jwt_identity()
+        oneSeller = PerfilVendedor.query.filter_by(email=identity).first()
+        return jsonify({ "identity": identity, "info_user": oneSeller.serialize()}), 200
+        
+        #token = get_jwt_identity()
+       
         # query de usuario vendedor
        
         #si existe vendedor con ese mail  return : info vendedor con todos los datos necesarios para su vista
 
-        return jsonify({"success": "Acceso a espacio privado", "usuario": token}), 200
+        #return jsonify({"success": "Acceso a espacio privado", "usuario": token}), 200
 
 
 @api.route('/perfilTransportista', methods=['POST', 'GET'])
@@ -99,6 +104,15 @@ def all_perfilTransportista():
             return jsonify({"mensaje":"mail no se encuentra registrado"}), 401
 
 
+@api.route("/DashTransport", methods=['GET'])
+@jwt_required()
+def profileTrans():
+ 
+        email = get_jwt_identity()
+        oneTrans = PerfilTransportista.query.filter_by(email=identity).first()
+        return jsonify({ "identity": email, "info_user":  oneTrans.serialize()}), 200
+
+
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
 
@@ -107,12 +121,6 @@ def handle_hello():
     }
 
    return jsonify(response_body), 200
-
-@api.route('/perfilVendedor', methods=['GET'])
-def all_vendedores():
-    all_perfilVendedor = PerfilVendedor.query.all()    
-    all_perfilVendedor = list(map(lambda x: x.serialize(), all_perfilVendedor))
-    return jsonify(all_perfilVendedor), 200
 
 
 

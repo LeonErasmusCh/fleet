@@ -4,6 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			message: null,
 			session: null,
+			info_user: {},
+			info_user2: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -76,9 +78,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 
-		/*allVendedores: [],
-		geocodedVendedores: [],*/
-
 		//Vendedores desde api, direccion sin geocode
 		allVendedores: [],
 		//Url en formato google para traer lat: lng: de google api
@@ -90,7 +89,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		//generar pedido desde componente ORDER
 		order: [],
-
 
 		actions: {
 			//FUNCION PARA MANTENER TOKEN OPERATIVO
@@ -172,6 +170,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const data = await response.json();
 					console.log("this came from the backend", data);
 					sessionStorage.setItem("token", data.token);
+
 					setStore({ token: data.token });
 					return true;
 				} catch (error) {
@@ -190,6 +189,64 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			iniciarsessiontransportista: () => {
 				setStore({ session: false });
+			},
+
+			//FUNCION PARA RUTA PRIVADA Y LLAMAR DATOS DEL PERFIL
+			/*traerusuario: () => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "GET",
+					headers: myHeaders,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/seller", requestOptions)
+					.then(response => response.json())
+					.then(result => setStore({ info_user: result.info_user }))
+					.catch(error => console.log("error", error));
+			},*/
+
+			traerusuario: () => {
+				const store = getStore();
+				var myHeaders = new Headers();
+				myHeaders.append("Authorization", `Bearer ${store.token}`);
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "GET",
+					headers: myHeaders,
+
+					redirect: "follow"
+				};
+				/*
+				const opts = {
+					headers: {
+						Authorization: `Bearer ${store.token}`
+					}
+				};*/
+				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/seller", requestOptions)
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ info_user: data.info_user });
+						console.log(store.info_user);
+					})
+					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			traerusuariotrans: () => {
+				const store = getStore();
+				console.log(store.token);
+				const opts = {
+					headers: {
+						Authorization: "Bearer " + store.token
+					}
+				};
+				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/DashTransport", opts)
+					.then(resp => resp.json())
+					.then(data => setStore({ info_user: data }))
+					.catch(error => console.log("Error loading message from backend", error));
 			},
 
 			// Use getActions to call a function within a fuction

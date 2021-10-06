@@ -26,10 +26,6 @@ const injectContext = PassedComponent => {
 			//state.actions.loadDetailseller();
 			state.actions.loadAllVendedores();
 
-
-			state.actions.enviarDatos();
-
-
 			/* EDIT THIS!
 
 
