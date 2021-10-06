@@ -28,6 +28,13 @@ export const Map = () => {
 	const [vendedorLat, setVendedorLat] = useState(null);
 	const [vendedorLng, setVendedorLng] = useState(null);
 	const [pins, setPins] = useState([]);
+	const [googlecoords, setGooglecoords] = useState([]);
+	let allgooglecoords = [];
+
+	useEffect(() => {
+		setGooglecoords(store.test);
+		console.log("googlecoords", googlecoords);
+	});
 
 	useEffect(() => {
 		setShowVendedor(store.allVendedores);
@@ -103,15 +110,19 @@ export const Map = () => {
 								top: "50px"
 							}}
 							onClick={() => {
-								console.log("hellooooooooo");
-								setVendedorLat(showVendedor[0].lat);
-								setVendedorLng(showVendedor[0].lng);
-								console.log(vendedorLat);
-								console.log(vendedorLng);
+								actions.addressToLatLong();
+								actions.fetchUrlVendedores();
+								allgooglecoords.push(googlecoords);
+								console.log("allgooglecoords", allgooglecoords);
+								//setVendedorLat(showVendedor[0].lat);
+								//setVendedorLng(showVendedor[0].lng);
+								//console.log(vendedorLat);
+								//console.log(vendedorLng);
 								for (let i = 0; i < showVendedor.length; i++) {
 									//<Marker position={{ lat: showVendedor[i].lat, lng: showVendedor[i].lng }} />;
-									console.log("all venderssss", showVendedor[i].lat, showVendedor[i].lng);
+									console.log("showVendedor", showVendedor[i].lat, showVendedor[i].lng);
 									setPins([showVendedor[i].lat, showVendedor[i].lng]);
+									console.log(pins);
 								}
 							}}>
 							Vendedor
