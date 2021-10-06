@@ -89,12 +89,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		//generar pedido desde componente ORDER
 		order: [],
-		orderToConfirm: [
-			{
-				message: "Hola.Santiago centro a las condes. Seria para mañana si puedes.",
-				name: "Bla bla"
-			}
-		],
 
 		actions: {
 			//FUNCION PARA MANTENER TOKEN OPERATIVO
@@ -322,7 +316,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//Traer todos Vendedores desde nuestro api
 			loadAllVendedores: () => {
 				const store = getStore();
-				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/perfilTransportista")
+				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/perfilVendedor")
 					.then(response => response.json())
 					.then(result => {
 						setStore({ allVendedores: result });
@@ -340,9 +334,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//CONCATENATE URL + ADDRESS + APIkey  TO DO GEOCODING
 				let address;
 				for (address = 0; address < store.allVendedores.length; address++) {
-					console.log("ALL VENDEDORES DIRECCIONES: " + store.allVendedores[address].transAddress);
+					console.log("ALL VENDEDORES DIRECCIONES: " + store.allVendedores[address].initialAddress);
 					// Remove , and " "
-					let initialString = store.allVendedores[address].transAddress.replace(/ /g, "+");
+					let initialString = store.allVendedores[address].initialAddress.replace(/ /g, "+");
 					let concatString = initialString.replace(/,/g, "");
 					//console.log(concatString);
 					// Concatenate
@@ -363,9 +357,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ test: [result.results[0].geometry.location] });
 					})
 					.catch(error => console.log("error", error));
-				console.log("Nombre: ", store.allVendedores[0].lastName);
-				console.log("Fetch de geocode url para cada vendedor", store.vendedoresLatLng);
-				console.log("test", store.test);
+				console.log("Nombre: ", store.allVendedores[0].name);
+				console.log("Fetch de geocode url para cada allVendedores array", store.allVendedores);
+				console.log("test", store.allVendedores);
 			},
 
 			generateOrder: input => {

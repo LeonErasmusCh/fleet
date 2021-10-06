@@ -7,8 +7,9 @@ import { BtnVendedors } from "./btn-show-vendedores";
 
 /* Tamaño del mapa */
 const containerStyle = {
-	width: "70vw",
-	height: "60vh"
+	width: "90vw",
+	height: "40vw",
+	margin: "80px auto"
 };
 
 /* Aqui centramos el mapa -- lat: -33.4369,
@@ -23,6 +24,15 @@ export const Map = () => {
 	const [userLat, setUserLat] = useState(null);
 	const [userLng, setUserLng] = useState(null);
 	const [status, setStatus] = useState(null);
+	const [showVendedor, setShowVendedor] = useState([]);
+	const [vendedorLat, setVendedorLat] = useState(null);
+	const [vendedorLng, setVendedorLng] = useState(null);
+	const [pins, setPins] = useState([]);
+
+	useEffect(() => {
+		setShowVendedor(store.allVendedores);
+		console.log("On page load --> showVendedor", showVendedor);
+	});
 
 	const getUserLocation = () => {
 		if (!navigator.geolocation) {
@@ -44,7 +54,7 @@ export const Map = () => {
 
 	return (
 		<LoadScript googleMapsApiKey="AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0">
-			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={11}>
+			<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={12}>
 				{/* Child components, such as markers, info windows, etc. */}
 				<>
 					{/* Markers son los pins en el mapa */}
@@ -59,7 +69,7 @@ export const Map = () => {
 										url: require("../../img/box-icon.png")
 									}}
 									onClick={() => {
-										alert("Cliente " + person.name + " esta en punto de retiro " + person.address);
+										alert("Cliente " + person.name);
 									}}
 								/>
 							);
@@ -70,8 +80,8 @@ export const Map = () => {
 							className="btn btn-success"
 							style={{
 								position: "absolute",
-								marginLeft: "10px",
-								bottom: "10px"
+								marginLeft: "250px",
+								top: "10px"
 							}}
 							onClick={() => {
 								getUserLocation();
@@ -81,8 +91,38 @@ export const Map = () => {
 							}}>
 							mi ubicación actual
 						</button>
-						{/*  El Merker abajo se pinta despues el onClick en boton "mi ubicacion", para pintar ubicacion del USARIO*/}
+						{/*  El Marker abajo se pinta despues el onClick en boton "mi ubicacion", para pintar ubicacion del USARIO*/}
 						<Marker position={{ lat: userLat, lng: userLng }} />
+
+						{/* button for VENDEDOR position */}
+						<button
+							className="btn btn-success"
+							style={{
+								position: "absolute",
+								marginLeft: "250px",
+								top: "50px"
+							}}
+							onClick={() => {
+								console.log("hellooooooooo");
+								setVendedorLat(showVendedor[0].lat);
+								setVendedorLng(showVendedor[0].lng);
+								console.log(vendedorLat);
+								console.log(vendedorLng);
+								for (let i = 0; i < showVendedor.length; i++) {
+									//<Marker position={{ lat: showVendedor[i].lat, lng: showVendedor[i].lng }} />;
+									console.log("all venderssss", showVendedor[i].lat, showVendedor[i].lng);
+									setPins([showVendedor[i].lat, showVendedor[i].lng]);
+								}
+							}}>
+							Vendedor
+						</button>
+						{/*  El Marker para VENDEDOR*/}
+						<Marker
+							position={{ lat: vendedorLat, lng: vendedorLng }}
+							icon={{
+								url: require("../../img/box-icon.png")
+							}}
+						/>
 
 						<BtnVendedors />
 						{/*  Mostrar vendedores
@@ -106,36 +146,5 @@ export const Map = () => {
 				</>
 			</GoogleMap>
 		</LoadScript>
-	);
-};
-
-export const Maplist = () => {
-	const { store, actions } = useContext(Context);
-
-	return (
-		<div>
-			{store.vendedores.map((person, position) => {
-				return (
-					<div className="container mt-2 col-6 mx-auto" key={position}>
-						<ul className="list-group">
-							<li className="list-group-item">
-								Nombre: <strong>{person.name}</strong>
-								<p>
-									Punto de Inicio:
-									<strong>{person.address}</strong>
-								</p>
-								<p>
-									Zona:
-									<strong>{person.zone}</strong>
-								</p>
-								<h5>
-									punto de retiro <span className="text-success">confirmado</span>
-								</h5>
-							</li>
-						</ul>
-					</div>
-				);
-			})}
-		</div>
 	);
 };
