@@ -28,6 +28,8 @@ const injectContext = PassedComponent => {
 			state.actions.getMessage();
 			state.actions.userSignup();
 			state.actions.userSignup2();
+			state.actions.loadEncomiendas();
+
 			/* EDIT THIS!
 
 

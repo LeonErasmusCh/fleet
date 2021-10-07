@@ -18,6 +18,7 @@ import { DeliveryMap } from "./pages/delivery-map";
 import { DashTrans } from "./pages/DashTrans";
 import { NavbarDelivery } from "./component/navbar-delivery";
 import { NavbarSell } from "./component/ navbarSell";
+import { Sidebar } from "./component/sidebar";
 import { SellerDetail } from "./pages/sellerDetail";
 
 //create your first component
@@ -35,6 +36,7 @@ const Layout = () => {
 							<Navbar />
 							<Home />
 						</Route>
+
 						<Route exact path="/test">
 							<Test />
 						</Route>
@@ -42,7 +44,6 @@ const Layout = () => {
 							<NavbarSell />
 							<Seller />
 						</Route>
-
 						<Route exact path="/transportdetail">
 							<NavbarSell />
 							<TransportDetail />

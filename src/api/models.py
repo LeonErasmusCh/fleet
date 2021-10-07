@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -88,6 +89,7 @@ class Tarifas(db.Model):
             "destinationAddress": self.destinationAddress,
             "originAddress": self.originAddress,
             "zone": self.zone,
+            "zoneDestino": self.zoneDestino,
         }
 class PerfilTransportista(db.Model):
     __tablename__= "perfiltransportista"
