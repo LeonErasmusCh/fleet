@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { GeneralSellerInformation } from "../component/GeneralSellerInformation";
 import { Link } from "react-router-dom";
-
+import { SellerMessage } from "../component/sellerMessage";
 import { Context } from "../store/appContext";
 
 export const Seller = () => {
@@ -21,6 +21,10 @@ export const Seller = () => {
 					<GeneralSellerInformation />
 					<h5>Bienvenido {store.info_user.name}</h5>
 					<p>¿donde necesitas enviar tu producto hoy?</p>
+
+					<SellerMessage />
+
+
 					<Link to="/">
 						<button>Go back</button>
 					</Link>
