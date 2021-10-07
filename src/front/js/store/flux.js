@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			message: null,
 			session: null,
+			registro: null,
 			info_user: {},
 			info_user2: [],
 			demo: [
@@ -125,6 +126,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
+					const response = await fetch(
+						"https://3001-amaranth-primate-eobir9j0.ws-us18.gitpod.io/api/perfilVendedor",
+						requestOptions
+					);
 					const response = await fetch(store.endpoint + "/api/perfilVendedor", requestOptions);
 					if (response.status !== 200) {
 						alert("There has been an error");
@@ -254,6 +259,65 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+
+			userSignup: (name, lastName, rut, email, phone, initialAddress, password) => {
+				console.log("password", password);
+
+				var raw = JSON.stringify({
+					name: name,
+					lastName: lastName,
+					rut: rut,
+					email: email,
+					phone: phone,
+					initialAddress: initialAddress,
+					password: password
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-amaranth-primate-eobir9j0.ws-us18.gitpod.io/api/register", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Ah ocurrido un error", error));
+			},
+			userSignup2: (name, lastName, rut, email, phone, initialAddress, password) => {
+				console.log("password", password);
+
+				var raw = JSON.stringify({
+					name: name,
+					lastName: lastName,
+					rut: rut,
+					email: email,
+					phone: phone,
+					initialAddress: initialAddress,
+					password: password
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-amaranth-primate-eobir9j0.ws-us18.gitpod.io/api/register2", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Ah ocurrido un error", error));
+			},
+
+			registroUserSeller: () => {
+				setStore({ registro: true });
+			},
+
+			registroUserTransport: () => {
+				setStore({ registro: false });
 			},
 
 			/*getMessage: () => {

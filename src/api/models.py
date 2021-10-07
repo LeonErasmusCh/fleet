@@ -20,12 +20,12 @@ class PerfilVendedor(db.Model):
     id_vendor = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=False, nullable=False)
     lastName = db.Column(db.String(50), unique=False, nullable=False)
-    email = db.Column(db.String(50), unique=True, nullable=False)
+    email = db.Column(db.String(50), unique=False, nullable=False)
     password = db.Column(db.String(50), unique=False, nullable=False)
     rut = db.Column(db.String(50), unique=True, nullable=False)
-    initialAddress = db.Column(db.String(50),unique=True)
-    phone = db.Column(db.String(50), unique=True, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
+    initialAddress = db.Column(db.String(50),unique=False)
+    phone = db.Column(db.String(50), unique=False, nullable=False)
+    # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     def serialize(self):
         return {
             "id_vendor": self.id_vendor,
@@ -40,11 +40,11 @@ class PerfilVendedor(db.Model):
         }
 class Encomiendas(db.Model):
     id_package = db.Column(db.Integer,  primary_key=True, unique=True)
-    status = db.Column(db.String(50), unique=True, nullable=False)
-    destinationAddress = db.Column(db.String(50), unique=True)
+    status = db.Column(db.String(50), unique=False, nullable=False)
+    destinationAddress = db.Column(db.String(50), unique=False)
     originAddress = db.Column(db.String(50), db.ForeignKey('perfilvendedor.initialAddress'), unique=True, nullable=False)
-    zone = db.Column(db.String(50), unique=True, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=True, nullable=False)
+    zone = db.Column(db.String(50), unique=False, nullable=False)
+    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     rel = db.relationship("PerfilVendedor")
     def serialize(self):
         return {
@@ -61,7 +61,7 @@ class PedidoAceptado(db.Model):
     status = db.Column(db.String(50), db.ForeignKey('encomiendas.status'), unique=True, nullable=False)
     destinationAddress = db.Column(db.String(50), db.ForeignKey('encomiendas.destinationAddress'), unique=True)
     originAddress = db.Column(db.String(50), db.ForeignKey('encomiendas.originAddress'), unique=True, nullable=False)
-    zone = db.Column(db.String(50), db.ForeignKey('encomiendas.zone'), unique=True, nullable=False)
+    zone = db.Column(db.String(50), db.ForeignKey('encomiendas.zone'), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     def serialize(self):
         return {
@@ -101,7 +101,6 @@ class PerfilTransportista(db.Model):
     rut = db.Column(db.String(50), unique=True, nullable=False)
     transAddress = db.Column(db.String(50), unique=False, nullable=False)
     phone = db.Column(db.String(50), unique=True, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     rel = db.relationship('Tarifas')
     #rel2 = db.relationship("Tarifas", foreign_keys=[phone])
     def serialize(self):
