@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
+import { SellerMessage } from "../component/sellerMessage";
 import { Context } from "../store/appContext";
 
 export const Seller = () => {
@@ -19,6 +19,7 @@ export const Seller = () => {
 				<div className="col col-10 mt-5">
 					<h5>Bienvenido {store.info_user.name}</h5>
 					<p>¿donde necesitas enviar tu producto hoy?</p>
+					<SellerMessage />
 
 					<Link to="/">
 						<button>Go back</button>
