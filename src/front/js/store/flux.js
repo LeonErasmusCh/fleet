@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
+			endpoint: "https://3001-salmon-mite-g61f1r07.ws-us18.gitpod.io",
 			token: null,
 			message: null,
 			session: null,
@@ -103,6 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//login con metodo POST para vendedores
 			login: async (mail, password) => {
+				const store = getStore();
 				console.log("mail", mail);
 				console.log("password", password);
 
@@ -122,10 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(
-						"https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/perfilVendedor",
-						requestOptions
-					);
+					const response = await fetch(store.endpoint + "/api/perfilVendedor", requestOptions);
 					if (response.status !== 200) {
 						alert("There has been an error");
 						return false;
@@ -143,6 +143,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//LOGIN PARA TRANSPORTISTAS
 			login2: async (mail, password) => {
+				const store = getStore();
 				console.log("mail", mail);
 				console.log("password", password);
 
@@ -162,10 +163,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(
-						"https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/perfilTransportista",
-						requestOptions
-					);
+					const response = await fetch(store.endpoint + "/api/perfilTransportista", requestOptions);
 					if (response.status !== 200) {
 						alert("There has been an error");
 						return false;
@@ -230,7 +228,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: `Bearer ${store.token}`
 					}
 				};*/
-				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/seller", requestOptions)
+				fetch(store.endpoint + "/api/seller", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
 						setStore({ info_user: data.info_user });
@@ -247,7 +245,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + store.token
 					}
 				};
-				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/DashTransport", opts)
+				fetch(store.endpoint + "/api/DashTransport", opts)
 					.then(resp => resp.json())
 					.then(data => setStore({ info_user: data }))
 					.catch(error => console.log("Error loading message from backend", error));
@@ -320,7 +318,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//Traer todos Vendedores desde nuestro api
 			loadAllVendedores: () => {
 				const store = getStore();
-				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/perfilVendedor")
+				fetch(store.endpoint + "/api/perfilVendedor")
 					.then(response => response.json())
 					.then(result => {
 						setStore({ allVendedores: result });

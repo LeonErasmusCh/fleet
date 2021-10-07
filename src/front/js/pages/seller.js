@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { GeneralSellerInformation } from "../component/GeneralSellerInformation";
 import { Link } from "react-router-dom";
 
 import { Context } from "../store/appContext";
@@ -17,9 +18,9 @@ export const Seller = () => {
 			<div className="container-fluid row">
 				<div className="col col-2" />
 				<div className="col col-10 mt-5">
+					<GeneralSellerInformation />
 					<h5>Bienvenido {store.info_user.name}</h5>
 					<p>¿donde necesitas enviar tu producto hoy?</p>
-
 					<Link to="/">
 						<button>Go back</button>
 					</Link>

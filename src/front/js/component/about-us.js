@@ -17,7 +17,7 @@ export const TeamMembers = props => {
 					una aplicación y/o pagina web con el fin de generar un vinculo seguro y confiable entre empresas
 					vendedoras y empresas repartidoras, facilitando la comunicación directa entre ellas siendo nosotros
 					un intermediario. Nuestra prestación de servicios no solo genera un mejor vinculo entre las empresas
-					vendedoras y de reparto, sino que también puede otorgarle una satisfacción a los cientes de aquellas
+					vendedoras y las empresas de reparto, sino que también puede otorgarle una satisfacción a los cientes de aquellas
 					empresas en lo que respecta al despacho de sus encargos.
 				</p>
 			</div>
