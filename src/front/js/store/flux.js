@@ -1,6 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
+			endpoint: "https://3001-salmon-mite-g61f1r07.ws-us18.gitpod.io",
 			token: null,
 			message: null,
 			session: null,
@@ -84,8 +86,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		geocodedVendedores_url: [],
 		// Lat: lng: de cada usario para pintar markers en map
 		vendedoresLatLng: [],
-		//probando lat lng
+		//probando lat lng (POR AHORA USAMOS test para los pins de vendedores)
 		test: [],
+		//probando lat lng (POR AHORA USAMOS test para los pins de vendedores)
+		encomiendas: [],
+		encomiendasUrl: [],
+		encomiendasCoords: [],
 
 		//generar pedido desde componente ORDER
 		order: [],
@@ -99,6 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//login con metodo POST para vendedores
 			login: async (mail, password) => {
+				const store = getStore();
 				console.log("mail", mail);
 				console.log("password", password);
 
@@ -118,10 +125,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(
-						"https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/perfilVendedor",
-						requestOptions
-					);
+					const response = await fetch(store.endpoint + "/api/perfilVendedor", requestOptions);
 					if (response.status !== 200) {
 						alert("There has been an error");
 						return false;
@@ -139,6 +143,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//LOGIN PARA TRANSPORTISTAS
 			login2: async (mail, password) => {
+				const store = getStore();
 				console.log("mail", mail);
 				console.log("password", password);
 
@@ -158,10 +163,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(
-						"https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/perfilTransportista",
-						requestOptions
-					);
+					const response = await fetch(store.endpoint + "/api/perfilTransportista", requestOptions);
 					if (response.status !== 200) {
 						alert("There has been an error");
 						return false;
@@ -226,7 +228,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: `Bearer ${store.token}`
 					}
 				};*/
-				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/seller", requestOptions)
+				fetch(store.endpoint + "/api/seller", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
 						setStore({ info_user: data.info_user });
@@ -243,7 +245,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + store.token
 					}
 				};
-				fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/DashTransport", opts)
+				fetch(store.endpoint + "/api/DashTransport", opts)
 					.then(resp => resp.json())
 					.then(data => setStore({ info_user: data }))
 					.catch(error => console.log("Error loading message from backend", error));
@@ -316,7 +318,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//Traer todos Vendedores desde nuestro api
 			loadAllVendedores: () => {
 				const store = getStore();
-				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/perfilVendedor")
+				fetch(store.endpoint + "/api/perfilVendedor")
 					.then(response => response.json())
 					.then(result => {
 						setStore({ allVendedores: result });
@@ -328,38 +330,104 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//funcion para convertir direccciones a LAT LNG
 			addressToLatLong: () => {
 				const store = getStore();
-				let url = "https://maps.googleapis.com/maps/api/geocode/json?";
+				let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 				let country = "&components=country:CL";
 				let googleKey = "&key=AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0";
 				//CONCATENATE URL + ADDRESS + APIkey  TO DO GEOCODING
-				let address;
-				for (address = 0; address < store.allVendedores.length; address++) {
-					console.log("ALL VENDEDORES DIRECCIONES: " + store.allVendedores[address].initialAddress);
+
+				for (let i = 0; i < store.allVendedores.length; i++) {
+					console.log("ALL VENDEDORES DIRECCIONES: " + store.allVendedores[i].initialAddress);
 					// Remove , and " "
-					let initialString = store.allVendedores[address].initialAddress.replace(/ /g, "+");
+					let initialString = store.allVendedores[i].initialAddress.replace(/ /g, "+");
 					let concatString = initialString.replace(/,/g, "");
 					//console.log(concatString);
 					// Concatenate
 					let geoCoded = url + concatString + country + googleKey;
-					//console.log("geoCoded url:" + geoCoded);
+					console.log("geoCoded url:" + geoCoded);
 					// Save in store
-					setStore({ geocodedVendedores_url: geoCoded });
-					console.log(store.geocodedVendedores_url);
+					setStore({ geocodedVendedores_url: [store.geocodedVendedores_url, geoCoded] });
+					// Remove undefined values && flatten array
+					var filtered = store.geocodedVendedores_url.filter(e => e !== undefined);
+					setStore({ geocodedVendedores_url: filtered.flat() });
+					console.log("store.geocodedVendedores_url Array", store.geocodedVendedores_url);
 				}
 			},
 
 			fetchUrlVendedores: () => {
 				const store = getStore();
-				fetch(store.geocodedVendedores_url)
+				for (let i = 0; i < store.geocodedVendedores_url.length; i++) {
+					console.log("fetch url-->", store.geocodedVendedores_url[i]);
+					fetch(store.geocodedVendedores_url[i])
+						.then(response => response.json())
+						.then(result => {
+							//setStore({ vendedoresLatLng: result.results[0].geometry.location });
+							setStore({ test: [store.test, result.results[0].geometry.location] });
+							// Remove undefined values && flatten array
+							var filtered = store.test.filter(e => e !== undefined);
+							setStore({ test: filtered.flat() });
+						})
+						.catch(error => console.log("error", error));
+					//console.log("Nombre: ", store.allVendedores[0].name);
+					//console.log("Fetch de geocode url para cada allVendedores array", store.allVendedores);
+					console.log("test", store.test);
+				}
+			},
+
+			// fetch encomiendas
+			loadEncomiendas: () => {
+				const store = getStore();
+				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/encomiendas")
 					.then(response => response.json())
 					.then(result => {
-						setStore({ vendedoresLatLng: result.results[0].geometry.location });
-						setStore({ test: [result.results[0].geometry.location] });
+						setStore({ encomiendas: result });
+						console.log("loadEncomiendas => ", result);
+						console.log("store.encomiendas => ", store.encomiendas);
 					})
 					.catch(error => console.log("error", error));
-				console.log("Nombre: ", store.allVendedores[0].name);
-				console.log("Fetch de geocode url para cada allVendedores array", store.allVendedores);
-				console.log("test", store.allVendedores);
+			},
+
+			//
+			encomiendasCoords: () => {
+				const store = getStore();
+				let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+				let country = "&components=country:CL";
+				let googleKey = "&key=AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0";
+
+				for (let i = 0; i < store.encomiendas.length; i++) {
+					console.log("destinationAddress en encomiendas: " + store.encomiendas[i].destinationAddress);
+					// Remove , and " "
+					let initialString = store.encomiendas[i].destinationAddress.replace(/ /g, "+");
+					let concatString = initialString.replace(/,/g, "");
+					//console.log(concatString);
+					// Concatenate
+					let geoCoded = url + concatString + country + googleKey;
+					console.log("geoCoded url encomiendas:" + geoCoded);
+					// Save in store
+					setStore({ encomiendasUrl: [store.encomiendasUrl, geoCoded] });
+					// Remove undefined values && flatten array
+					var filtered = store.encomiendasUrl.filter(e => e !== undefined);
+					setStore({ encomiendasUrl: filtered.flat() });
+					console.log("store.encomiendasUrl Array", store.encomiendasUrl);
+				}
+			},
+
+			fetchUrlEncomiendas: () => {
+				const store = getStore();
+				for (let i = 0; i < store.encomiendasUrl.length; i++) {
+					console.log("fetch url encomiendas-->", store.encomiendasUrl[i]);
+					fetch(store.encomiendasUrl, [i])
+						.then(response => response.json())
+						.then(result => {
+							setStore({
+								encomiendasCoords: [store.encomiendasCoords, result.results[0].geometry.location]
+							});
+							// Remove undefined values && flatten array
+							var filtered = store.encomiendasCoords.filter(e => e !== undefined);
+							setStore({ encomiendasCoords: filtered.flat() });
+						})
+						.catch(error => console.log("error", error));
+					console.log("encomiendasCoords", store.encomiendasCoords);
+				}
 			},
 
 			generateOrder: input => {

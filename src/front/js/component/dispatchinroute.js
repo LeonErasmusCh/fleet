@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-export const Dispatchinroute= () => {
+export const Dispatchinroute = () => {
 	return (
 		<div className="" style={{ width: "18rem" }}>
 			<table className="table table-bordered table-dark">

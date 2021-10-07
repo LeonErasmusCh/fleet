@@ -36,6 +36,7 @@ const Layout = () => {
 							<Navbar />
 							<Home />
 						</Route>
+
 						<Route exact path="/test">
 							<Test />
 						</Route>
@@ -43,7 +44,6 @@ const Layout = () => {
 							<NavbarSell />
 							<Seller />
 						</Route>
-
 						<Route exact path="/transportdetail">
 							<NavbarSell />
 							<TransportDetail />
