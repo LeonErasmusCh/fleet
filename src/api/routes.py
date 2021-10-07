@@ -7,7 +7,7 @@ from api.models import db, PerfilVendedor, Encomiendas , PedidoAceptado, Tarifas
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import datetime
-#pipenv install flask-jwt-extended
+# pipenv install flask-jwt-extended
 #importar LO QUE NECESITAMOS DE JWT
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
@@ -16,6 +16,67 @@ from flask_jwt_extended import jwt_required
 api = Blueprint('api', __name__)
 
 
+@api.route('/register', methods=['POST'])
+def post_register():    
+    body=request.get_json()
+    if body is None:
+        return "The request body is null", 400
+    if 'name' not in body:
+        return "Nombre no puede estar vacío",400
+    if 'lastName' not in body:
+        return "Apellido no puede estar vacío",400
+    if 'rut' not in body:
+        return "RUT no puede estar vacío",400
+    if 'email' not in body:
+        return "E-mail no puede estar vacío",400  
+    if 'phone'not in body:
+        return "Teléfono no puede estar vacío",400
+    if 'initialAddress'not in body:
+        return "Dirección no puede estar vacío",400
+    if 'password'not in body:
+        return "Contraseña no puede estar vacío",400
+    # if 'is_active'not in body:
+    #     return "Activo no puede estar vacío",400
+    
+
+    newRegister= PerfilVendedor (name=body['name'], lastName=body['lastName'], rut=body['rut'], email=body['email'], phone=body['phone'], initialAddress=body['initialAddress'], password=body['password'])
+    db.session.add(newRegister)
+    db.session.commit()
+    response_body={
+        "msg": "Usuario Registrado"
+    }
+    return jsonify(response_body),200
+
+@api.route('/register2', methods=['POST'])
+def post_register2():    
+    body=request.get_json()
+    if body is None:
+        return "The request body is null", 400
+    if 'name' not in body:
+        return "Nombre no puede estar vacío",400
+    if 'lastName' not in body:
+        return "Apellido no puede estar vacío",400
+    if 'rut' not in body:
+        return "RUT no puede estar vacío",400
+    if 'email' not in body:
+        return "E-mail no puede estar vacío",400  
+    if 'phone'not in body:
+        return "Teléfono no puede estar vacío",400
+    if 'initialAddress'not in body:
+        return "Dirección no puede estar vacío",400
+    if 'password'not in body:
+        return "Contraseña no puede estar vacío",400
+    # if 'is_active'not in body:
+    #     return "Activo no puede estar vacío",400
+    
+
+    newRegister2= PerfilTransportista (name=body['name'], lastName=body['lastName'], rut=body['rut'], email=body['email'], phone=body['phone'], initialAddress=body['initialAddress'], password=body['password'])
+    db.session.add(newRegister2)
+    db.session.commit()
+    response_body={
+        "msg": "Usuario Registrado"
+    }
+    return jsonify(response_body),200
 
 @api.route('/perfilVendedor', methods=['POST', 'GET'])
 def all_perfilVendedor():
@@ -39,18 +100,18 @@ def all_perfilVendedor():
         if oneSeller:
             if (oneSeller.password == body["password"] ):
                 #CUANDO VALIDAMOS LA PASSWORD CREAREMOS EL TOKEN
-               
-                access_token = create_access_token(identity=oneSeller.email)
+                expira = datetime.timedelta(minutes=2)
+                access_token = create_access_token(identity=oneSeller.email, expires_delta=expira)
                 data = {
                     "info_user": oneSeller.serialize(),
                     "token": access_token,
-                    
+                    "expires": expira.total_seconds()
                 }
                 return(jsonify(data))
             else:
-                return jsonify({"mensaje":False}), 401
+                return(jsonify({"mensaje":False}))
         else:
-            return jsonify({"mensaje":"mail no se encuentra registrado"}), 401
+            return(jsonify({"mensaje":"mail no se encuentra registrado"}))
 
 
 @api.route("/seller", methods=['GET'])
@@ -87,16 +148,18 @@ def all_perfilTransportista():
         if oneTrans:
             if (oneTrans.password == body["password"] ):
                 #CUANDO VALIDAMOS LA PASSWORD CREAREMOS EL TOKEN
-                access_token = create_access_token(identity=oneTrans.email)
+                expira = datetime.timedelta(minutes=2)
+                access_token = create_access_token(identity=oneTrans.email, expires_delta=expira)
                 data = {
                     "info_user": oneTrans.serialize(),
                     "token": access_token,
+                    "expires": expira.total_seconds()
                 }
                 return(jsonify(data))
             else:
-                return jsonify({"mensaje":False}), 401
+                return(jsonify({"mensaje":False}))
         else:
-            return jsonify({"mensaje":"mail no se encuentra registrado"}), 401
+            return(jsonify({"mensaje":"mail no se encuentra registrado"}))
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -108,11 +171,11 @@ def handle_hello():
 
    return jsonify(response_body), 200
 
-@api.route('/perfilVendedor', methods=['GET'])
-def all_vendedores():
-    all_perfilVendedor = PerfilVendedor.query.all()    
-    all_perfilVendedor = list(map(lambda x: x.serialize(), all_perfilVendedor))
-    return jsonify(all_perfilVendedor), 200
+# @api.route('/perfilVendedor', methods=['GET'])
+# def all_vendedores():
+#     all_perfilVendedor = PerfilVendedor.query.all()    
+#     all_perfilVendedor = list(map(lambda x: x.serialize(), all_perfilVendedor))
+#     return jsonify(all_perfilVendedor), 200
 
 
 

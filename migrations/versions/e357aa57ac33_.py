@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 07128084e135
+Revision ID: e357aa57ac33
 Revises: 
-Create Date: 2021-10-02 13:27:42.887344
+Create Date: 2021-10-07 02:11:34.282881
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '07128084e135'
+revision = 'e357aa57ac33'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,10 +41,7 @@ def upgrade():
     sa.Column('password', sa.String(length=50), nullable=False),
     sa.Column('rut', sa.String(length=50), nullable=False),
     sa.Column('initialAddress', sa.String(length=50), nullable=True),
-    sa.Column('lat', sa.Float(), nullable=False),
-    sa.Column('lng', sa.Float(), nullable=False),
     sa.Column('phone', sa.String(length=50), nullable=False),
-    sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id_vendor'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('initialAddress'),
@@ -92,8 +89,7 @@ def upgrade():
     sa.UniqueConstraint('destinationAddress'),
     sa.UniqueConstraint('id_package'),
     sa.UniqueConstraint('originAddress'),
-    sa.UniqueConstraint('status'),
-    sa.UniqueConstraint('zone')
+    sa.UniqueConstraint('status')
     )
     op.create_table('tarifas',
     sa.Column('id_fee', sa.Integer(), nullable=False),
@@ -101,6 +97,7 @@ def upgrade():
     sa.Column('destinationAddress', sa.String(length=50), nullable=False),
     sa.Column('originAddress', sa.String(length=50), nullable=False),
     sa.Column('zone', sa.String(length=50), nullable=False),
+    sa.Column('zoneDestino', sa.String(length=50), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.Column('phone', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['destinationAddress'], ['encomiendas.destinationAddress'], ),
@@ -111,7 +108,8 @@ def upgrade():
     sa.UniqueConstraint('destinationAddress'),
     sa.UniqueConstraint('originAddress'),
     sa.UniqueConstraint('phone'),
-    sa.UniqueConstraint('zone')
+    sa.UniqueConstraint('zone'),
+    sa.UniqueConstraint('zoneDestino')
     )
     # ### end Alembic commands ###
 
