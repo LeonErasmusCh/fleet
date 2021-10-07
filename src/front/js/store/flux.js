@@ -328,38 +328,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//funcion para convertir direccciones a LAT LNG
 			addressToLatLong: () => {
 				const store = getStore();
-				let url = "https://maps.googleapis.com/maps/api/geocode/json?";
+				let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 				let country = "&components=country:CL";
 				let googleKey = "&key=AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0";
 				//CONCATENATE URL + ADDRESS + APIkey  TO DO GEOCODING
-				let address;
-				for (address = 0; address < store.allVendedores.length; address++) {
-					console.log("ALL VENDEDORES DIRECCIONES: " + store.allVendedores[address].initialAddress);
+
+				for (let i = 0; i < store.allVendedores.length; i++) {
+					console.log("ALL VENDEDORES DIRECCIONES: " + store.allVendedores[i].initialAddress);
 					// Remove , and " "
-					let initialString = store.allVendedores[address].initialAddress.replace(/ /g, "+");
+					let initialString = store.allVendedores[i].initialAddress.replace(/ /g, "+");
 					let concatString = initialString.replace(/,/g, "");
 					//console.log(concatString);
 					// Concatenate
 					let geoCoded = url + concatString + country + googleKey;
-					//console.log("geoCoded url:" + geoCoded);
+					console.log("geoCoded url:" + geoCoded);
 					// Save in store
-					setStore({ geocodedVendedores_url: geoCoded });
-					console.log(store.geocodedVendedores_url);
+					setStore({ geocodedVendedores_url: [store.geocodedVendedores_url, geoCoded] });
+					// Remove undefined values && flatten array
+					var filtered = store.geocodedVendedores_url.filter(e => e !== undefined);
+					setStore({ geocodedVendedores_url: filtered.flat() });
+					console.log("store.geocodedVendedores_url Array", store.geocodedVendedores_url);
 				}
 			},
 
 			fetchUrlVendedores: () => {
 				const store = getStore();
-				fetch(store.geocodedVendedores_url)
-					.then(response => response.json())
-					.then(result => {
-						setStore({ vendedoresLatLng: result.results[0].geometry.location });
-						setStore({ test: [result.results[0].geometry.location] });
-					})
-					.catch(error => console.log("error", error));
-				console.log("Nombre: ", store.allVendedores[0].name);
-				console.log("Fetch de geocode url para cada allVendedores array", store.allVendedores);
-				console.log("test", store.allVendedores);
+				for (let i = 0; i < store.geocodedVendedores_url.length; i++) {
+					console.log("fetch url-->", store.geocodedVendedores_url[i]);
+					fetch(store.geocodedVendedores_url[i])
+						.then(response => response.json())
+						.then(result => {
+							//setStore({ vendedoresLatLng: result.results[0].geometry.location });
+							setStore({ test: [store.test, result.results[0].geometry.location] });
+							// Remove undefined values && flatten array
+							var filtered = store.test.filter(e => e !== undefined);
+							setStore({ test: filtered.flat() });
+						})
+						.catch(error => console.log("error", error));
+					//console.log("Nombre: ", store.allVendedores[0].name);
+					//console.log("Fetch de geocode url para cada allVendedores array", store.allVendedores);
+					console.log("test", store.test);
+				}
 			},
 
 			generateOrder: input => {

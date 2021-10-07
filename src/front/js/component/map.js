@@ -3,7 +3,6 @@ import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { BtnVendedors } from "./btn-show-vendedores";
 
 /* Tamaño del mapa */
 const containerStyle = {
@@ -13,7 +12,7 @@ const containerStyle = {
 };
 
 /* Aqui centramos el mapa -- lat: -33.4369,
-	lng: -70.6344 ES PARA PLAZA ITALIA */
+    lng: -70.6344 ES PARA PLAZA ITALIA */
 const center = {
 	lat: -33.4369,
 	lng: -70.6344
@@ -21,24 +20,18 @@ const center = {
 
 export const Map = () => {
 	const { store, actions } = useContext(Context);
+	// USER LOCATION
 	const [userLat, setUserLat] = useState(null);
 	const [userLng, setUserLng] = useState(null);
 	const [status, setStatus] = useState(null);
-	const [showVendedor, setShowVendedor] = useState([]);
-	const [vendedorLat, setVendedorLat] = useState(null);
-	const [vendedorLng, setVendedorLng] = useState(null);
-	const [pins, setPins] = useState([]);
+
+	// VENDEDOR LOCATION
 	const [googlecoords, setGooglecoords] = useState([]);
 	let allgooglecoords = [];
 
 	useEffect(() => {
 		setGooglecoords(store.test);
 		console.log("googlecoords", googlecoords);
-	});
-
-	useEffect(() => {
-		setShowVendedor(store.allVendedores);
-		console.log("On page load --> showVendedor", showVendedor);
 	});
 
 	const getUserLocation = () => {
@@ -67,7 +60,7 @@ export const Map = () => {
 					{/* Markers son los pins en el mapa */}
 
 					<div>
-						{store.vendedores.map((person, position) => {
+						{allgooglecoords.map((person, position) => {
 							return (
 								<Marker
 									key={position}
@@ -75,13 +68,9 @@ export const Map = () => {
 									icon={{
 										url: require("../../img/box-icon.png")
 									}}
-									onClick={() => {
-										alert("Cliente " + person.name);
-									}}
 								/>
 							);
 						})}
-
 						{/* button for user position */}
 						<button
 							className="btn btn-success"
@@ -112,32 +101,9 @@ export const Map = () => {
 							onClick={() => {
 								actions.addressToLatLong();
 								actions.fetchUrlVendedores();
-								allgooglecoords.push(googlecoords);
-								console.log("allgooglecoords", allgooglecoords);
-								//setVendedorLat(showVendedor[0].lat);
-								//setVendedorLng(showVendedor[0].lng);
-								//console.log(vendedorLat);
-								//console.log(vendedorLng);
-								for (let i = 0; i < showVendedor.length; i++) {
-									//<Marker position={{ lat: showVendedor[i].lat, lng: showVendedor[i].lng }} />;
-									console.log("showVendedor", showVendedor[i].lat, showVendedor[i].lng);
-									setPins([showVendedor[i].lat, showVendedor[i].lng]);
-									console.log(pins);
-								}
 							}}>
 							Vendedor
 						</button>
-						{/*  El Marker para VENDEDOR*/}
-						<Marker
-							position={{ lat: vendedorLat, lng: vendedorLng }}
-							icon={{
-								url: require("../../img/box-icon.png")
-							}}
-						/>
-
-						<BtnVendedors />
-						{/*  Mostrar vendedores
-						<Marker position={{ lat: store.test.lat, lng: store.test.lng }} />  */}
 
 						{store.puntosDeEntrega.map((person, position) => {
 							return (
@@ -153,6 +119,21 @@ export const Map = () => {
 								/>
 							);
 						})}
+
+						{googlecoords
+							? googlecoords.map((index, key) => {
+									console.log("helloooooo googlecoords", index);
+									return (
+										<Marker
+											key={{ key }}
+											position={{ lat: index.lat, lng: index.lng }}
+											icon={{
+												url: require("../../img/box-icon.png")
+											}}
+										/>
+									);
+							  })
+							: console.log("allgoogle coords undefined")}
 					</div>
 				</>
 			</GoogleMap>
