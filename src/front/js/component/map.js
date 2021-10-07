@@ -70,7 +70,7 @@ export const Map = () => {
 							className="btn btn-success"
 							style={{
 								position: "absolute",
-								marginLeft: "250px",
+								marginLeft: "200px",
 								top: "10px"
 							}}
 							onClick={() => {
@@ -79,7 +79,9 @@ export const Map = () => {
 								console.log("User lat", userLat);
 								console.log("User lng", userLng);
 							}}>
-							mi ubicación actual
+							<span>
+								<i className="fas fa-location-arrow mx-1" />
+							</span>
 						</button>
 						{/*  El Marker abajo se pinta despues el onClick en boton "mi ubicacion", para pintar ubicacion del USARIO*/}
 						<Marker position={{ lat: userLat, lng: userLng }} />
@@ -89,28 +91,32 @@ export const Map = () => {
 							className="btn btn-success"
 							style={{
 								position: "absolute",
-								marginLeft: "250px",
-								top: "50px"
+								marginLeft: "260px",
+								top: "10px"
 							}}
 							onClick={() => {
 								actions.addressToLatLong();
 								actions.fetchUrlVendedores();
 							}}>
-							Vendedor
+							<span>
+								<i className="fas fa-box-open mx-2" />
+							</span>
 						</button>
 						{/* button for ENCOMIENDAS position */}
 						<button
 							className="btn btn-success"
 							style={{
 								position: "absolute",
-								marginLeft: "450px",
+								marginLeft: "330px",
 								top: "10px"
 							}}
 							onClick={() => {
 								actions.encomiendasCoords();
 								actions.fetchUrlEncomiendas();
 							}}>
-							Puntos de entrega
+							<span>
+								<i className="fas fa-home mx-2" />
+							</span>
 						</button>
 
 						{/* Encomieda (puntos de retiro) Markers */}
