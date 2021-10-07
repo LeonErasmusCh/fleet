@@ -25,6 +25,7 @@ const injectContext = PassedComponent => {
 			//state.actions.loadSeller();
 			//state.actions.loadDetailseller();
 			state.actions.loadAllVendedores();
+			state.actions.loadEncomiendas();
 
 			/* EDIT THIS!
 

@@ -27,11 +27,16 @@ export const Map = () => {
 
 	// VENDEDOR LOCATION
 	const [googlecoords, setGooglecoords] = useState([]);
-	let allgooglecoords = [];
+	// ENCOMIENDA LOCATION
+	const [encomiendacoords, setEncomiendascoords] = useState([]);
 
 	useEffect(() => {
 		setGooglecoords(store.test);
 		console.log("googlecoords", googlecoords);
+	});
+	useEffect(() => {
+		setEncomiendascoords(store.encomiendasCoords);
+		console.log("encomiendacoords", encomiendacoords);
 	});
 
 	const getUserLocation = () => {
@@ -60,17 +65,6 @@ export const Map = () => {
 					{/* Markers son los pins en el mapa */}
 
 					<div>
-						{allgooglecoords.map((person, position) => {
-							return (
-								<Marker
-									key={position}
-									position={{ lat: person.lat, lng: person.lng }}
-									icon={{
-										url: require("../../img/box-icon.png")
-									}}
-								/>
-							);
-						})}
 						{/* button for user position */}
 						<button
 							className="btn btn-success"
@@ -104,22 +98,37 @@ export const Map = () => {
 							}}>
 							Vendedor
 						</button>
+						{/* button for ENCOMIENDAS position */}
+						<button
+							className="btn btn-success"
+							style={{
+								position: "absolute",
+								marginLeft: "450px",
+								top: "10px"
+							}}
+							onClick={() => {
+								actions.encomiendasCoords();
+								actions.fetchUrlEncomiendas();
+							}}>
+							Puntos de entrega
+						</button>
 
-						{store.puntosDeEntrega.map((person, position) => {
-							return (
-								<Marker
-									key={position}
-									position={{ lat: person.lat, lng: person.lng }}
-									icon={{
-										url: require("../../img/destination.png")
-									}}
-									onClick={() => {
-										alert("Nombre: " + person.name + "  " + " Punto de entrega: " + person.address);
-									}}
-								/>
-							);
-						})}
-
+						{/* Encomieda (puntos de retiro) Markers */}
+						{encomiendacoords
+							? encomiendacoords.map((index, key) => {
+									console.log("helloooooo encomiendacoords", index);
+									return (
+										<Marker
+											key={{ key }}
+											position={{ lat: index.lat, lng: index.lng }}
+											icon={{
+												url: require("../../img/destination.png")
+											}}
+										/>
+									);
+							  })
+							: console.log("allgoogle coords undefined")}
+						{/* Vendedor Markers */}
 						{googlecoords
 							? googlecoords.map((index, key) => {
 									console.log("helloooooo googlecoords", index);

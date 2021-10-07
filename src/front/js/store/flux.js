@@ -84,8 +84,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		geocodedVendedores_url: [],
 		// Lat: lng: de cada usario para pintar markers en map
 		vendedoresLatLng: [],
-		//probando lat lng
+		//probando lat lng (POR AHORA USAMOS test para los pins de vendedores)
 		test: [],
+		//probando lat lng (POR AHORA USAMOS test para los pins de vendedores)
+		encomiendas: [],
+		encomiendasUrl: [],
+		encomiendasCoords: [],
 
 		//generar pedido desde componente ORDER
 		order: [],
@@ -368,6 +372,63 @@ const getState = ({ getStore, getActions, setStore }) => {
 					//console.log("Nombre: ", store.allVendedores[0].name);
 					//console.log("Fetch de geocode url para cada allVendedores array", store.allVendedores);
 					console.log("test", store.test);
+				}
+			},
+
+			// fetch encomiendas
+			loadEncomiendas: () => {
+				const store = getStore();
+				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/encomiendas")
+					.then(response => response.json())
+					.then(result => {
+						setStore({ encomiendas: result });
+						console.log("loadEncomiendas => ", result);
+						console.log("store.encomiendas => ", store.encomiendas);
+					})
+					.catch(error => console.log("error", error));
+			},
+
+			//
+			encomiendasCoords: () => {
+				const store = getStore();
+				let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+				let country = "&components=country:CL";
+				let googleKey = "&key=AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0";
+
+				for (let i = 0; i < store.encomiendas.length; i++) {
+					console.log("destinationAddress en encomiendas: " + store.encomiendas[i].destinationAddress);
+					// Remove , and " "
+					let initialString = store.encomiendas[i].destinationAddress.replace(/ /g, "+");
+					let concatString = initialString.replace(/,/g, "");
+					//console.log(concatString);
+					// Concatenate
+					let geoCoded = url + concatString + country + googleKey;
+					console.log("geoCoded url encomiendas:" + geoCoded);
+					// Save in store
+					setStore({ encomiendasUrl: [store.encomiendasUrl, geoCoded] });
+					// Remove undefined values && flatten array
+					var filtered = store.encomiendasUrl.filter(e => e !== undefined);
+					setStore({ encomiendasUrl: filtered.flat() });
+					console.log("store.encomiendasUrl Array", store.encomiendasUrl);
+				}
+			},
+
+			fetchUrlEncomiendas: () => {
+				const store = getStore();
+				for (let i = 0; i < store.encomiendasUrl.length; i++) {
+					console.log("fetch url encomiendas-->", store.encomiendasUrl[i]);
+					fetch(store.encomiendasUrl, [i])
+						.then(response => response.json())
+						.then(result => {
+							setStore({
+								encomiendasCoords: [store.encomiendasCoords, result.results[0].geometry.location]
+							});
+							// Remove undefined values && flatten array
+							var filtered = store.encomiendasCoords.filter(e => e !== undefined);
+							setStore({ encomiendasCoords: filtered.flat() });
+						})
+						.catch(error => console.log("error", error));
+					console.log("encomiendasCoords", store.encomiendasCoords);
 				}
 			},
 
