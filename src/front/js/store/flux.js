@@ -3,9 +3,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
 			endpoint: "https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io",
+
 			token: null,
 			message: null,
 			session: null,
+			registro: null,
 			info_user: {},
 			info_user2: [],
 			demo: [
@@ -256,6 +258,65 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 
+			userSignup: (name, lastName, rut, email, phone, initialAddress, password) => {
+				console.log("password", password);
+
+				var raw = JSON.stringify({
+					name: name,
+					lastName: lastName,
+					rut: rut,
+					email: email,
+					phone: phone,
+					initialAddress: initialAddress,
+					password: password
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-amaranth-primate-eobir9j0.ws-us18.gitpod.io/api/register", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Ah ocurrido un error", error));
+			},
+			userSignup2: (name, lastName, rut, email, phone, initialAddress, password) => {
+				console.log("password", password);
+
+				var raw = JSON.stringify({
+					name: name,
+					lastName: lastName,
+					rut: rut,
+					email: email,
+					phone: phone,
+					initialAddress: initialAddress,
+					password: password
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-amaranth-primate-eobir9j0.ws-us18.gitpod.io/api/register2", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Ah ocurrido un error", error));
+			},
+
+			registroUserSeller: () => {
+				setStore({ registro: true });
+			},
+
+			registroUserTransport: () => {
+				setStore({ registro: false });
+			},
+
 			/*getMessage: () => {
 				// fetching data from the backend
 				fetch(process.env.BACKEND_URL + "/api/hello")
@@ -272,9 +333,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		.catch(error => console.log("Error loading message from backend", error));
 			// },
 
-			getMessage: message => {
+			getMessage: (message, datosVendedor) => {
 				const store = getStore();
-				setStore({ solicitud: [...store.solicitud, message] });
+				/*
+				aca iria el fetch tipo post a la api haciendo una solicitud
+				*/
 			},
 
 			//Funcion llamar usuarios, (API FAKE)

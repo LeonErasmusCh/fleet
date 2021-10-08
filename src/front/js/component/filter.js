@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-
+import { ModalExample } from "./modal";
 export const Selector = () => {
 	const [filter, setFilter] = useState("");
 
@@ -17,9 +17,9 @@ export const Selector = () => {
 	};
 
 	return (
-		<div className="selector">
-			<div className="select-container">
-				<select value="option" onChange={handleChange}>
+		<div classNameName="selector">
+			<div classNameName="select-container">
+				<select name="plan" value={filter} onChange={handleChange}>
 					<option value="norte"> Norte</option>
 					<option value="centro"> Centro</option>
 					<option value="sur"> Sur</option>
@@ -27,7 +27,7 @@ export const Selector = () => {
 				</select>
 				{/* Aca alondra estará la tabla segun lo que selecciono la persona */}
 
-				<table className="table">
+				<table classNameName="table">
 					<thead>
 						<tr>
 							<th>nombre</th>
@@ -47,14 +47,7 @@ export const Selector = () => {
 											<td>{value.entrega}</td>
 											<td>{value.precio}</td>
 											<td>
-												<button
-													onClick={() => {
-														alert(
-															"Este es el perfil de la persona, tiene 5 estrellas y es ficha :D "
-														);
-													}}>
-													Ver Perfil{" "}
-												</button>
+												<ModalExample datosVendedor={value} />
 											</td>
 										</tr>
 									) : (
