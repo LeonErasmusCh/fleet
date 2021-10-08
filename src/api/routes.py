@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 import os 
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, PerfilVendedor, Encomiendas, PedidoAceptado, Tarifas, PerfilTransportista
+from api.models import db, Vendedor, Encomiendas, Tarifas,Transportista
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 import datetime
@@ -15,7 +15,7 @@ from flask_jwt_extended import jwt_required
 
 api = Blueprint('api', __name__)
 
-
+"""
 @api.route('/register', methods=['POST'])
 def post_register():    
     body=request.get_json()
@@ -39,7 +39,7 @@ def post_register():
     #     return "Activo no puede estar vacío",400
     
 
-    newRegister= PerfilVendedor (name=body['name'], lastName=body['lastName'], rut=body['rut'], email=body['email'], phone=body['phone'], initialAddress=body['initialAddress'], password=body['password'])
+    newRegister= Vendedor (name=body['name'], lastName=body['lastName'], rut=body['rut'], email=body['email'], phone=body['phone'], initialAddress=body['initialAddress'], password=body['password'])
     db.session.add(newRegister)
     db.session.commit()
     response_body={
@@ -82,7 +82,7 @@ def post_register2():
 def all_perfilVendedor():
 
     if request.method =='GET':
-        all_Vendedor = PerfilVendedor.query.all()
+        all_Vendedor = Vendedor.query.all()
         all_Vendedor = list(map(lambda x: x.serialize(), all_Vendedor))
     
         return jsonify(all_Vendedor), 200
@@ -96,7 +96,7 @@ def all_perfilVendedor():
         if 'password' not in body:
             return 'Especificar password',400
         #estoy consultando si existe alguien con el email que mande en la api y consigo la primera coincidencia
-        oneSeller = PerfilVendedor.query.filter_by(email=body["email"]).first()
+        oneSeller = Vendedor.query.filter_by(email=body["email"]).first()
         if oneSeller:
             if (oneSeller.password == body["password"] ):
                 #CUANDO VALIDAMOS LA PASSWORD CREAREMOS EL TOKEN
@@ -119,7 +119,7 @@ def all_perfilVendedor():
 def profile():
     if request.method == 'GET':
         identity = get_jwt_identity()
-        oneSeller = PerfilVendedor.query.filter_by(email=identity).first()
+        oneSeller = Vendedor.query.filter_by(email=identity).first()
         return jsonify({ "identity": identity, "info_user": oneSeller.serialize()}), 200
         
         #token = get_jwt_identity()
@@ -211,4 +211,4 @@ def all_tarifas():
     all_tarifas = list(map(lambda x: x.serialize(), all_tarifas))
     return jsonify(all_tarifas), 200 
 
- 
+ """

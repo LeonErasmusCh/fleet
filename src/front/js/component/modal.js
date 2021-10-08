@@ -1,42 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { SellerMessage } from "../component/sellerMessage";
+import PropTypes from "prop-types";
 
-export const Modal = () => {
+export const ModalExample = props => {
+	const [modal, setModal] = useState(false);
+
+	const toggle = () => setModal(!modal);
+
 	return (
-		<>
-			<div classNameName="container">
-				<button type="button" classNameName="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-					Launch demo modal
-				</button>
-			</div>
-
-			<div
-				className="modal fade"
-				id="exampleModal"
-				tabIndex="-1"
-				aria-labelledby="exampleModalLabel"
-				aria-hidden="true">
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h5 className="modal-title" id="exampleModalLabel">
-								Modal title
-							</h5>
-							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div className="modal-body">...</div>
-						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-dismiss="modal">
-								Close
-							</button>
-							<button type="button" className="btn btn-primary">
-								Save changes
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
+		<div>
+			<Button color="danger" onClick={toggle}>
+				Solicitar
+			</Button>
+			<Modal isOpen={modal} fade={false} toggle={toggle}>
+				<ModalHeader toggle={toggle}>Modal title</ModalHeader>
+				<ModalBody>
+					<SellerMessage datosVendedor={props.datosVendedor} />
+				</ModalBody>
+			</Modal>
+		</div>
 	);
+};
+ModalExample.propTypes = {
+	datosVendedor: PropTypes.object
 };
