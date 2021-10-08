@@ -24,7 +24,6 @@ export const Seller = () => {
 
 					<SellerMessage />
 
-
 					<Link to="/">
 						<button>Go back</button>
 					</Link>

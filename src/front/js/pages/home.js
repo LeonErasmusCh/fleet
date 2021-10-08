@@ -12,16 +12,19 @@ export const Home = () => {
 	return (
 		<div>
 			<HeroSection />
-			<div className="row">
-				<TeamMembers name=" Constanza" />
-				<TeamMembers name=" Leon" />
-				<TeamMembers name=" Alondra" />
-				<TeamMembers name=" Sebastian" />
-				<TeamMembers name=" Renato" />
-			</div>
-
-			<Contacts />
 			<FrequentlyAsked />
+			<Contacts />
+
+			<h2 className="text-center text-secondary m-5">Quienes Somos</h2>
+			<div className="container">
+				<div className="row d-flex justify-content-around ">
+					<TeamMembers name=" Constanza" />
+					<TeamMembers name=" Leon" />
+					<TeamMembers name=" Alondra" />
+					<TeamMembers name=" Sebastian" />
+					<TeamMembers name=" Renato" />
+				</div>
+			</div>
 		</div>
 	);
 };

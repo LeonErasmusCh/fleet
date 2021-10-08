@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
-			endpoint: "https://3001-salmon-mite-g61f1r07.ws-us18.gitpod.io",
+			endpoint: "https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io",
 			token: null,
 			message: null,
 			session: null,
@@ -376,7 +376,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// fetch encomiendas
 			loadEncomiendas: () => {
 				const store = getStore();
-				fetch("https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io/api/encomiendas")
+				fetch(store.endpoint + "/api/encomiendas")
 					.then(response => response.json())
 					.then(result => {
 						setStore({ encomiendas: result });
