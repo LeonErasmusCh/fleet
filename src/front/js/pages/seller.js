@@ -18,7 +18,11 @@ export const Seller = () => {
 				<div className="col col-10 mt-5">
 					<h5>Bienvenido {store.info_user.name}</h5>
 					<p>¿donde necesitas enviar tu producto hoy?</p>
+
+					<SellerMessage />
+
 					<Selector />
+
 
 					<Link to="/">
 						<button>Go back</button>

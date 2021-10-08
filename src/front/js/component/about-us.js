@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 export const TeamMembers = props => {
 	return (
-		<div id="who-we-are" className="m-3 col-3 ">
-			<h1 className="text-center p-3">Quienes somos</h1>
+		<div id="who-we-are" className="col-8 col-md-3 m-4">
 			<div className="row d-flex justify-content-around">
 				<img src="rigo-baby.jpg" alt="..." className="rounded-circle img-thumbnail m-3" />
 				<h5>
