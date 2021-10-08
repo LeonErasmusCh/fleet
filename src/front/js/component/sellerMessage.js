@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 // import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-
-export const SellerMessage = () => {
+import PropTypes from "prop-types";
+export const SellerMessage = props => {
 	const [sellerText, setSellerText] = useState("");
 	const { store, actions } = useContext(Context);
 
@@ -36,8 +36,9 @@ export const SellerMessage = () => {
 						type="submit"
 						className="btn btn-primary"
 						onClick={() => {
-							actions.getMessage(sellerText);
+							actions.getMessage(sellerText, props.datosVendedor);
 							console.log("Variable input: ", sellerText);
+							console.log("datos Vendedor: ", props.datosVendedor);
 						}}>
 						Enviar Solicitud
 					</button>
@@ -45,4 +46,7 @@ export const SellerMessage = () => {
 			</div>
 		</>
 	);
+};
+SellerMessage.propTypes = {
+	datosVendedor: PropTypes.object
 };

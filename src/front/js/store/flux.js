@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
-			endpoint: "https://3001-salmon-mite-g61f1r07.ws-us18.gitpod.io",
+			endpoint: "https://3001-cyan-meerkat-f9i80l1h.ws-us18.gitpod.io",
 			token: null,
 			message: null,
 			session: null,
@@ -126,10 +126,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(
-						"https://3001-amaranth-primate-eobir9j0.ws-us18.gitpod.io/api/perfilVendedor",
-						requestOptions
-					);
 					const response = await fetch(store.endpoint + "/api/perfilVendedor", requestOptions);
 					if (response.status !== 200) {
 						alert("There has been an error");
@@ -336,9 +332,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		.catch(error => console.log("Error loading message from backend", error));
 			// },
 
-			getMessage: message => {
+			getMessage: (message, datosVendedor) => {
 				const store = getStore();
-				setStore({ solicitud: [...store.solicitud, message] });
+				/*
+				aca iria el fetch tipo post a la api haciendo una solicitud
+				*/
 			},
 
 			//Funcion llamar usuarios, (API FAKE)
