@@ -1,24 +1,20 @@
 import React, { useState, useEffect, useContext } from "react";
-import { LeftSidebar } from "../component/left-sidebar";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 export const DashTrans = () => {
 	const { store, actions } = useContext(Context);
 
-	useEffect(
-		() => {
-			if (store.token && store.token != "" && store.token != undefined) actions.traerusuariotrans();
-		},
-		[store.token]
-	);
+	useEffect(() => {
+		actions.loadtrans();
+	}, []);
 
 	return (
 		<div className="MarginDashTrans">
-			<div className="container w">
-				{/* <LeftSidebar />  */}
+			<div className="container w-50">
+				<h5>Bienvenido {store.perfil.name}</h5>
 				<h1>Lista de Precios Según Sector</h1>
-				<h5>Bienvenido {store.info_user2}</h5>
+
 				<table className="table table-light">
 					<thead>
 						<tr>

@@ -3,7 +3,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
 
+
 			endpoint: "https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io",
+
 
 
 			token: null,
@@ -11,7 +13,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			session: null,
 			registro: null,
 			info_user: {},
-			info_user2: [],
+			perfil: [],
+			datos: [],
+			mensaje: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -241,17 +245,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 
-			traerusuariotrans: () => {
+			loadtrans: () => {
 				const store = getStore();
-				console.log(store.token);
-				const opts = {
-					headers: {
-						Authorization: "Bearer " + store.token
-					}
+				var myHeaders = new Headers();
+				myHeaders.append("Authorization", `Bearer ${store.token}`);
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "GET",
+					headers: myHeaders,
+
+					redirect: "follow"
 				};
-				fetch(store.endpoint + "/api/DashTransport", opts)
+				fetch(store.endpoint + "/api/dashTrans", requestOptions)
 					.then(resp => resp.json())
-					.then(data => setStore({ info_user: data }))
+					.then(data => {
+						setStore({ perfil: data.perfil });
+						console.log(store.perfil);
+					})
+					.catch(error => console.log("Error loading message from backend", error));
+			},
+
+			getDatos: () => {
+				const store = getStore();
+				console.log(store.datos);
+				fetch(store.endpoint + "/api/tarifas")
+					.then(resp => resp.json())
+					.then(data => setStore({ datos: data }))
 					.catch(error => console.log("Error loading message from backend", error));
 			},
 
@@ -261,6 +281,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			userSignup: (name, lastName, rut, email, phone, initialAddress, password) => {
+				const store = getStore();
 				console.log("password", password);
 
 				var raw = JSON.stringify({
@@ -280,11 +301,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io/api/register", requestOptions)
+				fetch(store.endpoint + "/api/register", requestOptions)
+
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
 			},
+
+
 			userSignup2: (name, lastName, rut, email, phone, transAddress, password) => {
 				console.log("password", password);
 
@@ -305,7 +329,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io/api/register2", requestOptions)
+
+				fetch(store.endpoint + "/api/register2", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
@@ -335,35 +360,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		.catch(error => console.log("Error loading message from backend", error));
 			// },
 
-			getMessage: (message, datosVendedor) => {
+			/*getMessage: (sellerText) => {
 				const store = getStore();
-				/*
-				aca iria el fetch tipo post a la api haciendo una solicitud
-				*/
-			},
+				console.log("message", message);
 
-			//Funcion llamar usuarios, (API FAKE)
-			/*loadSeller: () => {
-				const store = getStore();
-				fetch("https://jsonplaceholder.typicode.com/users")
-					.then(response => response.json())
-					.then(result => {
-						setStore({ seller: result });
-						//console.log(store.seller);
-					})
-					.catch(error => console.log("error", error));
-			},*/
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
 
-			//Funcion llamar detalle de usuarios (API FAKE)
-			/*loadDetailseller: id => {
-				const store = getStore();
-				fetch("https://jsonplaceholder.typicode.com/users/" + id)
-					.then(response => response.json())
-					.then(result => {
-						setStore({ detailseller: result });
-						//console.log("ddetailseller", store.detailseller);
-					})
-					.catch(error => console.log("error", error));
+				var raw = JSON.stringify({
+					"message": sellerText,
+
+				});
+
+				var requestOptions = {
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
+				};
+
+				fetch(store.endpoint + "/api/tarifas", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Ah ocurrido un error", error));
 			},*/
 
 			changeColor: (index, color) => {

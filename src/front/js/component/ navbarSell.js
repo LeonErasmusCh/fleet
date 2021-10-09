@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useHistory } from "react-router-dom";
+import "../../styles/home.scss";
 
 export const NavbarSell = () => {
 	const { store, actions } = useContext(Context);
@@ -13,7 +14,7 @@ export const NavbarSell = () => {
 
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
-			<div className="container">
+			<div className="row col-6 mx-3">
 				<Link to="/">
 					<a className="navbar-brand text-white" href="#">
 						<span className="fleet">
