@@ -2,7 +2,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
+
 			endpoint: "https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io",
+
 
 			token: null,
 			message: null,
