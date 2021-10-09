@@ -25,10 +25,13 @@ const injectContext = PassedComponent => {
 			//state.actions.loadSeller();
 			//state.actions.loadDetailseller();
 			state.actions.loadAllVendedores();
-			state.actions.getMessage();
+			//state.actions.getMessage();
 			state.actions.userSignup();
 			state.actions.userSignup2();
+			state.actions.getDatos();
 			state.actions.loadEncomiendas();
+			//state.actions.loadtrans();
+			//state.actions.traerusuariotrans();
 
 			/* EDIT THIS!
 

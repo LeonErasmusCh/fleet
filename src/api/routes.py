@@ -78,8 +78,10 @@ def post_register2():
     }
     return jsonify(response_body),200
 
+
+
 @api.route('/Vendedor', methods=['POST', 'GET'])
-def all_perfilVendedor():
+def all_Vendedor():
 
     if request.method =='GET':
         all_Vendedor = Vendedor.query.all()
@@ -114,13 +116,7 @@ def all_perfilVendedor():
             return(jsonify({"mensaje":"mail no se encuentra registrado"}))
 
 
-@api.route("/seller", methods=['GET'])
-@jwt_required()
-def profile():
-    if request.method == 'GET':
-        identity = get_jwt_identity()
-        oneSeller = Vendedor.query.filter_by(email=identity).first()
-        return jsonify({ "identity": identity, "info_user": oneSeller.serialize()}), 200
+
         
         #token = get_jwt_identity()
        
@@ -132,6 +128,7 @@ def profile():
 
 
 @api.route('/Transportista', methods=['POST', 'GET'])
+
 def all_Transportista():
 
     if request.method =='GET':
@@ -153,12 +150,11 @@ def all_Transportista():
         if oneTrans:
             if (oneTrans.password == body["password"] ):
                 #CUANDO VALIDAMOS LA PASSWORD CREAREMOS EL TOKEN
-                expira = datetime.timedelta(minutes=2)
-                access_token = create_access_token(identity=oneTrans.email, expires_delta=expira)
+                access_token = create_access_token(identity=oneTrans.email)
                 data = {
                     "info_user": oneTrans.serialize(),
                     "token": access_token,
-                    "expires": expira.total_seconds()
+
                 }
                 return(jsonify(data))
             else:
@@ -167,13 +163,28 @@ def all_Transportista():
             return(jsonify({"mensaje":"mail no se encuentra registrado"}))
 
 
-@api.route("/DashTransport", methods=['GET'])
+@api.route("/dashTrans", methods=['GET'])
 @jwt_required()
 def profileTrans():
+
+    if request.method == 'GET':
+        identity = get_jwt_identity()
+        oneTrans = Transportista.query.filter_by(email=identity).first()
+        return jsonify({ "identity": identity, "perfil": oneTrans.serialize()}), 200
+
+@api.route("/seller", methods=['GET'])
+@jwt_required()
+def profile():
+    if request.method == 'GET':
+        identity = get_jwt_identity()
+        oneSeller = Vendedor.query.filter_by(email=identity).first()
+        return jsonify({ "identity": identity, "info_user": oneSeller.serialize()}), 200
+
  
         email = get_jwt_identity()
         oneTrans = Transportista.query.filter_by(email=identity).first()
         return jsonify({ "identity": email, "info_user":  oneTrans.serialize()}), 200
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])
@@ -185,29 +196,27 @@ def handle_hello():
 
    return jsonify(response_body), 200
 
-# @api.route('/perfilVendedor', methods=['GET'])
-# def all_vendedores():
-#     all_perfilVendedor = PerfilVendedor.query.all()    
-#     all_perfilVendedor = list(map(lambda x: x.serialize(), all_perfilVendedor))
-#     return jsonify(all_perfilVendedor), 200
 
-
-
-@api.route('/encomiendas', methods=['GET'])
+@api.route('/encomiendas', methods=['POST', 'GET'])
 def all_encomiendas():
-    all_encomiendas = Encomiendas.query.all()    
-    all_encomiendas = list(map(lambda x: x.serialize(), all_encomiendas))
-    return jsonify(all_encomiendas), 200
+    if request.method =='GET':
+        all_encomiendas = Encomiendas.query.all()    
+        all_encomiendas = list(map(lambda x: x.serialize(), all_encomiendas))
+        return jsonify(all_encomiendas), 200
 
-@api.route('/pedidoAceptado', methods=['GET'])
-def all_pedidoAceptado():
-    all_pedidoAceptado = PedidoAceptado.query.all()    
-    all_pedidoAceptado = list(map(lambda x: x.serialize(), all_pedidoAceptado))
-    return jsonify(all_pedidoAceptado), 200
-
+    else:
+        body = request.get_json() # obtener el request body de la solicitud
+        if body is None:
+            return "The request body is null", 400
+        if 'mensaje' not in body:
+            return 'solicitud vacia', 400
+        else:
+          return(jsonify({"mensaje":"mensaje enviado"})), 200
+             
 @api.route('/tarifas', methods=['GET'])
 def all_tarifas():
     all_tarifas = Tarifas.query.all()    
     all_tarifas = list(map(lambda x: x.serialize(), all_tarifas))
     return jsonify(all_tarifas), 200 
+
 

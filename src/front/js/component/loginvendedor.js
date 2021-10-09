@@ -9,6 +9,7 @@ export const LoginVendedor = () => {
 	const [password, setPassword] = useState("");
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
+	
 
 	console.log("this is your token", store.token);
 
@@ -28,8 +29,6 @@ export const LoginVendedor = () => {
 	const handleClick = () => {
 		actions.login(mail, password);
 	};
-
-	//llama login transportista
 
 	//condicional para que rediriga una vez iniciada session vendedor a seller
 	if (store.token && store.token != "" && store.token != undefined) history.push("/seller");

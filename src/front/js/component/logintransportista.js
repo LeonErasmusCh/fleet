@@ -22,7 +22,7 @@ export const LoginTransportista = () => {
 	};
 
 	//condicional para que rediriga una vez iniciada session vendedor a seller
-	if (store.token && store.token != "" && store.token != undefined) history.push("/DashTransport");
+	if (store.token && store.token != "" && store.token != undefined) history.push("/dashTrans");
 	return (
 		<>
 			<div className="text-center mt-5">
