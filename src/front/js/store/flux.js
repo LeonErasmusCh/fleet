@@ -452,7 +452,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// fetch encomiendas
 			loadEncomiendas: () => {
 				const store = getStore();
-				fetch("https://3001-3001-scarlet-hookworm-ekjzg717.ws-us18.gitpod.io/api/encomiendas")
+				fetch(store.endpoint + "/api/encomiendas")
 					.then(response => response.json())
 					.then(result => {
 						setStore({ encomiendas: result });
