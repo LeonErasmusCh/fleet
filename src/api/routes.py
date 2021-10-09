@@ -15,7 +15,7 @@ from flask_jwt_extended import jwt_required
 
 api = Blueprint('api', __name__)
 
-"""
+
 @api.route('/register', methods=['POST'])
 def post_register():    
     body=request.get_json()
@@ -62,7 +62,7 @@ def post_register2():
         return "E-mail no puede estar vacío",400  
     if 'phone'not in body:
         return "Teléfono no puede estar vacío",400
-    if 'initialAddress'not in body:
+    if 'transAddress'not in body:
         return "Dirección no puede estar vacío",400
     if 'password'not in body:
         return "Contraseña no puede estar vacío",400
@@ -70,7 +70,7 @@ def post_register2():
     #     return "Activo no puede estar vacío",400
     
 
-    newRegister2= PerfilTransportista (name=body['name'], lastName=body['lastName'], rut=body['rut'], email=body['email'], phone=body['phone'], initialAddress=body['initialAddress'], password=body['password'])
+    newRegister2= Transportista (name=body['name'], lastName=body['lastName'], rut=body['rut'], email=body['email'], phone=body['phone'], transAddress=body['transAddress'], password=body['password'])
     db.session.add(newRegister2)
     db.session.commit()
     response_body={
@@ -78,7 +78,7 @@ def post_register2():
     }
     return jsonify(response_body),200
 
-@api.route('/perfilVendedor', methods=['POST', 'GET'])
+@api.route('/Vendedor', methods=['POST', 'GET'])
 def all_perfilVendedor():
 
     if request.method =='GET':
@@ -131,14 +131,14 @@ def profile():
         #return jsonify({"success": "Acceso a espacio privado", "usuario": token}), 200
 
 
-@api.route('/perfilTransportista', methods=['POST', 'GET'])
-def all_perfilTransportista():
+@api.route('/Transportista', methods=['POST', 'GET'])
+def all_Transportista():
 
     if request.method =='GET':
-        all_Transportistas = PerfilTransportista.query.all()
-        all_Transportistas = list(map(lambda x: x.serialize(), all_Transportistas))
+        all_Transportista = Transportista.query.all()
+        all_Transportista = list(map(lambda x: x.serialize(), all_Transportista))
     
-        return jsonify(all_Transportistas), 200
+        return jsonify(all_Transportista), 200
 
     else:
         body = request.get_json() # obtener el request body de la solicitud
@@ -149,7 +149,7 @@ def all_perfilTransportista():
         if 'password' not in body:
             return 'Especificar password',400
         #estoy consultando si existe alguien con el email que mande en la api y consigo la primera coincidencia
-        oneTrans = PerfilTransportista.query.filter_by(email=body["email"]).first()
+        oneTrans = Transportista.query.filter_by(email=body["email"]).first()
         if oneTrans:
             if (oneTrans.password == body["password"] ):
                 #CUANDO VALIDAMOS LA PASSWORD CREAREMOS EL TOKEN
@@ -172,7 +172,7 @@ def all_perfilTransportista():
 def profileTrans():
  
         email = get_jwt_identity()
-        oneTrans = PerfilTransportista.query.filter_by(email=identity).first()
+        oneTrans = Transportista.query.filter_by(email=identity).first()
         return jsonify({ "identity": email, "info_user":  oneTrans.serialize()}), 200
 
 
@@ -211,4 +211,3 @@ def all_tarifas():
     all_tarifas = list(map(lambda x: x.serialize(), all_tarifas))
     return jsonify(all_tarifas), 200 
 
- """

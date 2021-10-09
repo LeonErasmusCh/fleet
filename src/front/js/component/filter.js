@@ -17,8 +17,8 @@ export const Selector = () => {
 	};
 
 	return (
-		<div classNameName="selector">
-			<div classNameName="select-container">
+		<div className="selector">
+			<div className="select-container">
 				<select name="plan" value={filter} onChange={handleChange}>
 					<option value="norte"> Norte</option>
 					<option value="centro"> Centro</option>
@@ -27,7 +27,7 @@ export const Selector = () => {
 				</select>
 				{/* Aca alondra estará la tabla segun lo que selecciono la persona */}
 
-				<table classNameName="table">
+				<table className="table">
 					<thead>
 						<tr>
 							<th>nombre</th>

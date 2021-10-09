@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
-			endpoint: "https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io",
+			endpoint: "https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io",
 
 			token: null,
 			message: null,
@@ -127,7 +127,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(store.endpoint + "/api/perfilVendedor", requestOptions);
+					const response = await fetch(store.endpoint + "/api/Vendedor", requestOptions);
 					if (response.status !== 200) {
 						alert("There has been an error");
 						return false;
@@ -165,7 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const response = await fetch(store.endpoint + "/api/perfilTransportista", requestOptions);
+					const response = await fetch(store.endpoint + "/api/Transportista", requestOptions);
 					if (response.status !== 200) {
 						alert("There has been an error");
 						return false;
@@ -278,12 +278,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-amaranth-primate-eobir9j0.ws-us18.gitpod.io/api/register", requestOptions)
+				fetch("https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io/api/register", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
 			},
-			userSignup2: (name, lastName, rut, email, phone, initialAddress, password) => {
+			userSignup2: (name, lastName, rut, email, phone, transAddress, password) => {
 				console.log("password", password);
 
 				var raw = JSON.stringify({
@@ -292,7 +292,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					rut: rut,
 					email: email,
 					phone: phone,
-					initialAddress: initialAddress,
+					transAddress: transAddress,
 					password: password
 				});
 
@@ -303,7 +303,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-amaranth-primate-eobir9j0.ws-us18.gitpod.io/api/register2", requestOptions)
+				fetch("https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io/api/register2", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
@@ -381,7 +381,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//Traer todos Vendedores desde nuestro api
 			loadAllVendedores: () => {
 				const store = getStore();
-				fetch(store.endpoint + "/api/perfilVendedor")
+				fetch(store.endpoint + "/api/Vendedor")
 					.then(response => response.json())
 					.then(result => {
 						setStore({ allVendedores: result });
