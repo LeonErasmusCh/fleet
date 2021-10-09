@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { LoginTransportista } from "../component/logintransportista";
 import { LoginVendedor } from "../component/loginvendedor";
+import "../../styles/demo.scss";
 
 export const Login = () => {
 	const [mail, setMail] = useState("");
@@ -42,22 +43,52 @@ export const Login = () => {
 	return (
 		<>
 			<div className="text-center mt-5">
-				<div id="divSignin">
-					<div className="signinBox">
-						<div id="loginBox">
-							<h1>login</h1>
-							<br />
-							<br />
-							<div className="botones">
-								<button onClick={traeriniciosessionvendedor}>vendedor</button>
-								<button onClick={traeriniciosessiontransportista}>transportista</button>
-							</div>
-							<div className="container login-container">
-								<div>{store.session ? <LoginVendedor /> : <LoginTransportista />}</div>
-							</div>
-						</div>
+				{/* <div id="divSignin"> */}
+				<div className="signinBox">
+					{/* <div id="loginBox"> */}
+					<h1 style={{ color: "white" }}>Selecciona tu Perfil</h1>
+					<br />
+					<br />
+					<div className="botones">
+						<button
+							id="perfilV"
+							className="btn "
+							onClick={traeriniciosessionvendedor}
+							style={{ color: "white", border: "white" }}>
+							Vendedor
+						</button>
+						<button
+							id="perfilT"
+							className="btn"
+							onClick={traeriniciosessiontransportista}
+							style={{ color: "white" }}>
+							Transportista
+						</button>
 					</div>
+					<div className="container login-container">
+						<div>{store.session ? <LoginVendedor /> : <LoginTransportista />}</div>
+					</div>
+					<div style={{ align: "right" }}>
+						<h5 style={{ color: "white" }}>
+							¿Aún no cuentas con tu perfil?
+							<br />
+							Registrate para obtener los beneficios de Fleet!
+						</h5>
+						<a href="/signup">Registrarse</a>
+					</div>
+
+					{/* <Link to="/signup">
+								<button
+									type="submit"
+									className="btn btn-primary"
+									// value={register}
+									name="register">
+									Registrarse
+								</button>
+							</Link> */}
 				</div>
+				{/* </div> */}
+				{/* </div> */}
 			</div>
 		</>
 	);
