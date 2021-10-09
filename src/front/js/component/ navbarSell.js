@@ -13,17 +13,16 @@ export const NavbarSell = () => {
 
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
-			<div className="row col-4 mx-3">
+			<div className="container">
 				<Link to="/">
-					<button type="button" className="btn btn-secondary">
-						Fleet
-					</button>
+					<a className="navbar-brand text-white" href="#">
+						<span className="fleet">
+							<i className="fas fa-box-open ">
+								<em style={{ fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif" }}>Fleet</em>
+							</i>
+						</span>
+					</a>
 				</Link>
-			</div>
-			<div className="ml-auto">
-				<button onClick={logouts} type="button" className="btn btn-secondary">
-					logout
-				</button>
 			</div>
 		</nav>
 	);

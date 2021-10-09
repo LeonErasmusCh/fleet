@@ -5,7 +5,7 @@ export const TeamMembers = props => {
 	return (
 		<div id="who-we-are" className="col-8 col-md-3 m-4">
 			<div className="row d-flex justify-content-around">
-				<img src="rigo-baby.jpg" alt="..." className="rounded-circle img-thumbnail m-3" />
+				<img alt="..." className="rounded-circle img-thumbnail m-3" src={props.imagen} />
 				<h5>
 					Hola! Soy
 					{props.name}
@@ -25,5 +25,6 @@ export const TeamMembers = props => {
 	);
 };
 TeamMembers.propTypes = {
-	name: PropTypes.string
+	name: PropTypes.string,
+	imagen: PropTypes.string
 };
