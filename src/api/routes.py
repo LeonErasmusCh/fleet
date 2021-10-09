@@ -62,7 +62,7 @@ def post_register2():
         return "E-mail no puede estar vacío",400  
     if 'phone'not in body:
         return "Teléfono no puede estar vacío",400
-    if 'initialAddress'not in body:
+    if 'transAddress'not in body:
         return "Dirección no puede estar vacío",400
     if 'password'not in body:
         return "Contraseña no puede estar vacío",400
@@ -70,13 +70,14 @@ def post_register2():
     #     return "Activo no puede estar vacío",400
     
 
-    newRegister2= PerfilTransportista (name=body['name'], lastName=body['lastName'], rut=body['rut'], email=body['email'], phone=body['phone'], initialAddress=body['initialAddress'], password=body['password'])
+    newRegister2= Transportista (name=body['name'], lastName=body['lastName'], rut=body['rut'], email=body['email'], phone=body['phone'], transAddress=body['transAddress'], password=body['password'])
     db.session.add(newRegister2)
     db.session.commit()
     response_body={
         "msg": "Usuario Registrado"
     }
     return jsonify(response_body),200
+
 
 
 @api.route('/Vendedor', methods=['POST', 'GET'])
@@ -127,13 +128,14 @@ def all_Vendedor():
 
 
 @api.route('/Transportista', methods=['POST', 'GET'])
-def all_perfilTransportista():
+
+def all_Transportista():
 
     if request.method =='GET':
-        all_Transportistas = Transportista.query.all()
-        all_Transportistas = list(map(lambda x: x.serialize(), all_Transportistas))
+        all_Transportista = Transportista.query.all()
+        all_Transportista = list(map(lambda x: x.serialize(), all_Transportista))
     
-        return jsonify(all_Transportistas), 200
+        return jsonify(all_Transportista), 200
 
     else:
         body = request.get_json() # obtener el request body de la solicitud
@@ -164,6 +166,7 @@ def all_perfilTransportista():
 @api.route("/dashTrans", methods=['GET'])
 @jwt_required()
 def profileTrans():
+
     if request.method == 'GET':
         identity = get_jwt_identity()
         oneTrans = Transportista.query.filter_by(email=identity).first()
@@ -176,6 +179,12 @@ def profile():
         identity = get_jwt_identity()
         oneSeller = Vendedor.query.filter_by(email=identity).first()
         return jsonify({ "identity": identity, "info_user": oneSeller.serialize()}), 200
+
+ 
+        email = get_jwt_identity()
+        oneTrans = Transportista.query.filter_by(email=identity).first()
+        return jsonify({ "identity": email, "info_user":  oneTrans.serialize()}), 200
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])

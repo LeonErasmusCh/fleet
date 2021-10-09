@@ -2,7 +2,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
-			endpoint: "https://3001-scarlet-hookworm-ekjzg717.ws-us18.gitpod.io",
+
+
+			endpoint: "https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io",
+
+
+
 			token: null,
 			message: null,
 			session: null,
@@ -297,12 +302,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				fetch(store.endpoint + "/api/register", requestOptions)
+
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
 			},
-			userSignup2: (name, lastName, rut, email, phone, initialAddress, password) => {
-				const store = getStore();
+
+
+			userSignup2: (name, lastName, rut, email, phone, transAddress, password) => {
 				console.log("password", password);
 
 				var raw = JSON.stringify({
@@ -311,7 +318,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					rut: rut,
 					email: email,
 					phone: phone,
-					initialAddress: initialAddress,
+					transAddress: transAddress,
 					password: password
 				});
 
@@ -321,6 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: raw,
 					redirect: "follow"
 				};
+
 
 				fetch(store.endpoint + "/api/register2", requestOptions)
 					.then(response => response.text())

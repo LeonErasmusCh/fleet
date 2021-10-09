@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Selector } from "../component/filter";
 import { NEWSidebar } from "../component/NewSidebar";
-import { OtherSidebar } from "../component/othersider";
+
 export const Seller = () => {
 	const { store, actions } = useContext(Context);
 
@@ -28,6 +28,7 @@ export const Seller = () => {
 					<br />
 					<Selector />
 					<br />
+
 
 					<Link to="/">
 						<button>Go back</button>
