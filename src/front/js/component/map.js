@@ -1,14 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { Marker, InfoWindow } from "@react-google-maps/api";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 /* Tamaño del mapa */
 const containerStyle = {
-	width: "90vw",
-	height: "40vw",
-	margin: "80px auto"
+	width: "100vw",
+	height: "100vh",
+	margin: "0 auto"
 };
 
 /* Aqui centramos el mapa -- lat: -33.4369,
@@ -118,6 +118,17 @@ export const Map = () => {
 								<i className="fas fa-home mx-2" />
 							</span>
 						</button>
+						<Link to="/DashTransport">
+							<button
+								className="btn btn-primary"
+								style={{
+									position: "absolute",
+									marginLeft: "400px",
+									top: "10px"
+								}}>
+								volver
+							</button>
+						</Link>
 
 						{/* Encomieda (puntos de retiro) Markers */}
 						{encomiendacoords

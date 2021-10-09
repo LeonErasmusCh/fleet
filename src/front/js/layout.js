@@ -35,6 +35,7 @@ const Layout = () => {
 						<Route exact path="/">
 							<Navbar />
 							<Home />
+							<Footer />
 						</Route>
 
 						<Route exact path="/test">
@@ -43,19 +44,22 @@ const Layout = () => {
 						<Route exact path="/seller">
 							<NavbarSell />
 							<Seller />
+							<Footer />
 						</Route>
 						<Route exact path="/transportdetail">
 							<NavbarSell />
 							<TransportDetail />
+							<Footer />
 						</Route>
 
 						<Route exact path="/sellerdetail">
 							<NavbarSell />
 							<SellerDetail />
+							<Footer />
 						</Route>
 
 						<Route exact path="/map">
-							<NavbarDelivery />
+							{/*<NavbarDelivery />*/}
 							<DeliveryMap />
 						</Route>
 						<Route exact path="/demo">
@@ -79,7 +83,6 @@ const Layout = () => {
 							<h1>Not found!</h1>
 						</Route>
 					</Switch>
-					<Footer />
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>

@@ -19,10 +19,7 @@ export const Seller = () => {
 					<h5>Bienvenido {store.info_user.name}</h5>
 					<p>¿donde necesitas enviar tu producto hoy?</p>
 
-					<SellerMessage />
-
 					<Selector />
-
 
 					<Link to="/">
 						<button>Go back</button>

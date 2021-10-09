@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
-			endpoint: "https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io",
+			endpoint: "https://3000-green-reptile-8ag6a3rx.ws-us18.gitpod.io",
 
 			token: null,
 			message: null,
