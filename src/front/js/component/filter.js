@@ -1,61 +1,65 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
+import "../../styles/home.scss";
 import { ModalExample } from "./modal";
+
 export const Selector = () => {
 	const [filter, setFilter] = useState("");
+	const { store, actions } = useContext(Context);
+	const [datosVendedor, setDatosVendedor] = useState([]);
 
-	//aca se supone tendre los datos de la api que aun no tengo
-	var datos = [
-		{ nombre: "juanito", recibe: "centro", entrega: "centro", precio: "1000" },
-		{ nombre: "juaniti", recibe: "centro", entrega: "norte", precio: "2000" },
-		{ nombre: "juan", recibe: "centro", entrega: "centro", precio: "1200" },
-		{ nombre: "renato", recibe: "sur", entrega: "centro", precio: "200000" }
-	];
-	//esta funcion me dice que cosa seleccioné
+	useEffect(() => {
+		setDatosVendedor(store.datos);
+		console.log("datosVendedor", datosVendedor);
+	});
+
 	const handleChange = e => {
 		console.log("element Selected!!", e.target.value);
 		setFilter(e.target.value); //significa que como filtro ya tendrá un parámetro mostrará los que cumplan solamente
 	};
 
 	return (
-		<div classNameName="selector">
-			<div classNameName="select-container">
+		<div className="selector">
+			<div className="select-container">
 				<select name="plan" value={filter} onChange={handleChange}>
 					<option value="norte"> Norte</option>
 					<option value="centro"> Centro</option>
 					<option value="sur"> Sur</option>
 					<option value="periferia"> Periferia</option>
 				</select>
-				{/* Aca alondra estará la tabla segun lo que selecciono la persona */}
 
-				<table classNameName="table">
+				<table className="table">
 					<thead>
 						<tr>
-							<th>nombre</th>
-							<th>recibe</th>
-							<th>entrega</th>
-							<th>monto</th>
+							<th>transportista</th>
+							<th>zone</th>
+							<th>zoneDestino</th>
+							<th>price</th>
 						</tr>
 					</thead>
 					<tbody>
-						{datos.map((value, key) => {
-							return (
-								<>
-									{value.recibe === filter ? (
-										<tr>
-											<td>{value.nombre}</td>
-											<td>{value.recibe}</td>
-											<td>{value.entrega}</td>
-											<td>{value.precio}</td>
-											<td>
-												<ModalExample datosVendedor={value} />
-											</td>
-										</tr>
-									) : (
-										""
-									)}
-								</>
-							);
-						})}
+						{datosVendedor
+							? datosVendedor.map((value, posicion) => {
+									console.log("helloooooo tarfias", value);
+									return (
+										<>
+											{value.zone === filter ? (
+												<tr>
+													<td>{value.transportista}</td>
+													<td>{value.zone}</td>
+													<td>{value.zoneDestino}</td>
+													<td>{value.price}</td>
+													<td>
+														<ModalExample datosVendedor={value} />
+													</td>
+												</tr>
+											) : (
+												""
+											)}
+										</>
+									);
+							  })
+							: console.log("esta vacia")}
 					</tbody>
 				</table>
 			</div>

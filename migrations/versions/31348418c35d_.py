@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2cc413808a24
+Revision ID: 31348418c35d
 Revises: 
-Create Date: 2021-10-08 03:04:31.142578
+Create Date: 2021-10-09 04:04:34.256890
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2cc413808a24'
+revision = '31348418c35d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,9 +39,11 @@ def upgrade():
     sa.Column('email', sa.String(length=50), nullable=False),
     sa.Column('password', sa.String(length=50), nullable=False),
     sa.Column('rut', sa.String(length=50), nullable=False),
+    sa.Column('initialAddress', sa.String(length=50), nullable=False),
     sa.Column('phone', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id_vendor'),
     sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('initialAddress'),
     sa.UniqueConstraint('lastName'),
     sa.UniqueConstraint('name'),
     sa.UniqueConstraint('phone'),
@@ -61,9 +63,7 @@ def upgrade():
     sa.Column('zone', sa.String(length=50), nullable=False),
     sa.Column('zoneDestino', sa.String(length=50), nullable=False),
     sa.ForeignKeyConstraint(['transport'], ['transportista.id_transport'], ),
-    sa.PrimaryKeyConstraint('id_fee'),
-    sa.UniqueConstraint('zone'),
-    sa.UniqueConstraint('zoneDestino')
+    sa.PrimaryKeyConstraint('id_fee')
     )
     op.create_table('encomiendas',
     sa.Column('id_package', sa.Integer(), nullable=False),
@@ -71,6 +71,7 @@ def upgrade():
     sa.Column('destinationAddress', sa.String(length=50), nullable=True),
     sa.Column('originAddress', sa.Integer(), nullable=True),
     sa.Column('zone', sa.String(length=50), nullable=False),
+    sa.Column('mensaje', sa.String(length=1000), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=False),
     sa.Column('transport', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['originAddress'], ['direcciones.id_direccion'], ),

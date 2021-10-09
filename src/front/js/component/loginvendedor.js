@@ -29,8 +29,6 @@ export const LoginVendedor = () => {
 		actions.login(mail, password);
 	};
 
-	//llama login transportista
-
 	//condicional para que rediriga una vez iniciada session vendedor a seller
 	if (store.token && store.token != "" && store.token != undefined) history.push("/seller");
 	return (

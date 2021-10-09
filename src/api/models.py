@@ -9,7 +9,7 @@ class Vendedor(db.Model):
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(50), unique=False, nullable=False)
     rut = db.Column(db.String(50), unique=True, nullable=False)
-    #initialAddress = db.Column(db.String(50), unique=True, nullable=False)
+    initialAddress = db.Column(db.String(50), unique=True, nullable=False)
     phone = db.Column(db.String(50), unique=True, nullable=False)
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     def serialize(self):
@@ -38,13 +38,13 @@ class Direcciones(db.Model):
             "pertenece": self.pertenece,
         }
 
-
 class Encomiendas(db.Model):
     id_package = db.Column(db.Integer,  primary_key=True, unique=True)
     status = db.Column(db.String(50), unique=False, nullable=False)
     destinationAddress = db.Column(db.String(50), unique=False)
     originAddress =db.Column(db.Integer, db.ForeignKey('direcciones.id_direccion'))
     zone = db.Column(db.String(50), unique=False, nullable=False)
+    mensaje = db.Column(db.String(1000), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     rel = db.relationship("Direcciones")
     transport = db.Column(db.Integer,db.ForeignKey('transportista.id_transport'))
@@ -56,7 +56,8 @@ class Encomiendas(db.Model):
             "destinationAddress": self.destinationAddress,
             "originAddress": self.originAddress,
             "zone": self.zone,
-            "transport": self.transport
+            "transport": self.transport,
+            "mensaje":self.mensaje
         }
 
 
@@ -66,8 +67,8 @@ class Tarifas(db.Model):
     #destinationAddress = db.Column(db.String(50), db.ForeignKey('encomiendas.destinationAddress'), unique=True, nullable=False)
     #originAddress = db.Column(db.String(50), db.ForeignKey('encomiendas.originAddress'), unique=True, nullable=False)
     transport = db.Column(db.Integer,db.ForeignKey('transportista.id_transport'))
-    zone =  db.Column(db.String(50), unique=True, nullable=False)
-    zoneDestino = db.Column(db.String(50), unique=True, nullable=False)
+    zone =  db.Column(db.String(50), unique=False, nullable=False)
+    zoneDestino = db.Column(db.String(50), unique=False, nullable=False)
     #is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     #phone = db.Column(db.String(50), db.ForeignKey('perfiltransportista.phone'), unique=True, nullable=False)
     rel = db.relationship('Transportista')
