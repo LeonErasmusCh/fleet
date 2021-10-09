@@ -6,6 +6,26 @@
 //     height: 100vh;
 // }
 
+// button:hover {
+//     background-color: #ff1dff;
+//   }
+
+
+
+button:active{
+    background:#ff1dff;
+    border: 2px;
+    border-Color: pink;
+    // background-color: transparent;
+    
+}
+
+button:focus{
+    background:#ff1dff;
+    border: 2px;
+    border-Color: pink;
+    // background-color: transparent;
+}
 
 #loginBox {
     width: 400px;

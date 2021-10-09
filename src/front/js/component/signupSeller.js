@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 export const SignupSeller = () => {
 	const { store, actions } = useContext(Context);
@@ -34,9 +35,9 @@ export const SignupSeller = () => {
 
 	return (
 		<>
-			<div className="signinBox">
+			<div className="" style={{ alignContent: "center" }}>
 				<form onSubmit={e => handlersubmit(e)}>
-					<h1>Registro de Cuenta</h1>
+					<h1 />
 					{/* <select className="custom-select" id="inputGroupSelect01">
 							<option selected>Selecciona tu Perfil</option>
 							<option value="transport" onClick={e => setTransport(e.target.value)}>
@@ -102,21 +103,31 @@ export const SignupSeller = () => {
 						onChange={e => setPassword(e.target.value)}
 					/>
 					<br />
-					<input type="submit" name="ingresar" value="Registrarse" onSubmit={e => handlersubmit(e)} />
-					{/* <Link to="/login">
+					<input
+						style={{
+							// border: "2px",
+							borderRadius: "5px",
+							backgroundColor: "transparent"
+						}}
+						className="btn btn-primary"
+						type="submit"
+						name="ingresar"
+						value="Registrarse"
+						onSubmit={e => handlersubmit(e)}
+					/>
+					<Link to="/login">
 						<button
 							type="submit"
-							style={{ backgroundColor: "transparent" }}
+							style={{ backgroundColor: "transparent", marginLeft: "10px" }}
 							className="btn btn-primary"
 							// value={register}
 							name="register">
 							Iniciar Sesión
 						</button>
-					</Link> */}
+					</Link>
 				</form>
 				<form action="login.html" method="POST" />
 			</div>
-			{/* <SignupSeller /> */}
 		</>
 	);
 };

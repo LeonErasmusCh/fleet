@@ -36,32 +36,39 @@ export const LoginVendedor = () => {
 	return (
 		<>
 			<div className="text-center mt-5">
-				<div>
+				{/* <div>
 					<div className="container login-container">
-						<div className="row">
-							<div className="col-8 justify-content-center login-form-1">
-								<h3>Login Vendedor </h3>
-								<div className="form-group">
-									<input
-										type="text"
-										placeholder="mail"
-										value={mail}
-										onChange={e => setMail(e.target.value)}
-									/>
-								</div>
-								<div className="form-group">
-									<input
-										type="text"
-										placeholder="password"
-										value={password}
-										onChange={e => setPassword(e.target.value)}
-									/>
-								</div>
-								<button onClick={handleClick}>Login</button>
-							</div>
-						</div>
-					</div>
+						<div className="row"> */}
+				{/* <div className="col-8 justify-content-center login-form-1"> */}
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						placeholder="E-mail"
+						value={mail}
+						onChange={e => setMail(e.target.value)}
+					/>
 				</div>
+				<div className="form-group">
+					<input
+						className="form-control"
+						type="text"
+						placeholder="Contraseña"
+						value={password}
+						onChange={e => setPassword(e.target.value)}
+					/>
+				</div>
+				<button
+					type="submit"
+					style={{ backgroundColor: "transparent", marginLeft: "10px", marginBottom: "10px" }}
+					className="btn btn-primary"
+					onClick={handleClick}>
+					Iniciar Sesión
+				</button>
+				{/* </div> */}
+				{/* </div>
+					</div>
+				</div> */}
 			</div>
 		</>
 	);

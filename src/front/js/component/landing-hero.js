@@ -20,7 +20,7 @@ export const HeroSection = () => {
 											<button className="button">iniciar Sesión</button>
 										</Link>
 										<Link to="/signup">
-											<button className="button ">Registrarse</button>
+											<button className="button ">Registrar</button>
 										</Link>
 									</div>
 								</div>
