@@ -10,6 +10,7 @@ import renato from "../../img/renato.jpeg";
 import leon from "../../img/leon.jpeg";
 import rigo from "../../img/rigo-baby.jpg";
 import connie from "../../img/connie.jpeg";
+import seba from "../../img/seba.jpeg";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -26,7 +27,7 @@ export const Home = () => {
 					<TeamMembers name=" Constanza" imagen={connie} />
 					<TeamMembers name=" Leon" imagen={leon} />
 					<TeamMembers name=" Alondra" imagen={alondra} />
-					<TeamMembers name=" Sebastian" imagen={rigo} />
+					<TeamMembers name=" Sebastian" imagen={seba} />
 					<TeamMembers name=" Renato" imagen={renato} />
 				</div>
 			</div>
