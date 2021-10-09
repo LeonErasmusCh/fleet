@@ -9,7 +9,7 @@ class Vendedor(db.Model):
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(50), unique=False, nullable=False)
     rut = db.Column(db.String(50), unique=True, nullable=False)
-    #initialAddress = db.Column(db.String(50), unique=True, nullable=False)
+    initialAddress = db.Column(db.String(50), unique=True, nullable=False)
     phone = db.Column(db.String(50), unique=True, nullable=False)
     # is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     def serialize(self):

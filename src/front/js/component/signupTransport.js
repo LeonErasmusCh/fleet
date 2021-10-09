@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
-export const SignupSeller = () => {
+export const SignupTransport = () => {
 	const { store, actions } = useContext(Context);
 	// const [seller, setSeller] = useState("");
 	// const [transport, setTransport] = useState("");
@@ -10,7 +10,7 @@ export const SignupSeller = () => {
 	const [rut, setRut] = useState("");
 	const [email, setEmail] = useState("");
 	const [phone, setPhone] = useState("");
-	const [initialAddress, setInitialAddress] = useState("");
+	const [transAddress, setTransAddress] = useState("");
 	const [password, setPassword] = useState("");
 	const [data, setData] = useState();
 
@@ -26,16 +26,16 @@ export const SignupSeller = () => {
 	// 	actions.registroUserSeller();
 	// };
 
-	const handlersubmit = e => {
+	const handlersubmit2 = e => {
 		e.preventDefault();
-		actions.userSignup(name, lastName, rut, email, phone, initialAddress, password);
+		actions.userSignup2(name, lastName, rut, email, phone, transAddress, password);
 		console.log("DATOS");
 	};
 
 	return (
 		<>
 			<div className="signinBox">
-				<form onSubmit={e => handlersubmit(e)}>
+				<form onSubmit={e => handlersubmit2(e)}>
 					<h1>Registro de Cuenta</h1>
 					{/* <select className="custom-select" id="inputGroupSelect01">
 							<option selected>Selecciona tu Perfil</option>
@@ -89,9 +89,9 @@ export const SignupSeller = () => {
 						type="text"
 						className="form-control"
 						// value={initialAddress}
-						name="initialAddress"
+						name="transAddress"
 						placeholder="Dirección"
-						onChange={e => setInitialAddress(e.target.value)}
+						onChange={e => setTransAddress(e.target.value)}
 					/>
 					<input
 						type="password"
@@ -102,7 +102,7 @@ export const SignupSeller = () => {
 						onChange={e => setPassword(e.target.value)}
 					/>
 					<br />
-					<input type="submit" name="ingresar" value="Registrarse" onSubmit={e => handlersubmit(e)} />
+					<input type="submit" name="ingresar" value="Registrarse" onSubmit={e => handlersubmit2(e)} />
 					{/* <Link to="/login">
 						<button
 							type="submit"
