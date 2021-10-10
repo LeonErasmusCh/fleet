@@ -11,8 +11,8 @@ export const DashTrans = () => {
 
 	return (
 		<div className="MarginDashTrans">
-			<div className="container w-50">
-				<h5>Bienvenido {store.perfil.name}</h5>
+			<div className="container w-75">
+				<h5>Bienvenido</h5>
 				<h1>Lista de Precios Según Sector</h1>
 
 				<table className="table table-light">
@@ -27,32 +27,56 @@ export const DashTrans = () => {
 						<tr>
 							<td>Mark</td>
 							<td>Otto</td>
-							<td>@mdo</td>
+							<td>
+								<div className="d-flex align-items-center">
+									@mdo
+									<button type="button" className="btn btn-success btn-sm mx-3">
+										<i className="fas fa-check mx-2" />
+										aceptar
+									</button>
+								</div>
+							</td>
 						</tr>
 						<tr>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>
+								<div className="d-flex align-items-center">
+									@mdo
+									<button type="button" className="btn btn-success btn-sm mx-3">
+										<i className="fas fa-check mx-2" />
+										aceptar
+									</button>
+								</div>
+							</td>
 						</tr>
 						<tr>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>
+								<div className="d-flex align-items-center">
+									@mdo
+									<button type="button" className="btn btn-success btn-sm mx-3">
+										<i className="fas fa-check mx-2" />
+										aceptar
+									</button>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 				<Link to="/">
-					<button type="button" className="btn btn-success btn-md btn-block m-2">
+					<button type="button" className="btn btn-secondary btn-md btn-block m-2">
 						inicio
 					</button>
 				</Link>
 				<Link to="/map">
-					<button type="button" className="btn btn-success btn-md btn-block m-2">
+					<button type="button" className="btn btn-secondary btn-md btn-block m-2">
 						ver pedidos aceptados en mapa
 					</button>
 				</Link>
 				<Link to="/">
-					<button type="button" className="btn btn-success btn-md btn-block m-2">
+					<button type="button" className="btn btn-secondary btn-md btn-block m-2">
 						solicitudes
 					</button>
 				</Link>
