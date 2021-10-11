@@ -96,6 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		encomiendas: [],
 		encomiendasUrl: [],
 		encomiendasCoords: [],
+		encomiendaForm: [],
 
 		//generar pedido desde componente ORDER
 		order: [],
@@ -512,6 +513,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ order: input });
 				console.log("STORE => Order message: ", store.order);
+			},
+
+			loadEncomiendaForm: input => {
+				const store = getStore();
+				setStore({ encomiendaForm: input });
+				console.log("STORE => encomiendaForm: ", store.encomiendaForm);
 			}
 		}
 	};

@@ -12,7 +12,6 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Test } from "./pages/test";
 import { Seller } from "./pages/seller";
 import { DeliveryMap } from "./pages/delivery-map";
 import { DashTrans } from "./pages/DashTrans";
@@ -39,9 +38,6 @@ const Layout = () => {
 							<Footer />
 						</Route>
 
-						<Route exact path="/test">
-							<Test />
-						</Route>
 						<Route exact path="/seller">
 							<NavbarSell />
 							<NEWSidebar />
@@ -49,15 +45,12 @@ const Layout = () => {
 							<Footer />
 						</Route>
 						<Route exact path="/transportdetail">
-							<NavbarSell />
 							<TransportDetail />
-							<Footer />
 						</Route>
 
 						<Route exact path="/sellerdetail">
 							<NavbarSell />
 							<SellerDetail />
-							<Footer />
 						</Route>
 
 						<Route exact path="/map">
