@@ -29,7 +29,6 @@ export const Seller = () => {
 					<Selector />
 					<br />
 
-
 					<Link to="/">
 						<button>Go back</button>
 					</Link>

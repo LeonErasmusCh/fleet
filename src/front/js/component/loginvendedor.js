@@ -9,7 +9,6 @@ export const LoginVendedor = () => {
 	const [password, setPassword] = useState("");
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
-	
 
 	console.log("this is your token", store.token);
 
