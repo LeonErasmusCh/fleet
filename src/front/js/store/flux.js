@@ -516,9 +516,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("STORE => Order message: ", store.order);
 			},
 
-			loadEncomiendaForm: input => {
+			loadEncomiendaForm: form => {
 				const store = getStore();
-				setStore({ encomiendaForm: input });
+				setStore({ encomiendaForm: [form] });
 				console.log("STORE => encomiendaForm: ", store.encomiendaForm);
 			}
 		}
