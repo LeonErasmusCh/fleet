@@ -31,10 +31,10 @@ export const Selector = () => {
 				<table className="table">
 					<thead>
 						<tr>
-							<th>transportista</th>
-							<th>zone</th>
-							<th>zoneDestino</th>
-							<th>price</th>
+							<th>Pyme Transportista</th>
+							<th>Zona de Origen</th>
+							<th>Zona de Destino</th>
+							<th>Tarifa</th>
 						</tr>
 					</thead>
 					<tbody>
