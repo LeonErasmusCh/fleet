@@ -31,6 +31,7 @@ const injectContext = PassedComponent => {
 			state.actions.getDatos();
 			state.actions.loadEncomiendas();
 			state.actions.loadEncomiendaForm();
+			state.actions.loadTransportPrices();
 
 			//state.actions.loadtrans();
 			//state.actions.traerusuariotrans();

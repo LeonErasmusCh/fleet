@@ -97,7 +97,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		encomiendas: [],
 		encomiendasUrl: [],
 		encomiendasCoords: [],
+		//datos de encomienda en formulario en sellerDetail
 		encomiendaForm: [],
+		//loadTransportPrices formulario (zonaA ZonaB y Precio)
+		transportPrices: [],
 
 		//generar pedido desde componente ORDER
 		order: [],
@@ -515,11 +518,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ order: input });
 				console.log("STORE => Order message: ", store.order);
 			},
-
+			// EncomiendaForm en sellDetail
 			loadEncomiendaForm: form => {
 				const store = getStore();
 				setStore({ encomiendaForm: [form] });
 				console.log("STORE => encomiendaForm: ", store.encomiendaForm);
+			},
+			// funcion en DashTrans in mandar transportista precios a store
+			loadTransportPrices: zona => {
+				const store = getStore();
+				setStore({ transportPrices: [zona] });
+				console.log("STORE => transportPrices: ", store.transportPrices);
 			},
 
 			postForm: () => {
