@@ -41,7 +41,7 @@ class Direcciones(db.Model):
 
 class Encomiendas(db.Model):
     id_package = db.Column(db.Integer,  primary_key=True, unique=True)
-    status = db.Column(db.Boolean(50), unique=False, nullable=False)
+    status = db.Column(db.Boolean(), unique=False, nullable=False)
     destinationAddress = db.Column(db.String(50), unique=False)
     originAddress =db.Column(db.Integer, db.ForeignKey('direcciones.id_direccion'))
     # zone = db.Column(db.String(50), unique=False, nullable=False)
