@@ -118,7 +118,7 @@ export const Map = () => {
 								<i className="fas fa-home mx-2" />
 							</span>
 						</button>
-						<Link to="/DashTransport">
+						<Link to="/DashTrans">
 							<button
 								className="btn btn-primary"
 								style={{

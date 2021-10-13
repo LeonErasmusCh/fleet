@@ -9,7 +9,6 @@ export const LoginVendedor = () => {
 	const [password, setPassword] = useState("");
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
-	
 
 	console.log("this is your token", store.token);
 
@@ -51,7 +50,7 @@ export const LoginVendedor = () => {
 				<div className="form-group">
 					<input
 						className="form-control"
-						type="text"
+						type="password"
 						placeholder="Contraseña"
 						value={password}
 						onChange={e => setPassword(e.target.value)}

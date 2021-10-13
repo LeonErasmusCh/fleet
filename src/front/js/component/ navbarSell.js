@@ -25,6 +25,11 @@ export const NavbarSell = () => {
 					</a>
 				</Link>
 			</div>
+			<div className="ml-auto">
+				<button onClick={logouts} type="button" className="btn btn-secondary">
+					logout
+				</button>
+			</div>
 		</nav>
 	);
 };

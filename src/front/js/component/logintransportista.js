@@ -42,7 +42,7 @@ export const LoginTransportista = () => {
 				<div className="form-group">
 					<input
 						className="form-control"
-						type="text"
+						type="password"
 						placeholder="Contraseña"
 						value={password}
 						onChange={e => setPassword(e.target.value)}

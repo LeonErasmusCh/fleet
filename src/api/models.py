@@ -22,6 +22,7 @@ class Vendedor(db.Model):
             "rut": self.rut,
             "initialAddress": self.initialAddress,
             "phone": self.phone,
+            "password": self.password,
             # do not serialize the password, its a security breach
         }
 class Direcciones(db.Model):
@@ -105,4 +106,5 @@ class Transportista(db.Model):
             "rut": self.rut,
             "transAddress": self.transAddress,
             "phone": self.phone,
+            "password": self.password,
         }

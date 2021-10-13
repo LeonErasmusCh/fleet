@@ -2,9 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
-			endpoint: "https://3001-green-reptile-8ag6a3rx.ws-us18.gitpod.io",
 
-
+			endpoint: "https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io",
 
 			token: null,
 			message: null,
@@ -299,13 +298,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch(store.endpoint + "/api/register", requestOptions)
-
+				fetch("https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io/api/register", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
 			},
-
 
 			userSignup2: (name, lastName, rut, email, phone, transAddress, password) => {
 				console.log("password", password);
@@ -327,8 +324,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-
-				fetch(store.endpoint + "/api/register2", requestOptions)
+				fetch("https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io/api/register2", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
