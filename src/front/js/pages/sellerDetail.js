@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Context } from "../store/appContext";
 
 import { Link, useParams } from "react-router-dom";
 import { LeftSidebar } from "../component/left-sidebar";
 import { ReceiveMessage } from "../component/receiveMessage";
 
 export const SellerDetail = () => {
+	const { store, actions } = useContext(Context);
+
 	const [form, setForm] = useState({
 		origin_calle: "",
 		origin_numero: "",
@@ -30,12 +33,14 @@ export const SellerDetail = () => {
 			...form,
 			[event.target.name]: event.target.value
 		});
+		//console.log("form data", form);
 	};
 
-	const enviarDatos = (event, form) => {
+	const enviarDatos = event => {
 		event.preventDefault();
 		console.log("form data", form);
 		// NEXT SEND FORM TO STORE loadEncomiendaForm()
+		actions.loadEncomiendaForm(form);
 	};
 
 	return (
