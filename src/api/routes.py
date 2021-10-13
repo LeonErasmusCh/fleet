@@ -219,4 +219,24 @@ def all_tarifas():
     all_tarifas = list(map(lambda x: x.serialize(), all_tarifas))
     return jsonify(all_tarifas), 200 
 
+@api.route('/tablaTarifas', methods=['POST'])
+def post_tablaTarifas():    
+    body=request.get_json()
+    if body is None:
+        return "The request body is null", 400
+    if 'price' not in body:
+        return "Tarifa no puede estar vacía",400
+    if 'zone' not in body:
+        return "Zona de Origen no puede estar vacía",400
+    if 'zoneDestino' not in body:
+        return "Zona de Destino no puede estar vacía",400
+
+    newTablaTarifas= Tarifas (price=body['price'], zone=body['zone'], zoneDestino=body['zoneDestino'])
+    db.session.add(newTablaTarifas)
+    db.session.commit()
+    response_body={
+        "msg": "Tarifas Registradas"
+    }
+    return jsonify(response_body),200 
+
 

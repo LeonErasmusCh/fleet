@@ -22,7 +22,7 @@ export const Seller = () => {
 						<span> {store.info_user.name} </span>
 					</h4>
 					<br />
-					<h5>¿Donde necesitas enviar tu producto hoy?</h5>
+					<h5>¿Dónde quieres enviar tu pedido?</h5>
 					<br />
 
 					<br />
