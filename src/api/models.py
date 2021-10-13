@@ -41,12 +41,12 @@ class Direcciones(db.Model):
 
 class Encomiendas(db.Model):
     id_package = db.Column(db.Integer,  primary_key=True, unique=True)
-    status = db.Column(db.String(50), unique=False, nullable=False)
+    status = db.Column(db.Boolean(50), unique=False, nullable=False)
     destinationAddress = db.Column(db.String(50), unique=False)
     originAddress =db.Column(db.Integer, db.ForeignKey('direcciones.id_direccion'))
-    zone = db.Column(db.String(50), unique=False, nullable=False)
+    # zone = db.Column(db.String(50), unique=False, nullable=False)
+    # zoneDestino = db.Column(db.String(50), unique=False, nullable=False)
     mensaje = db.Column(db.String(1000), unique=False, nullable=False)
-    is_active = db.Column(db.Boolean(), unique=False, nullable=False)
     rel = db.relationship("Direcciones")
     transport = db.Column(db.Integer,db.ForeignKey('transportista.id_transport'))
     rel = db.relationship('Transportista')

@@ -239,4 +239,27 @@ def post_tablaTarifas():
     }
     return jsonify(response_body),200 
 
+@api.route('/pedidos', methods=['POST'])
+def post_pedidos():    
+    body=request.get_json()
+    if body is None:
+        return "The request body is null", 400
+    if 'status' not in body:
+        return "Estado no puede estar vacío",400
+    if 'destinationAddress' not in body:
+        return "Dirección de destino no puede estar vacía",400
+    if 'originAddress' not in body:
+        return "Dirección de Origen no puede estar vacía",400
+    if 'mensaje' not in body:
+        return "Mensaje no puede estar vacío",400
+
+
+    newPedidos= Encomiendas (status=body['status'], destinationAddress=body['destinationAddress'], originAddress=body['originAddress'], mensaje=body['mensaje'])
+    db.session.add(newPedidos)
+    db.session.commit()
+    response_body={
+        "msg": "Encomienda Registrada"
+    }
+    return jsonify(response_body),200 
+
 
