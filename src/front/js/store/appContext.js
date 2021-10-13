@@ -30,6 +30,7 @@ const injectContext = PassedComponent => {
 			state.actions.userSignup2();
 			state.actions.getDatos();
 			state.actions.loadEncomiendas();
+			state.actions.loadEncomiendaForm();
 
 			//state.actions.loadtrans();
 			//state.actions.traerusuariotrans();
