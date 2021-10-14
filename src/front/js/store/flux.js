@@ -97,7 +97,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		encomiendas: [],
 		encomiendasUrl: [],
 		encomiendasCoords: [],
+		//datos de encomienda en formulario en sellerDetail
 		encomiendaForm: [],
+		//loadTransportPrices formulario (zonaA ZonaB y Precio)
+		transportPrices: [],
 
 		//generar pedido desde componente ORDER
 		order: [],
@@ -515,11 +518,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ order: input });
 				console.log("STORE => Order message: ", store.order);
 			},
-
+			// EncomiendaForm en sellDetail
 			loadEncomiendaForm: form => {
 				const store = getStore();
 				setStore({ encomiendaForm: [form] });
 				console.log("STORE => encomiendaForm: ", store.encomiendaForm);
+			},
+			// funcion en DashTrans in mandar transportista precios a store
+			loadTransportPrices: zona => {
+				const store = getStore();
+				setStore({ transportPrices: [zona] });
+				console.log("STORE => transportPrices: ", store.transportPrices);
+			},
+
+			postForm: () => {
+				const store = getStore();
+				console.log(
+					"postForm a orginAdress: ",
+					store.encomiendaForm[0].origin_calle +
+						" " +
+						store.encomiendaForm[0].origin_numero +
+						" " +
+						store.encomiendaForm[0].origin_comuna +
+						" " +
+						store.encomiendaForm[0].origin_cuidad
+				);
+				console.log(
+					"postForm a destinoAdress: ",
+					store.encomiendaForm[0].destino_calle +
+						" " +
+						store.encomiendaForm[0].destino_numero +
+						" " +
+						store.encomiendaForm[0].destino_comuna +
+						" " +
+						store.encomiendaForm[0].destino_cuidad
+				);
+				console.log("postForm messaje: ", store.encomiendaForm[0].mensaje);
+				console.log("postForm encomienda peso: ", store.encomiendaForm[0].encomienda_peso);
+				console.log(
+					"postForm encomienda volumen: ",
+					"alto " +
+						store.encomiendaForm[0].encomienda_alto +
+						" " +
+						"ancho " +
+						store.encomiendaForm[0].encomienda_ancho +
+						" " +
+						"largo " +
+						store.encomiendaForm[0].encomienda_largo
+				);
 			}
 		}
 	};

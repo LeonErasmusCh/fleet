@@ -41,6 +41,7 @@ export const SellerDetail = () => {
 		console.log("form data", form);
 		// NEXT SEND FORM TO STORE loadEncomiendaForm()
 		actions.loadEncomiendaForm(form);
+		actions.postForm();
 	};
 
 	return (
