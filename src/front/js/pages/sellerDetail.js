@@ -26,6 +26,8 @@ export const SellerDetail = () => {
 		mensaje: ""
 	});
 
+	const [count, setCount] = useState(0);
+
 	const handleInputChange = event => {
 		// console.log(event.target.name)
 		// console.log(event.target.value)
@@ -38,6 +40,8 @@ export const SellerDetail = () => {
 
 	const enviarDatos = event => {
 		event.preventDefault();
+		event.target.reset();
+		setCount(count + 1);
 		console.log("form data", form);
 		// NEXT SEND FORM TO STORE loadEncomiendaForm()
 		actions.loadEncomiendaForm(form);
@@ -292,6 +296,12 @@ export const SellerDetail = () => {
 							</div>
 
 							<div className="border-bottom border-light m-3" />
+
+							{count ? (
+								<h6 className="text-success text-center p-2">
+									{count} ingresado <i className="fas fa-check-circle" />
+								</h6>
+							) : null}
 
 							<button className="btn btn-primary my-3" type="submit">
 								enviar

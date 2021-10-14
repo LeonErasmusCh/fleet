@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export const DashTrans = () => {
 	const { store, actions } = useContext(Context);
 	const [zona, setZona] = useState({ zonaA: "", zonaB: "", precio: "" });
+	const [count, setCount] = useState(0);
 
 	const handleChange = e => {
 		//console.log(e.target.name);
@@ -17,6 +18,8 @@ export const DashTrans = () => {
 
 	const enviarDatos = event => {
 		event.preventDefault();
+		event.target.reset();
+		setCount(count + 1);
 		console.log("zona data", zona);
 		actions.loadTransportPrices(zona);
 	};
@@ -122,6 +125,7 @@ export const DashTrans = () => {
 									id="zonaA"
 									name="zonaA"
 									className="form-control"
+									required
 									onChange={handleChange}>
 									<option value="" className="text-center">
 										-- Elegir Zona --
@@ -143,7 +147,12 @@ export const DashTrans = () => {
 
 							<div className="col-12">
 								<label htmlFor="formGroupExampleInput">Zona B</label>
-								<select id="zonaB" className="form-control" name="zonaB" onChange={handleChange}>
+								<select
+									id="zonaB"
+									className="form-control"
+									name="zonaB"
+									onChange={handleChange}
+									required>
 									<option value="" className="text-center">
 										-- Elegir Zona --
 									</option>
@@ -171,12 +180,18 @@ export const DashTrans = () => {
 									className="form-control"
 									placeholder="Precio"
 									name="precio"
+									required
 									onChange={handleChange}
 								/>
 							</div>
 							<button type="sumbit" className="btn btn-secondary btn-md my-2">
 								enviar
 							</button>
+							{count ? (
+								<h6 className="text-success text-center p-2">
+									{count} ingresado <i className="fas fa-check-circle" />
+								</h6>
+							) : null}
 						</div>
 					</form>
 				</div>
