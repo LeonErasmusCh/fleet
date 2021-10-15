@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 
 export const DashTrans = () => {
 	const { store, actions } = useContext(Context);
-	const [zona, setZona] = useState({ zonaA: "", zonaB: "", precio: "" });
+	const [zone, setZone] = useState("");
+	const [zoneDestino, setZoneDestino] = useState("");
+	const [price, setPrice] = useState("");
 	const [count, setCount] = useState(0);
 
 	const handleChange = e => {
@@ -22,6 +24,12 @@ export const DashTrans = () => {
 		setCount(count + 1);
 		console.log("zona data", zona);
 		actions.loadTransportPrices(zona);
+	};
+
+	const handlersubmit3 = e => {
+		e.preventDefault();
+		actions.loadTransportPrices(zone, zoneDestino, price);
+		console.log("TARIFA");
 	};
 
 	useEffect(() => {
@@ -116,18 +124,18 @@ export const DashTrans = () => {
 
 				<div className="container bg-light col-10 col-md-3 ">
 					<h5 className="text-center m-3">Ingresar valores de servicio</h5>
-					<form onSubmit={enviarDatos}>
+					<form onSubmit={e => handlersubmit3(e)}>
 						<div className="row p-3">
 							<div className="col-12">
-								<label htmlFor="formGroupExampleInput">Zona A</label>
+								<label htmlFor="formGroupExampleInput">Zona de Origen</label>
 								<select
 									type="text"
 									id="zonaA"
-									name="zonaA"
+									name="zone"
 									className="form-control"
 									required
-									onChange={handleChange}>
-									<option value="" className="text-center">
+									onChange={e => setZone(e.target.value)}>
+									<option disable selected="true" value="" className="text-center">
 										-- Elegir Zona --
 									</option>
 									<option id="Cuidad" value="Centro">
@@ -146,12 +154,12 @@ export const DashTrans = () => {
 							</div>
 
 							<div className="col-12">
-								<label htmlFor="formGroupExampleInput">Zona B</label>
+								<label htmlFor="formGroupExampleInput">Zona de Destino</label>
 								<select
-									id="zonaB"
+									// id="zonaB"
 									className="form-control"
-									name="zonaB"
-									onChange={handleChange}
+									name="zoneDestino"
+									onChange={e => setZoneDestino(e.target.value)}
 									required>
 									<option value="" className="text-center">
 										-- Elegir Zona --
@@ -179,12 +187,15 @@ export const DashTrans = () => {
 									step="500"
 									className="form-control"
 									placeholder="Precio"
-									name="precio"
+									name="price"
 									required
-									onChange={handleChange}
+									onChange={e => setPrice(e.target.value)}
 								/>
 							</div>
-							<button type="sumbit" className="btn btn-secondary btn-md my-2">
+							<button
+								type="sumbit"
+								className="btn btn-secondary btn-md my-2"
+								onSubmit={e => handlersubmit3(e)}>
 								enviar
 							</button>
 							{count ? (

@@ -25,39 +25,29 @@ class Vendedor(db.Model):
             "password": self.password,
             # do not serialize the password, its a security breach
         }
-class Direcciones(db.Model):
-    __tablename__= 'direcciones'
-    id_direccion = db.Column(db.Integer, primary_key=True)
-    direccion = db.Column(db.String(50), unique=False, nullable=False)
-    pertenece = db.Column(db.Integer, db.ForeignKey('vendedor.id_vendor'))
-    vendedor = db.relationship("Vendedor")
-    
-    def serialize(self):
-        return {
-            "id_direccion": self.id_direccion,
-            "emdireccionail": self.direccion,
-            "pertenece": self.pertenece,
-        }
+
 
 class Encomiendas(db.Model):
     id_package = db.Column(db.Integer,  primary_key=True, unique=True)
     status = db.Column(db.Boolean(), unique=False, nullable=False)
+    originAddress =db.Column(db.String(50), unique=False)
     destinationAddress = db.Column(db.String(50), unique=False)
-    originAddress =db.Column(db.Integer, db.ForeignKey('direcciones.id_direccion'))
-    # zone = db.Column(db.String(50), unique=False, nullable=False)
-    # zoneDestino = db.Column(db.String(50), unique=False, nullable=False)
+    weight = db.Column(db.String(50), unique=False, nullable=False)
+    dimensions = db.Column(db.String(50), unique=False, nullable=False)
     mensaje = db.Column(db.String(1000), unique=False, nullable=False)
-    rel = db.relationship("Direcciones")
     transport = db.Column(db.Integer,db.ForeignKey('transportista.id_transport'))
-    rel = db.relationship('Transportista')
+    seller = db.Column(db.Integer,db.ForeignKey('vendedor.id_vendor'))
+    Transport = db.relationship('Transportista')
+    Seller = db.relationship("Vendedor")
     def serialize(self):
         return {
             "id_package": self.id_package,
             "status": self.status,
-            "destinationAddress": self.destinationAddress,
             "originAddress": self.originAddress,
+            "destinationAddress": self.destinationAddress,
             "zone": self.zone,
             "transport": self.transport,
+            "seller": self.seller,
             "mensaje":self.mensaje
         }
 
