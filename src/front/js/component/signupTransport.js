@@ -52,6 +52,7 @@ export const SignupTransport = () => {
 						className="form-control"
 						// value={name}
 						placeholder="Nombre"
+						required
 						onChange={e => setName(e.target.value)}
 					/>
 					<input
@@ -59,6 +60,7 @@ export const SignupTransport = () => {
 						className="form-control"
 						// value={lastName}
 						name="lastName"
+						required
 						placeholder="Apellido"
 						onChange={e => setLastName(e.target.value)}
 					/>
@@ -68,6 +70,7 @@ export const SignupTransport = () => {
 						// value={rut}
 						name="rut"
 						placeholder="RUT"
+						required
 						onChange={e => setRut(e.target.value)}
 					/>
 					<input
@@ -76,14 +79,16 @@ export const SignupTransport = () => {
 						// value={email}
 						name="email"
 						placeholder="E-mail"
+						required
 						onChange={e => setEmail(e.target.value)}
 					/>
 					<input
-						type="text"
+						type="number"
 						className="form-control"
 						// value={phone}
 						name="phone"
 						placeholder="Teléfono"
+						required
 						onChange={e => setPhone(parseInt(e.target.value))}
 					/>
 					<input
@@ -92,6 +97,7 @@ export const SignupTransport = () => {
 						// value={initialAddress}
 						name="transAddress"
 						placeholder="Dirección"
+						required
 						onChange={e => setTransAddress(e.target.value)}
 					/>
 					<input
@@ -100,6 +106,7 @@ export const SignupTransport = () => {
 						// value={password}
 						name="password"
 						placeholder="Contraseña"
+						required
 						onChange={e => setPassword(e.target.value)}
 					/>
 					<br />

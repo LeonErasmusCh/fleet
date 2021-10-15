@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
 
-			endpoint: "https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io",
+			endpoint: "https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io",
 
 			token: null,
 			message: null,
@@ -302,7 +302,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io/api/register", requestOptions)
+				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/register", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
@@ -328,7 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-aqua-alpaca-w869zgjl.ws-us18.gitpod.io/api/register2", requestOptions)
+				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/register2", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
@@ -525,10 +525,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("STORE => encomiendaForm: ", store.encomiendaForm);
 			},
 			// funcion en DashTrans in mandar transportista precios a store
-			loadTransportPrices: zona => {
+			loadTransportPrices: (zone, zoneDestino, price) => {
 				const store = getStore();
-				setStore({ transportPrices: [zona] });
-				console.log("STORE => transportPrices: ", store.transportPrices);
+				// setStore({ transportPrices: [zone] });
+				// console.log("STORE => transportPrices: ", store.transportPrices);
+
+				var raw = JSON.stringify({
+					// id_transport: id_transport,
+					zone: zone,
+					zoneDestino: zoneDestino,
+					price: price
+				});
+				var requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/tablaTarifas", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Ah ocurrido un error", error));
 			},
 
 			postForm: () => {
