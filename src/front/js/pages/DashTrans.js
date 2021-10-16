@@ -29,7 +29,7 @@ export const DashTrans = () => {
 	const handlersubmit3 = e => {
 		e.preventDefault();
 		actions.loadTransportPrices(zone, zoneDestino, price);
-		console.log("TARIFA");
+		console.log(zone, zoneDestino, price);
 	};
 
 	useEffect(() => {
@@ -130,7 +130,6 @@ export const DashTrans = () => {
 								<label htmlFor="formGroupExampleInput">Zona de Origen</label>
 								<select
 									type="text"
-									id="zonaA"
 									name="zone"
 									className="form-control"
 									required

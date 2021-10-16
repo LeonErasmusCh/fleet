@@ -24,20 +24,22 @@ const injectContext = PassedComponent => {
 		useEffect(() => {
 			//state.actions.loadSeller();
 			//state.actions.loadDetailseller();
-			state.actions.loadAllVendedores();
 			//state.actions.getMessage();
-			state.actions.userSignup();
-			state.actions.userSignup2();
-			state.actions.getDatos();
-			state.actions.loadEncomiendas();
-			state.actions.loadEncomiendaForm();
-			state.actions.loadTransportPrices();
 
 			//state.actions.loadtrans();
 			//state.actions.traerusuariotrans();
 
-			/* EDIT THIS!
+			// comentado 15 octubre
+			state.actions.loadAllVendedores();
+			// state.actions.userSignup();
+			// state.actions.userSignup2();
+			// state.actions.getDatos();
+			state.actions.loadEncomiendas();
+			// state.actions.loadEncomiendaForm();
+			state.actions.loadTransportPrices();
 
+			/* EDIT THIS!
+			
 
 			/**
 			 * EDIT THIS!

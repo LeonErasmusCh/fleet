@@ -191,6 +191,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//LOG OUT PARA AMBOS (SE LLAMA EN NAVBARSELL)
 			logout: () => {
 				sessionStorage.removeItem("token");
+				sessionStorage.removeItem("transport");
+				sessionStorage.removeItem("seller");
 				console.log("login out"), setStore({ token: null });
 			},
 			//funciones para el boleano de los inicios de sesion
@@ -240,7 +242,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(store.endpoint + "/api/seller", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ info_user: data.info_user });
+						if (!localStorage.getItem("seller"))
+							localStorage.setItem("seller", JSON.stringify(data.info_user));
+						setStore({ info_user: JSON.parse(localStorage.getItem("seller")) });
+						// setStore({ info_user: data.info_user });
 						console.log(store.info_user);
 					})
 					.catch(error => console.log("Error loading message from backend", error));
@@ -261,6 +266,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(store.endpoint + "/api/dashTrans", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
+						// guardar usuario transportista
+						localStorage.setItem("transport", JSON.stringify(data.perfil));
 						setStore({ perfil: data.perfil });
 						console.log(store.perfil);
 					})
@@ -475,7 +482,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 				let country = "&components=country:CL";
 				let googleKey = "&key=AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0";
-
+				console.log("store.encomiendas", store.encomiendas);
 				for (let i = 0; i < store.encomiendas.length; i++) {
 					console.log("destinationAddress en encomiendas: " + store.encomiendas[i].destinationAddress);
 					// Remove , and " "
@@ -525,16 +532,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("STORE => encomiendaForm: ", store.encomiendaForm);
 			},
 			// funcion en DashTrans in mandar transportista precios a store
-			loadTransportPrices: (zone, zoneDestino, price) => {
+			loadTransportPrices: (price, zone, zoneDestino) => {
 				const store = getStore();
+				const transport = JSON.parse(localStorage.getItem("transport"));
 				// setStore({ transportPrices: [zone] });
 				// console.log("STORE => transportPrices: ", store.transportPrices);
 
 				var raw = JSON.stringify({
-					// id_transport: id_transport,
+					price: price,
 					zone: zone,
 					zoneDestino: zoneDestino,
-					price: price
+					id_transport: transport.id_transport
 				});
 				var requestOptions = {
 					method: "POST",
