@@ -233,7 +233,7 @@ def post_tablaTarifas():
     # if 'transportista' not in body:
         # return "rayoooos"
     
-    newTablaTarifas= Tarifas ( price=body['price'], zone=body['zone'], zoneDestino=body['zoneDestino'], id_transport= body['id_transport'])
+    newTablaTarifas= Tarifas ( price=body['price'], zone=body['zone'], zoneDestino=body['zoneDestino'], id_transport= body['id_transport'],  name_transport= body['name_transport'])
     db.session.add(newTablaTarifas)
     db.session.commit()
     response_body={

@@ -357,14 +357,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => console.log("Error loading message from backend", error));
 			},*/
 
-			// getMessage: () => {
-			// 	// fetching data from the backend
-			// 	fetch(process.env.BACKEND_URL + "/api/hello")
-			// 		.then(resp => resp.json())
-			// 		.then(data => setStore({ message: data.message }))
-			// 		.catch(error => console.log("Error loading message from backend", error));
-			// },
-
 			/*getMessage: (sellerText) => {
 				const store = getStore();
 				console.log("message", message);
@@ -389,21 +381,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
 			},*/
-
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			},
 
 			//Traer todos Vendedores desde nuestro api
 			loadAllVendedores: () => {
@@ -542,7 +519,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					price: price,
 					zone: zone,
 					zoneDestino: zoneDestino,
-					id_transport: transport.id_transport
+					id_transport: transport.id_transport,
+					name_transport: transport.name + " " + transport.lastName
 				});
 				var requestOptions = {
 					method: "POST",

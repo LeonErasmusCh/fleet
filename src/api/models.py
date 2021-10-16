@@ -55,13 +55,10 @@ class Encomiendas(db.Model):
 class Tarifas(db.Model):
     id_fee = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.String(50), unique=False, nullable=False)
-    #destinationAddress = db.Column(db.String(50), db.ForeignKey('encomiendas.destinationAddress'), unique=True, nullable=False)
-    #originAddress = db.Column(db.String(50), db.ForeignKey('encomiendas.originAddress'), unique=True, nullable=False)
     zone =  db.Column(db.String(50), unique=False, nullable=False)
     zoneDestino = db.Column(db.String(50), unique=False, nullable=False)
     id_transport = db.Column(db.Integer,db.ForeignKey('transportista.id_transport'))
-    #is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    #phone = db.Column(db.String(50), db.ForeignKey('perfiltransportista.phone'), unique=True, nullable=False)
+    name_transport = db.Column(db.String(50), unique=False, nullable=False)
     rel = db.relationship('Transportista')
     #rel1 = db.relationship("Encomiendas", foreign_keys=[destinationAddress])
     def serialize(self):
@@ -72,7 +69,8 @@ class Tarifas(db.Model):
             #"originAddress": self.originAddress,
             "zone": self.zone,
             "zoneDestino": self.zoneDestino,
-            "id_transport": self.id_transport
+            "id_transport": self.id_transport,
+            "name_transport": self.name_transport
         }
 
 class Transportista(db.Model):
