@@ -30,13 +30,13 @@ const injectContext = PassedComponent => {
 			//state.actions.traerusuariotrans();
 
 			// comentado 15 octubre
-			state.actions.loadAllVendedores();
+			// state.actions.loadAllVendedores();
 			// state.actions.userSignup();
 			// state.actions.userSignup2();
-			// state.actions.getDatos();
-			state.actions.loadEncomiendas();
+			//state.actions.getDatos();
+			// state.actions.loadEncomiendas();
 			// state.actions.loadEncomiendaForm();
-			state.actions.loadTransportPrices();
+			// state.actions.loadTransportPrices();
 
 			/* EDIT THIS!
 			
