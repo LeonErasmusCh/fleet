@@ -230,14 +230,20 @@ def post_tablaTarifas():
         return "Zona de Origen no puede estar vacía",400
     if 'zoneDestino' not in body:
         return "Zona de Destino no puede estar vacía",400
-
-    newTablaTarifas= Tarifas (price=body['price'], zone=body['zone'], zoneDestino=body['zoneDestino'])
+    # if 'transportista' not in body:
+        # return "rayoooos"
+    
+    newTablaTarifas= Tarifas ( price=body['price'], zone=body['zone'], zoneDestino=body['zoneDestino'], id_transport= body['id_transport'])
     db.session.add(newTablaTarifas)
     db.session.commit()
     response_body={
-        "msg": "Tarifas Registradas"
+        "msg": "Tarifa Registradaaaaaa"
+    
     }
+    
     return jsonify(response_body),200 
+
+
 
 @api.route('/pedidos', methods=['POST'])
 def post_pedidos():    

@@ -8,7 +8,7 @@ export const NEWSidebar = () => {
 				<ul>
 					<li>
 						<a href="http://justinfarrow.com">
-							<i classNameName="fa fa-home fa-2x" />
+							<i className="fa fa-home fa-2x" />
 							<span className="nav-text">Dashboard</span>
 						</a>
 					</li>

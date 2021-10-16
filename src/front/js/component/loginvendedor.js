@@ -13,13 +13,13 @@ export const LoginVendedor = () => {
 	console.log("this is your token", store.token);
 
 	//FUNCIONES VARIAS PARA EL BOLEANO DE PERFILES (PROABLEMENTE SE PUEDE HACER EN MENOS PASOS)
-	const traeriniciosessionvendedor = () => {
-		actions.iniciarsessionvendedor();
-	};
+	// const traeriniciosessionvendedor = () => {
+	// 	actions.iniciarsessionvendedor();
+	// };
 
-	const traeriniciosessiontransportista = () => {
-		actions.iniciarsessiontransportista();
-	};
+	// const traeriniciosessiontransportista = () => {
+	// 	actions.iniciarsessiontransportista();
+	// };
 
 	// ALMACENE UNA VARIABLE EN store LLAMADA SESSION QUE ES NULA, CREE DOS FUNCOINES EN FLUX UNA PARA INICIAR SESSION TRANSPORTISTA QUE CAMBIA A SESSION A TRUE Y OTRA PARA VENDEDORES QUE AMBIA SESSION A FALSE.
 
