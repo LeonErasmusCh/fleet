@@ -233,12 +233,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					redirect: "follow"
 				};
-				/*
-				const opts = {
-					headers: {
-						Authorization: `Bearer ${store.token}`
-					}
-				};*/
 				fetch(store.endpoint + "/api/seller", requestOptions)
 					.then(resp => resp.json())
 					.then(data => {
@@ -248,7 +242,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						// setStore({ info_user: data.info_user });
 						console.log(store.info_user);
 					})
-					.catch(error => console.log("Error loading message from backend", error));
+					.catch(error => console.log("Error cargando datos", error));
 			},
 
 			loadtrans: () => {
@@ -267,25 +261,58 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						// guardar usuario transportista
-						localStorage.setItem("transport", JSON.stringify(data.perfil));
-						setStore({ perfil: data.perfil });
+
+						if (!localStorage.getItem("transport"))
+							localStorage.setItem("transport", JSON.stringify(data.perfil));
+						setStore({ perfil: JSON.parse(localStorage.getItem("transport")) });
 						console.log(store.perfil);
 					})
 					.catch(error => console.log("Error loading message from backend", error));
 			},
+			//get para datos tarifas
 
-			getDatos: () => {
+			// getTarifas: () => {
+			// 	const store = getStore();
+			// 	fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/tablaTarifas")
+			// 		.then(response => response.json())
+			// 		.then(result => {
+			// 			setStore({ tarifas: result });
+			// 		})
+			// 		.catch(error => console.log("error", error));
+			// },
+
+			///////// funcion para Postear los  precios de Transportista
+			PostPrices: (zone, zoneDestino, price) => {
 				const store = getStore();
-				console.log(store.datos);
+				const transport = JSON.parse(localStorage.getItem("transport"));
+				// setStore({ transportPrices: [zone] });
+				console.log("TARIFA:", zone, zoneDestino, price);
+
+				var raw = JSON.stringify({
+					price: price,
+					zone: zone,
+					zoneDestino: zoneDestino,
+					id_transport: transport.id_transport,
+					name_transport: transport.name + " " + transport.lastName
+				});
+				var requestOptions = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: raw,
+					redirect: "follow"
+				};
+
+				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/tarifas", requestOptions)
+					.then(response => response.text())
+					.then(result => console.log(result))
+					.catch(error => console.log("Ah ocurrido un error", error));
+			},
+			getPrices: () => {
+				const store = getStore();
 				fetch(store.endpoint + "/api/tarifas")
 					.then(resp => resp.json())
 					.then(data => setStore({ datos: data }))
-					.catch(error => console.log("Error loading message from backend", error));
-			},
-
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+					.catch(error => console.log("Error en tarifas", error));
 			},
 
 			userSignup: (name, lastName, rut, email, phone, initialAddress, password) => {
@@ -312,7 +339,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/register", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
-					.catch(error => console.log("Ah ocurrido un error", error));
+					.catch(error => console.log("Ah ocurrido un erroooooor", error));
 			},
 
 			userSignup2: (name, lastName, rut, email, phone, transAddress, password) => {
@@ -338,7 +365,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/register2", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
-					.catch(error => console.log("Ah ocurrido un error", error));
+					.catch(error => console.log("Ah ocurrido un errooooor", error));
 			},
 
 			registroUserSeller: () => {
@@ -507,32 +534,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ encomiendaForm: [form] });
 				console.log("STORE => encomiendaForm: ", store.encomiendaForm);
-			},
-			// funcion en DashTrans in mandar transportista precios a store
-			loadTransportPrices: (price, zone, zoneDestino) => {
-				const store = getStore();
-				const transport = JSON.parse(localStorage.getItem("transport"));
-				// setStore({ transportPrices: [zone] });
-				// console.log("STORE => transportPrices: ", store.transportPrices);
-
-				var raw = JSON.stringify({
-					price: price,
-					zone: zone,
-					zoneDestino: zoneDestino,
-					id_transport: transport.id_transport,
-					name_transport: transport.name + " " + transport.lastName
-				});
-				var requestOptions = {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: raw,
-					redirect: "follow"
-				};
-
-				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/tablaTarifas", requestOptions)
-					.then(response => response.text())
-					.then(result => console.log(result))
-					.catch(error => console.log("Ah ocurrido un error", error));
 			},
 
 			postForm: () => {

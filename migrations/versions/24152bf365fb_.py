@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: d99df0c2397c
+Revision ID: 24152bf365fb
 Revises: 
-Create Date: 2021-10-16 22:50:02.828082
+Create Date: 2021-10-17 01:33:07.881386
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd99df0c2397c'
+revision = '24152bf365fb'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -54,23 +54,34 @@ def upgrade():
     sa.Column('status', sa.Boolean(), nullable=False),
     sa.Column('originAddress', sa.String(length=50), nullable=True),
     sa.Column('destinationAddress', sa.String(length=50), nullable=True),
+    sa.Column('zone', sa.String(length=50), nullable=False),
+    sa.Column('zoneDestino', sa.String(length=50), nullable=False),
     sa.Column('weight', sa.String(length=50), nullable=False),
     sa.Column('dimensions', sa.String(length=50), nullable=False),
+    sa.Column('price', sa.String(length=50), nullable=False),
     sa.Column('mensaje', sa.String(length=1000), nullable=False),
-    sa.Column('transport', sa.Integer(), nullable=True),
-    sa.Column('seller', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['seller'], ['vendedor.id_vendor'], ),
-    sa.ForeignKeyConstraint(['transport'], ['transportista.id_transport'], ),
+    sa.Column('id_transport', sa.Integer(), nullable=True),
+    sa.Column('name_transport', sa.String(length=50), nullable=False),
+    sa.Column('phone_transport', sa.Integer(), nullable=False),
+    sa.Column('id_seller', sa.Integer(), nullable=True),
+    sa.Column('name_seller', sa.String(length=50), nullable=False),
+    sa.Column('phone_seller', sa.Integer(), nullable=False),
+    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['id_seller'], ['vendedor.id_vendor'], ),
+    sa.ForeignKeyConstraint(['id_transport'], ['transportista.id_transport'], ),
     sa.PrimaryKeyConstraint('id_package'),
-    sa.UniqueConstraint('id_package')
+    sa.UniqueConstraint('id_package'),
+    sa.UniqueConstraint('phone_seller'),
+    sa.UniqueConstraint('phone_transport'),
+    sa.UniqueConstraint('rating')
     )
     op.create_table('tarifas',
     sa.Column('id_fee', sa.Integer(), nullable=False),
-    sa.Column('price', sa.String(length=50), nullable=False),
-    sa.Column('zone', sa.String(length=50), nullable=False),
-    sa.Column('zoneDestino', sa.String(length=50), nullable=False),
     sa.Column('id_transport', sa.Integer(), nullable=True),
     sa.Column('name_transport', sa.String(length=50), nullable=False),
+    sa.Column('zone', sa.String(length=50), nullable=False),
+    sa.Column('zoneDestino', sa.String(length=50), nullable=False),
+    sa.Column('price', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['id_transport'], ['transportista.id_transport'], ),
     sa.PrimaryKeyConstraint('id_fee')
     )

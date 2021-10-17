@@ -10,8 +10,6 @@ export const LoginTransportista = () => {
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
 
-	console.log("this is your token", store.token);
-
 	// ALMACENE UNA VARIABLE EN store LLAMADA SESSION QUE ES NULA, CREE DOS FUNCOINES EN FLUX UNA PARA INICIAR SESSION TRANSPORTISTA QUE CAMBIA A SESSION A TRUE Y OTRA PARA VENDEDORES QUE AMBIA SESSION A FALSE.
 
 	//funciones para llamar a los login de vendedor y tranportista

@@ -152,7 +152,7 @@ def all_Transportista():
                 #CUANDO VALIDAMOS LA PASSWORD CREAREMOS EL TOKEN
                 access_token = create_access_token(identity=oneTrans.email)
                 data = {
-                    "info_user": oneTrans.serialize(),
+                    "perfil": oneTrans.serialize(),
                     "token": access_token,
 
                 }
@@ -180,10 +180,6 @@ def profile():
         oneSeller = Vendedor.query.filter_by(email=identity).first()
         return jsonify({ "identity": identity, "info_user": oneSeller.serialize()}), 200
 
- 
-        email = get_jwt_identity()
-        oneTrans = Transportista.query.filter_by(email=identity).first()
-        return jsonify({ "identity": email, "info_user":  oneTrans.serialize()}), 200
 
 
 
@@ -212,14 +208,14 @@ def all_encomiendas():
             return 'solicitud vacia', 400
         else:
           return(jsonify({"mensaje":"mensaje enviado"})), 200
-             
+
 @api.route('/tarifas', methods=['GET'])
 def all_tarifas():
     all_tarifas = Tarifas.query.all()    
     all_tarifas = list(map(lambda x: x.serialize(), all_tarifas))
     return jsonify(all_tarifas), 200 
-
-@api.route('/tablaTarifas', methods=['POST'])
+             
+@api.route('/tarifas', methods=['POST'])
 def post_tablaTarifas():    
     body=request.get_json()
     if body is None:
@@ -244,7 +240,7 @@ def post_tablaTarifas():
     return jsonify(response_body),200 
 
 
-
+# //ocupar para post de encomienda
 @api.route('/pedidos', methods=['POST'])
 def post_pedidos():    
     body=request.get_json()
