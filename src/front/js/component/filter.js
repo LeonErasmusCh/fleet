@@ -22,10 +22,11 @@ export const Selector = () => {
 		<div className="selector">
 			<div className="select-container">
 				<select name="plan" value={filter} onChange={handleChange}>
-					<option value="norte"> Norte</option>
-					<option value="centro"> Centro</option>
-					<option value="sur"> Sur</option>
-					<option value="periferia"> Periferia</option>
+					<option value="Norte"> Norte</option>
+					<option value="Centro"> Centro</option>
+					<option value="Sur"> Sur</option>
+					<option value="Oeste"> Oeste</option>
+					<option value="Periferia"> Periferia</option>
 				</select>
 
 				<table className="table">
@@ -40,12 +41,12 @@ export const Selector = () => {
 					<tbody>
 						{datosVendedor
 							? datosVendedor.map((value, posicion) => {
-									console.log("helloooooo tarfias", value);
+									console.log("tarfias", value);
 									return (
 										<>
-											{value.zone === filter ? (
+											{value.zoneDestino === filter ? (
 												<tr>
-													<td>{value.transportista}</td>
+													<td>{value.name_transport}</td>
 													<td>{value.zone}</td>
 													<td>{value.zoneDestino}</td>
 													<td>{value.price}</td>

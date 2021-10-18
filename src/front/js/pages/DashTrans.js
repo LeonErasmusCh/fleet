@@ -18,17 +18,17 @@ export const DashTrans = () => {
 		console.log("zona :", zona);
 	};
 
-	const enviarDatos = event => {
-		event.preventDefault();
-		event.target.reset();
-		setCount(count + 1);
-		console.log("zona data", zona);
-		actions.loadTransportPrices(zona);
-	};
+	// const enviarDatos = event => {
+	// 	event.preventDefault();
+	// 	event.target.reset();
+	// 	setCount(count + 1);
+	// 	console.log("zona data", zona);
+	// 	actions.PostPrices(zona);
+	// };
 
 	const handlersubmit3 = e => {
 		e.preventDefault();
-		actions.loadTransportPrices(zone, zoneDestino, price);
+		actions.PostPrices(zone, zoneDestino, price);
 		console.log(zone, zoneDestino, price);
 	};
 
@@ -39,6 +39,7 @@ export const DashTrans = () => {
 	return (
 		<div className="container">
 			<h5>Bienvenido</h5>
+			<span> {store.perfil.name} </span>
 			<h1>Lista de Precios Según Sector</h1>
 			<div className="row mt-5">
 				<div className="container col-9 col-md-8 bg-light">
@@ -191,12 +192,14 @@ export const DashTrans = () => {
 									onChange={e => setPrice(e.target.value)}
 								/>
 							</div>
+
 							<button
 								type="sumbit"
 								className="btn btn-secondary btn-md my-2"
 								onSubmit={e => handlersubmit3(e)}>
 								enviar
 							</button>
+
 							{count ? (
 								<h6 className="text-success text-center p-2">
 									{count} ingresado <i className="fas fa-check-circle" />

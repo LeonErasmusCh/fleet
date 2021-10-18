@@ -22,21 +22,22 @@ const injectContext = PassedComponent => {
 		);
 
 		useEffect(() => {
-			//state.actions.loadSeller();
-			//state.actions.loadDetailseller();
-			//state.actions.getMessage();
+			// state.actions.loadSeller();
+			// state.actions.loadDetailseller();
+			// state.actions.getMessage();
 
-			//state.actions.loadtrans();
-			//state.actions.traerusuariotrans();
+			// state.actions.loadtrans();
+			// state.actions.traerusuariotrans();
 
 			// comentado 15 octubre
 			// state.actions.loadAllVendedores();
 			// state.actions.userSignup();
 			// state.actions.userSignup2();
-			//state.actions.getDatos();
+
+			//Poner en page Seller con const
+			state.actions.getPrices();
 			// state.actions.loadEncomiendas();
 			// state.actions.loadEncomiendaForm();
-			// state.actions.loadTransportPrices();
 
 			/* EDIT THIS!
 			
