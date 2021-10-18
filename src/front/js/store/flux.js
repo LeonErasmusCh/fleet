@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			message: null,
 			session: null,
+			local: null,
 			registro: null,
 			info_user: {},
 			perfil: [],
@@ -191,8 +192,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//LOG OUT PARA AMBOS (SE LLAMA EN NAVBARSELL)
 			logout: () => {
 				sessionStorage.removeItem("token");
-				sessionStorage.removeItem("transport");
-				sessionStorage.removeItem("seller");
+				localStorage.removeItem("transport");
+				localStorage.removeItem("seller");
 				console.log("login out"), setStore({ token: null });
 			},
 			//funciones para el boleano de los inicios de sesion
@@ -240,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("seller", JSON.stringify(data.info_user));
 						setStore({ info_user: JSON.parse(localStorage.getItem("seller")) });
 						// setStore({ info_user: data.info_user });
-						console.log(store.info_user);
+						// console.log(store.info_user);
 					})
 					.catch(error => console.log("Error cargando datos", error));
 			},

@@ -19,32 +19,32 @@ class Vendedor(db.Model):
             "name": self.name,
             "lastName": self.lastName,
             "email": self.email,
-            "rut": self.rut,
+            # "rut": self.rut,
             "initialAddress": self.initialAddress,
             "phone": self.phone,
-            "password": self.password,
+            # "password": self.password,
             # do not serialize the password, its a security breach
         }
 
 
 class Encomiendas(db.Model):
     id_package = db.Column(db.Integer,  primary_key=True, unique=True)
-    status = db.Column(db.String(20), unique=False, nullable=False)
-    originAddress =db.Column(db.String(50), unique=False)
-    destinationAddress = db.Column(db.String(50), unique=False)
-    zone = db.Column(db.String(50), unique=False, nullable=False)
-    zoneDestino = db.Column(db.String(50), unique=False, nullable=False)
-    weight = db.Column(db.String(50), unique=False, nullable=False)
-    dimensions = db.Column(db.String(50), unique=False, nullable=False)
-    price = db.Column(db.String(50), unique=False, nullable=False)
-    mensaje = db.Column(db.String(1000), unique=False, nullable=False)
+    status = db.Column(db.String(20), unique=False, nullable=True)
+    originAddress =db.Column(db.String(50), unique=True)
+    destinationAddress = db.Column(db.String(50), unique=True)
+    zone = db.Column(db.String(50), unique=False, nullable=True)
+    zoneDestino = db.Column(db.String(50), unique=False, nullable=True)
+    weight = db.Column(db.String(50), unique=False, nullable=True)
+    dimensions = db.Column(db.String(50), unique=False, nullable=True)
+    price = db.Column(db.String(50), unique=False, nullable=True)
+    mensaje = db.Column(db.String(1000), unique=False, nullable=True)
     id_transport = db.Column(db.Integer,db.ForeignKey('transportista.id_transport'))
-    name_transport = db.Column(db.String(50), unique=False, nullable=False)
-    phone_transport = db.Column(db.Integer,  nullable=False, unique=True)
+    name_transport = db.Column(db.String(50), unique=False, nullable=True)
+    phone_transport = db.Column(db.Integer,  nullable=True, unique=False)
     id_seller = db.Column(db.Integer,db.ForeignKey('vendedor.id_vendor'))
-    name_seller = db.Column(db.String(50), unique=False, nullable=False)
-    phone_seller = db.Column(db.Integer,  nullable=False, unique=True)
-    rating = db.Column(db.Integer,  nullable=False, unique=True)
+    name_seller = db.Column(db.String(50), unique=False, nullable=True)
+    phone_seller = db.Column(db.Integer,  nullable=True, unique=False)
+    rating = db.Column(db.Integer,  nullable=True, unique=False)
     
     
     Transport = db.relationship('Transportista')
@@ -108,8 +108,8 @@ class Transportista(db.Model):
             "name": self.name,
             "lastName": self.lastName,
             "email": self.email,
-            "rut": self.rut,
+            # "rut": self.rut,
             "transAddress": self.transAddress,
             "phone": self.phone,
-            "password": self.password,
+            # "password": self.password,
         }

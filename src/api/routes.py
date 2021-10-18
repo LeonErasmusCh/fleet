@@ -193,13 +193,13 @@ def handle_hello():
    return jsonify(response_body), 200
 
 
-@api.route('/encomiendas', methods=['POST', 'GET'])
+@api.route('/encomiendas', methods=['GET', 'POST'])
 def all_encomiendas():
     if request.method =='GET':
         all_encomiendas = Encomiendas.query.all()    
         all_encomiendas = list(map(lambda x: x.serialize(), all_encomiendas))
         return jsonify(all_encomiendas), 200
-
+    
     else:
         body = request.get_json() # obtener el request body de la solicitud
         if body is None:
@@ -208,6 +208,8 @@ def all_encomiendas():
             return 'solicitud vacia', 400
         else:
           return(jsonify({"mensaje":"mensaje enviado"})), 200
+
+   
 
 @api.route('/tarifas', methods=['GET'])
 def all_tarifas():
@@ -241,8 +243,8 @@ def post_tablaTarifas():
 
 
 # //ocupar para post de encomienda
-@api.route('/pedidos', methods=['POST'])
-def post_pedidos():    
+@api.route('/encomiendas', methods=['POST'])
+def post_encomiendas():    
     body=request.get_json()
     if body is None:
         return "The request body is null", 400
@@ -256,11 +258,12 @@ def post_pedidos():
         return "Mensaje no puede estar vacío",400
 
 
-    newPedidos= Encomiendas (status=body['status'], destinationAddress=body['destinationAddress'], originAddress=body['originAddress'], mensaje=body['mensaje'])
-    db.session.add(newPedidos)
+    newEncomiendas= Encomiendas (status=body['status'], originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], mensaje=body['mensaje'])
+    # (status=body['status'], originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], zone=body['zone'], zoneDestino=body['zoneDestino'], weight=body['weight'], dimensions=body['dimensions'], mensaje=body['mensaje'], id_transport= body['id_transport'],  name_transport= body['name_transport'], phone_transport= body['phone_transport'], id_seller= body['id_seller'], name_seller= body['name_seller'], phone_seller= body['phone_seller'], rating= body['rating'], price=body['price'])
+    db.session.add(newEncomiendas)
     db.session.commit()
     response_body={
-        "msg": "Encomienda Registrada"
+        "msg": "Encomienda Registradaaaaa"
     }
     return jsonify(response_body),200 
 
