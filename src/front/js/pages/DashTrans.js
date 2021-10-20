@@ -111,16 +111,6 @@ export const DashTrans = () => {
 							solicitudes
 						</button>
 					</Link>
-
-					{/* 				<h4>** Montos Referenciales</h4>
-				<div className="row">
-					<button type="button" className="btn btn-primary mx-2">
-						Editar Informacion
-					</button>
-					<button type="button" className="btn btn-primary">
-						Guardar
-					</button>
-				</div> */}
 				</div>
 
 				<div className="container bg-light col-10 col-md-3 ">
@@ -150,6 +140,9 @@ export const DashTrans = () => {
 									<option id="Cuidad" value="Norte">
 										Norte
 									</option>
+									<option id="Cuidad" value="Periferia">
+										Periferia
+									</option>
 								</select>
 							</div>
 
@@ -175,6 +168,9 @@ export const DashTrans = () => {
 									</option>
 									<option id="Cuidad" value="Norte">
 										Norte
+									</option>
+									<option id="Cuidad" value="Periferia">
+										Periferia
 									</option>
 								</select>
 							</div>

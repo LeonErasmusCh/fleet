@@ -29,9 +29,9 @@ class Vendedor(db.Model):
 
 class Encomiendas(db.Model):
     id_package = db.Column(db.Integer,  primary_key=True, unique=True)
-    status = db.Column(db.String(20), unique=False, nullable=True)
-    originAddress =db.Column(db.String(50), unique=True)
-    destinationAddress = db.Column(db.String(50), unique=True)
+    estado = db.Column(db.String(20), unique=False, nullable=True)
+    originAddress =db.Column(db.String(50), unique=False)
+    destinationAddress = db.Column(db.String(50), unique=False)
     zone = db.Column(db.String(50), unique=False, nullable=True)
     zoneDestino = db.Column(db.String(50), unique=False, nullable=True)
     weight = db.Column(db.String(50), unique=False, nullable=True)
@@ -52,7 +52,7 @@ class Encomiendas(db.Model):
     def serialize(self):
         return {
             "id_package": self.id_package,
-            "status": self.status,
+            "estado": self.estado,
             "originAddress": self.originAddress,
             "destinationAddress": self.destinationAddress,
             "zone": self.zone,
