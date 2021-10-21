@@ -8,88 +8,113 @@ import { ReceiveMessage } from "../component/receiveMessage";
 export const SellerDetail = () => {
 	const { store, actions } = useContext(Context);
 
-	const [form, setForm] = useState({
-		origin_calle: "",
-		origin_numero: "",
-		origin_pisodepto: "",
-		origin_comuna: "",
-		origin_cuidad: "Santiago",
-		encomienda_peso: "",
-		encomienda_alto: "",
-		encomienda_ancho: "",
-		encomienda_largo: "",
-		destino_calle: "",
-		destino_numero: "",
-		destino_pisodepto: "",
-		destino_comuna: "",
-		destino_cuidad: "Santiago",
-		mensaje: ""
-	});
+	// const [estado, setEstado] = useState("");
+	const [originAddress, setOriginAddress] = useState("");
+	const [destinationAddress, setDestinationAddress] = useState("");
+	const [mensaje, setMensaje] = useState("");
+	// const [zone, setZone] = useState("");
+	// const [zoneDestino, setZoneDestino] = useState("");
+	const [weight, setWeight] = useState("");
+	const [dimensions, setDimensions] = useState("");
+	// const [id_transport, setId_transport] = useState("");
+	// const [name_transport, setName_transport] = useState("");
+	// const [phone_transport, setPhone_transport] = useState("");
+	// const [id_seller, setId_seller] = useState("");
+	// const [name_seller, setName_seller] = useState("");
+	const [phone_seller, setPhone_seller] = useState("");
+	// const [rating, setRating] = useState("");
+	// const [price, setPrice] = useState("");
 
-	const [count, setCount] = useState(0);
+	// const [form, setForm] = useState({
+	// 	origin_calle: "",
+	// 	origin_numero: "",
+	// 	origin_pisodepto: "",
+	// 	origin_comuna: "",
+	// 	origin_cuidad: "Santiago",
+	// 	encomienda_peso: "",
+	// 	encomienda_alto: "",
+	// 	encomienda_ancho: "",
+	// 	encomienda_largo: "",
+	// 	destino_calle: "",
+	// 	destino_numero: "",
+	// 	destino_pisodepto: "",
+	// 	destino_comuna: "",
+	// 	destino_cuidad: "Santiago",
+	// 	mensaje: ""
+	// });
 
-	const handleInputChange = event => {
-		// console.log(event.target.name)
-		// console.log(event.target.value)
-		setForm({
-			...form,
-			[event.target.name]: event.target.value
-		});
-		//console.log("form data", form);
-	};
+	// const [count, setCount] = useState(0);
 
-	const enviarDatos = event => {
-		event.preventDefault();
-		event.target.reset();
-		setCount(count + 1);
-		console.log("form data", form);
+	// const handleInputChange = event => {
+	// 	// console.log(event.target.name)
+	// 	// console.log(event.target.value)
+	// 	setForm({
+	// 		...form,
+	// 		[event.target.name]: event.target.value
+	// 	});
+	//console.log("form data", form);
+	// };
+
+	// const handlersubmit4 = e => {
+	// 	e.preventDefault();
+	// 	actions.postEncomiendas(estado, originAddress, destinationAddress, mensaje);
+	// 	console.log(estado, originAddress, destinationAddress, mensaje);
+	// };
+
+	const enviarSolicitud = e => {
+		e.preventDefault();
+		// e.target.reset();
+		// setCount(count + 1);
+		// console.log("form data", form);
 		// NEXT SEND FORM TO STORE loadEncomiendaForm()
-		actions.loadEncomiendaForm(form);
-		actions.postForm();
+		actions.postEncomiendas(originAddress, destinationAddress, weight, dimensions, mensaje, phone_seller);
+		console.log(originAddress, destinationAddress, mensaje);
+		// actions.loadEncomiendaForm(form);
+		// actions.postForm();
 	};
 
 	return (
 		<>
-			<form className="container bg-light col-12 col-md-8" onSubmit={enviarDatos}>
+			<form className="container bg-light col-12 col-md-8" onSubmit={e => enviarSolicitud(e)}>
 				<div className="col-10 col-md-9 mx-auto">
-					<h3 className="text-center text-secondary p-4">Solicitar pedido</h3>
+					<h3 className="text-center text-secondary p-4">Solicitud de Servicio</h3>
 
 					<div className="border-bottom border-light m-3" />
 
 					<div className="form-group">
 						<h5 className="text-secondary">
-							Donde retiramos?
+							Dirección de Origen
 							<i className="fas fa-home mx-3" />
 						</h5>
 						<div className="row">
-							<div className=" w-75">
-								<label htmlFor="formGroupExampleInput2">Calle</label>
+							<div className="  w-100">
+								<label htmlFor="formGroupExampleInput2" />
 								<input
 									type="text"
 									className="form-control"
 									id="formGroupExampleInput2"
-									placeholder="Calle"
-									name="origin_calle"
-									onChange={handleInputChange}
-									required
+									placeholder="Ej: Pasaje Las Flores 1234, Providencia"
+									name="originAddress"
+									onChange={e => setOriginAddress(e.target.value)}
+									//required
 								/>
 							</div>
-							<div className="w-25">
+							{/* <div className="w-25">
 								<label htmlFor="formGroupExampleInput2">Numero</label>
 								<input
 									type="number"
 									min="1"
 									className="form-control"
 									placeholder="1"
-									name="origin_numero"
-									onChange={handleInputChange}
-									required
+									name="numeracion"
+									// onChange={e => setEstado(e.target.value)}
+									//required
 								/>
-							</div>
-						</div>
+							</div> 
+						</div>*/}
 
-						<div className="row">
-							<div className="w-25">
+							{/*<div className="row">
+								<div className="w-25">
 								<label htmlFor="formGroupExampleInput2">Piso/Depto</label>
 								<input
 									type="number"
@@ -97,8 +122,8 @@ export const SellerDetail = () => {
 									placeholder="1"
 									min="1"
 									name="origin_pisodepto"
-									onChange={handleInputChange}
-									required
+									//onChange={handleInputChange}
+									//required
 								/>
 							</div>
 							<div className="col">
@@ -109,8 +134,8 @@ export const SellerDetail = () => {
 									placeholder="Comuna"
 									list="comuna"
 									name="origin_comuna"
-									onChange={handleInputChange}
-									required
+									//onChange={handleInputChange}
+									//required
 								/>
 								<datalist id="comuna">
 									<option value="Cerrillos" />
@@ -144,7 +169,7 @@ export const SellerDetail = () => {
 									<option value="Santiago" />
 									<option value="Vitacura" />
 								</datalist>
-							</div>
+							</div>*/}
 							<div className="col">
 								<label htmlFor="formGroupExampleInput2">Ciudad</label>
 								<select type="text" id="cuidad" className="form-control" placeholder="Santiago">
@@ -166,30 +191,30 @@ export const SellerDetail = () => {
 						</footer>
 						<div className="row">
 							<div className="col">
-								<label htmlFor="formGroupExampleInput2">peso</label>
+								<label htmlFor="formGroupExampleInput2">Peso</label>
 								<input
 									type="number"
 									className="form-control"
 									placeholder="1kg"
 									min="1"
-									name="encomienda_peso"
-									onChange={handleInputChange}
-									required
+									name="weight"
+									onChange={e => setWeight(e.target.value)}
+									//required
 								/>
 							</div>
 							<div className="col">
-								<label htmlFor="formGroupExampleInput2">alto</label>
+								<label htmlFor="formGroupExampleInput2">Medidas</label>
 								<input
-									type="number"
+									type="text"
 									className="form-control"
-									placeholder="30cm"
-									min="1"
-									name="encomienda_alto"
-									onChange={handleInputChange}
-									required
+									placeholder="Ej: 20x30x15"
+									// min="1"
+									name="dimensions"
+									onChange={e => setDimensions(e.target.value)}
+									//required
 								/>
 							</div>
-							<div className="col">
+							{/* <div className="col">
 								<label htmlFor="formGroupExampleInput2">ancho</label>
 								<input
 									type="number"
@@ -197,11 +222,11 @@ export const SellerDetail = () => {
 									placeholder="20cm"
 									min="1"
 									name="encomienda_ancho"
-									onChange={handleInputChange}
-									required
+									//onChange={handleInputChange}
+									//required
 								/>
-							</div>
-							<div className="col">
+							</div> */}
+							{/* <div className="col">
 								<label htmlFor="formGroupExampleInput2">largo</label>
 								<input
 									type="number"
@@ -209,31 +234,29 @@ export const SellerDetail = () => {
 									placeholder="10cm"
 									min="1"
 									name="encomienda_largo"
-									onChange={handleInputChange}
-									required
+									//onChange={handleInputChange}
+									//required
 								/>
-							</div>
-
-							<div className="border-bottom border-light m-3" />
-
+							</div> */}
+							{/* <div className="border-bottom border-light m-3" /> */}
 							<h5 className="text-secondary">
-								Donde entregamos?
+								Dirección de Destino
 								<i className="fas fa-check-square mx-3" />
-							</h5>
+							</h5>{" "}
 							<div className="row">
-								<div className=" w-75">
-									<label htmlFor="formGroupExampleInput2">Calle</label>
+								<div className=" w-100">
+									<label htmlFor="formGroupExampleInput2" />
 									<input
 										type="text"
 										className="form-control"
 										id="formGroupExampleInput2"
-										placeholder="Calle"
-										name="destino_calle"
-										onChange={handleInputChange}
-										required
+										placeholder="Ej: Pasaje Las Flores 1234, Providencia"
+										name="destinationAddress"
+										onChange={e => setDestinationAddress(e.target.value)}
+										//required
 									/>
 								</div>
-								<div className="w-25">
+								{/* <div className="w-25">
 									<label htmlFor="formGroupExampleInput2">Numero</label>
 									<input
 										type="number"
@@ -241,11 +264,11 @@ export const SellerDetail = () => {
 										className="form-control"
 										placeholder="1"
 										name="destino_numero"
-										onChange={handleInputChange}
-										required
+										//onChange={handleInputChange}
+										//required
 									/>
 								</div>
-							</div>
+						</div>
 
 							<div className="row">
 								<div className="w-25">
@@ -255,19 +278,18 @@ export const SellerDetail = () => {
 										className="form-control"
 										placeholder="1"
 										name="destino_pisodepto"
-										onChange={handleInputChange}
-										required
+										//onChange={handleInputChange}
+										//required
 									/>
-								</div>
+								</div>*/}
 								<div className="col">
-									<label htmlFor="formGroupExampleInput2">Comuna</label>
+									<label htmlFor="formGroupExampleInput2">Contacto</label>
 									<input
-										type="text"
+										type="number"
 										className="form-control"
-										placeholder="Comuna"
-										list="comuna"
-										name="destino_comuna"
-										onChange={handleInputChange}
+										placeholder="+569 88776655"
+										name="phone_seller"
+										onChange={e => setPhone_seller(e.target.value)}
 										required
 									/>
 									<datalist id="comuna" />
@@ -281,29 +303,25 @@ export const SellerDetail = () => {
 									</select>
 								</div>
 							</div>
-
 							<div className="border-bottom border-light m-3" />
-
 							<div className="form-group">
-								<label htmlFor="exampleFormControlTextarea1">Mensaje</label>
+								<label htmlFor="exampleFormControlTextarea1">Especificaciones</label>
 								<textarea
 									className="form-control"
 									id="exampleFormControlTextarea1"
 									rows="3"
+									placeholder="Ej: Hola! Necesito un despacho para el día Martes 14 de Diciembre, en horario PM"
 									name="mensaje"
-									onChange={handleInputChange}
+									onChange={e => setMensaje(e.target.value)}
 								/>
 							</div>
-
 							<div className="border-bottom border-light m-3" />
-
-							{count ? (
+							{/* {count ? (
 								<h6 className="text-success text-center p-2">
 									{count} ingresado <i className="fas fa-check-circle" />
 								</h6>
-							) : null}
-
-							<button className="btn btn-primary my-3" type="submit">
+							) : null} */}
+							<button className="btn btn-primary my-3" type="submit" onSubmit={e => enviarSolicitud(e)}>
 								enviar
 							</button>
 						</div>

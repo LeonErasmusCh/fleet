@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: null,
 			message: null,
 			session: null,
+			local: null,
 			registro: null,
 			info_user: {},
 			perfil: [],
@@ -191,8 +192,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//LOG OUT PARA AMBOS (SE LLAMA EN NAVBARSELL)
 			logout: () => {
 				sessionStorage.removeItem("token");
-				sessionStorage.removeItem("transport");
-				sessionStorage.removeItem("seller");
+				localStorage.removeItem("transport");
+				localStorage.removeItem("seller");
 				console.log("login out"), setStore({ token: null });
 			},
 			//funciones para el boleano de los inicios de sesion
@@ -240,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							localStorage.setItem("seller", JSON.stringify(data.info_user));
 						setStore({ info_user: JSON.parse(localStorage.getItem("seller")) });
 						// setStore({ info_user: data.info_user });
-						console.log(store.info_user);
+						// console.log(store.info_user);
 					})
 					.catch(error => console.log("Error cargando datos", error));
 			},
@@ -269,19 +270,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log("Error loading message from backend", error));
 			},
-			//get para datos tarifas
 
-			// getTarifas: () => {
-			// 	const store = getStore();
-			// 	fetch("https://3001-maroon-wombat-a7zqfr8t.ws-us18.gitpod.io/api/tablaTarifas")
-			// 		.then(response => response.json())
-			// 		.then(result => {
-			// 			setStore({ tarifas: result });
-			// 		})
-			// 		.catch(error => console.log("error", error));
-			// },
+			/////////////////////COMIENZO FUNCIONES MANDAR Y TRAER TARIFAS/////////////////////////////////////////////
 
-			///////// funcion para Postear los  precios de Transportista
+			// funcion para Postear los  precios de Transportista
 			PostPrices: (zone, zoneDestino, price) => {
 				const store = getStore();
 				const transport = JSON.parse(localStorage.getItem("transport"));
@@ -307,6 +299,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
 			},
+			// funcion para TRAER los  precios de Transportista
 			getPrices: () => {
 				const store = getStore();
 				fetch(store.endpoint + "/api/tarifas")
@@ -314,6 +307,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ datos: data }))
 					.catch(error => console.log("Error en tarifas", error));
 			},
+
+			/////////////////////COMIENZO FUNCIONES PARA REGISTRAR USUARIOS/////////////////////////////////////////////
 
 			userSignup: (name, lastName, rut, email, phone, initialAddress, password) => {
 				const store = getStore();
@@ -375,39 +370,103 @@ const getState = ({ getStore, getActions, setStore }) => {
 			registroUserTransport: () => {
 				setStore({ registro: false });
 			},
+			/////////////////FINALIZACIÓN FUNCIONES PARA REGISTROS DE USUARIO/////////////////////////////////////////////
 
-			/*getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
-			},*/
+			/////////////////////COMIENZO FUNCIONES PARA MANDAR Y OBTENER LAS ENCOMIENDAS/////////////////////////////////////////////
 
-			/*getMessage: (sellerText) => {
+			// getencomiendas: form => {
+			// 	const store = getStore();
+			// 	setStore({ encomiendaForm: [form] });
+			// 	console.log("STORE => encomiendaForm: ", store.encomiendaForm);
+			// },
+
+			postEncomiendas: (
+				originAddress,
+				destinationAddress,
+				// zone,
+				// zoneDestino,
+				weight,
+				dimensions,
+				mensaje,
+				phone_seller
+				// estado,
+				// rating,
+				// price
+			) => {
 				const store = getStore();
-				console.log("message", message);
-
-				var myHeaders = new Headers();
-				myHeaders.append("Content-Type", "application/json");
-
+				// const transportt = JSON.parse(localStorage.getItem("transport"));
+				const seller = JSON.parse(localStorage.getItem("seller"));
+				console.log("ENCOMIENDA:");
 				var raw = JSON.stringify({
-					"message": sellerText,
+					// estado: estado,
+					originAddress: originAddress,
+					destinationAddress: destinationAddress,
+					weight: weight,
+					dimensions: dimensions,
+					mensaje: mensaje,
+					phone_seller: phone_seller,
+					id_seller: seller.id_vendor,
+					name_seller: seller.name + " " + seller.lastName
+					// zone: zone,
+					// zoneDestino: zoneDestino,
 
+					// id_transport: transportt.id_transport,
+					// name_transport: transport2.name,
+					// phone_transport: transport2.phone,
+
+					// rating: rating,
+					// price: price
 				});
 
 				var requestOptions = {
-					method: 'POST',
-					headers: myHeaders,
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
 					body: raw,
-					redirect: 'follow'
+					redirect: "follow"
 				};
 
-				fetch(store.endpoint + "/api/tarifas", requestOptions)
+				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/encomiendas", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
-					.catch(error => console.log("Ah ocurrido un error", error));
-			},*/
+					.catch(error => console.log("ay no, no se mandó la encomiendaaa", error));
+			},
+			// const store = getStore();
+			// console.log(
+			// 	"postForm a orginAdress: ",
+			// 	store.encomiendaForm[0].origin_calle +
+			// 		" " +
+			// 		store.encomiendaForm[0].origin_numero +
+			// 		" " +
+			// 		store.encomiendaForm[0].origin_comuna +
+			// 		" " +
+			// 		store.encomiendaForm[0].origin_cuidad
+			// );
+			// console.log(
+			// 	"postForm a destinoAdress: ",
+			// 	store.encomiendaForm[0].destino_calle +
+			// 		" " +
+			// 		store.encomiendaForm[0].destino_numero +
+			// 		" " +
+			// 		store.encomiendaForm[0].destino_comuna +
+			// 		" " +
+			// 		store.encomiendaForm[0].destino_cuidad
+			// );
+			// console.log("postForm messaje: ", store.encomiendaForm[0].mensaje);
+			// console.log("postForm encomienda peso: ", store.encomiendaForm[0].encomienda_peso);
+			// console.log(
+			// 	"postForm encomienda volumen: ",
+			// 	"alto " +
+			// 		store.encomiendaForm[0].encomienda_alto +
+			// 		" " +
+			// 		"ancho " +
+			// 		store.encomiendaForm[0].encomienda_ancho +
+			// 		" " +
+			// 		"largo " +
+			// 		store.encomiendaForm[0].encomienda_largo
+			// );
+			// },
+
+			/////////////////FINALIZACIÓN FUNCIONES PARA MANDAR Y OBTENER LAS ENCOMIENDAS/////////////////////////////////////////////
 
 			//Traer todos Vendedores desde nuestro api
 			loadAllVendedores: () => {
@@ -528,49 +587,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({ order: input });
 				console.log("STORE => Order message: ", store.order);
-			},
-			// EncomiendaForm en sellDetail
-			loadEncomiendaForm: form => {
-				const store = getStore();
-				setStore({ encomiendaForm: [form] });
-				console.log("STORE => encomiendaForm: ", store.encomiendaForm);
-			},
-
-			postForm: () => {
-				const store = getStore();
-				console.log(
-					"postForm a orginAdress: ",
-					store.encomiendaForm[0].origin_calle +
-						" " +
-						store.encomiendaForm[0].origin_numero +
-						" " +
-						store.encomiendaForm[0].origin_comuna +
-						" " +
-						store.encomiendaForm[0].origin_cuidad
-				);
-				console.log(
-					"postForm a destinoAdress: ",
-					store.encomiendaForm[0].destino_calle +
-						" " +
-						store.encomiendaForm[0].destino_numero +
-						" " +
-						store.encomiendaForm[0].destino_comuna +
-						" " +
-						store.encomiendaForm[0].destino_cuidad
-				);
-				console.log("postForm messaje: ", store.encomiendaForm[0].mensaje);
-				console.log("postForm encomienda peso: ", store.encomiendaForm[0].encomienda_peso);
-				console.log(
-					"postForm encomienda volumen: ",
-					"alto " +
-						store.encomiendaForm[0].encomienda_alto +
-						" " +
-						"ancho " +
-						store.encomiendaForm[0].encomienda_ancho +
-						" " +
-						"largo " +
-						store.encomiendaForm[0].encomienda_largo
-				);
 			}
 		}
 	};

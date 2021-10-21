@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 24152bf365fb
+Revision ID: daf07f95dba5
 Revises: 
-Create Date: 2021-10-17 01:33:07.881386
+Create Date: 2021-10-20 05:08:15.935154
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '24152bf365fb'
+revision = 'daf07f95dba5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,29 +51,26 @@ def upgrade():
     )
     op.create_table('encomiendas',
     sa.Column('id_package', sa.Integer(), nullable=False),
-    sa.Column('status', sa.Boolean(), nullable=False),
+    sa.Column('estado', sa.String(length=20), nullable=True),
     sa.Column('originAddress', sa.String(length=50), nullable=True),
     sa.Column('destinationAddress', sa.String(length=50), nullable=True),
-    sa.Column('zone', sa.String(length=50), nullable=False),
-    sa.Column('zoneDestino', sa.String(length=50), nullable=False),
-    sa.Column('weight', sa.String(length=50), nullable=False),
-    sa.Column('dimensions', sa.String(length=50), nullable=False),
-    sa.Column('price', sa.String(length=50), nullable=False),
-    sa.Column('mensaje', sa.String(length=1000), nullable=False),
+    sa.Column('zone', sa.String(length=50), nullable=True),
+    sa.Column('zoneDestino', sa.String(length=50), nullable=True),
+    sa.Column('weight', sa.String(length=50), nullable=True),
+    sa.Column('dimensions', sa.String(length=50), nullable=True),
+    sa.Column('price', sa.String(length=50), nullable=True),
+    sa.Column('mensaje', sa.String(length=1000), nullable=True),
     sa.Column('id_transport', sa.Integer(), nullable=True),
-    sa.Column('name_transport', sa.String(length=50), nullable=False),
-    sa.Column('phone_transport', sa.Integer(), nullable=False),
+    sa.Column('name_transport', sa.String(length=50), nullable=True),
+    sa.Column('phone_transport', sa.Integer(), nullable=True),
     sa.Column('id_seller', sa.Integer(), nullable=True),
-    sa.Column('name_seller', sa.String(length=50), nullable=False),
-    sa.Column('phone_seller', sa.Integer(), nullable=False),
-    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('name_seller', sa.String(length=50), nullable=True),
+    sa.Column('phone_seller', sa.Integer(), nullable=True),
+    sa.Column('rating', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['id_seller'], ['vendedor.id_vendor'], ),
     sa.ForeignKeyConstraint(['id_transport'], ['transportista.id_transport'], ),
     sa.PrimaryKeyConstraint('id_package'),
-    sa.UniqueConstraint('id_package'),
-    sa.UniqueConstraint('phone_seller'),
-    sa.UniqueConstraint('phone_transport'),
-    sa.UniqueConstraint('rating')
+    sa.UniqueConstraint('id_package')
     )
     op.create_table('tarifas',
     sa.Column('id_fee', sa.Integer(), nullable=False),
