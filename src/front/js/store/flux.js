@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
 
-			endpoint: "https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io",
+			endpoint: "https://3001-teal-horse-roe1rwgk.ws-us18.gitpod.io",
 
 			token: null,
 			message: null,
@@ -266,7 +266,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						if (!localStorage.getItem("transport"))
 							localStorage.setItem("transport", JSON.stringify(data.perfil));
 						setStore({ perfil: JSON.parse(localStorage.getItem("transport")) });
-						console.log(store.perfil);
+						console.log("store.perfil ", store.perfil);
 					})
 					.catch(error => console.log("Error loading message from backend", error));
 			},
@@ -278,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const transport = JSON.parse(localStorage.getItem("transport"));
 				// setStore({ transportPrices: [zone] });
-				console.log("TARIFA:", zone, zoneDestino, price);
+				console.log("TARIFA :", zone, zoneDestino, price);
 
 				var raw = JSON.stringify({
 					price: price,
@@ -294,7 +294,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/tarifas", requestOptions)
+				fetch("https://3001-teal-horse-roe1rwgk.ws-us18.gitpod.io", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
@@ -331,7 +331,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/register", requestOptions)
+				fetch("https://3001-teal-horse-roe1rwgk.ws-us18.gitpod.io/api/register", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un erroooooor", error));
@@ -357,7 +357,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/register2", requestOptions)
+				fetch("https://3001-teal-horse-roe1rwgk.ws-us18.gitpod.io/api/register2", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un errooooor", error));
@@ -425,7 +425,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/encomiendas", requestOptions)
+				fetch("https://3001-teal-horse-roe1rwgk.ws-us18.gitpod.io/api/encomiendas", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("ay no, no se mandó la encomiendaaa", error));
@@ -533,7 +533,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(response => response.json())
 					.then(result => {
 						setStore({ encomiendas: result });
-						console.log("loadEncomiendas => ", result);
+						//console.log("loadEncomiendas => ", result);
 						console.log("store.encomiendas => ", store.encomiendas);
 					})
 					.catch(error => console.log("error", error));
