@@ -166,7 +166,6 @@ def all_Transportista():
 @api.route("/dashTrans", methods=['GET'])
 @jwt_required()
 def profileTrans():
-
     if request.method == 'GET':
         identity = get_jwt_identity()
         oneTrans = Transportista.query.filter_by(email=identity).first()
