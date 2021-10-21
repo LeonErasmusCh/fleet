@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
 
-			endpoint: "https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io",
+			endpoint: "https://3001-jade-wildfowl-9d67vhyb.ws-us17.gitpod.io",
 
 			token: null,
 			message: null,
@@ -14,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			perfil: [],
 			datos: [],
 			mensaje: [],
+			estado: null,
+			sidebar: null,
 			demo: [
 				{
 					title: "FIRST",
@@ -294,7 +296,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/tarifas", requestOptions)
+				fetch("https://3001-jade-wildfowl-9d67vhyb.ws-us17.gitpod.io/api/tarifas", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
@@ -331,7 +333,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/register", requestOptions)
+				fetch("https://3001-jade-wildfowl-9d67vhyb.ws-us17.gitpod.io/api/register", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un erroooooor", error));
@@ -357,7 +359,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-harlequin-eel-63rcud5o.ws-us17.gitpod.io/api/register2", requestOptions)
+				fetch("https://3001-jade-wildfowl-9d67vhyb.ws-us17.gitpod.io/api/register2", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un errooooor", error));
@@ -372,7 +374,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			/////////////////FINALIZACIÓN FUNCIONES PARA REGISTROS DE USUARIO/////////////////////////////////////////////
 
+
+			//bOLEANO INICIO DE SESSION
+			iniciarsessionvendedor: () => {
+				setStore({ session: true });
+			},
+
+			iniciarsessiontransportista: () => {
+				setStore({ session: false });
+			},
+
+			//JUEGO DE BOLEANOS QUE RENDERIZAN COMPONENTEAS VISTA SELLER
+			estadoperfilvendedor: () => {
+				setStore({ estado: false });
+			},
+
+			estadoperfilpedido: () => {
+				setStore({ estado: true });
+			},
+
+			//Boleano sidebar
+			renderizarsidebar: () => {
+				setStore({ sidebar: true });
+			},
+
+			renderizarsidebar2: () => {
+				setStore({ sidebar: false });
+			},
+
+			renderizarsidebar3: () => {
+				setStore({ sidebar: null });
+			},
+
+
+
 			/////////////////////COMIENZO FUNCIONES PARA MANDAR Y OBTENER LAS ENCOMIENDAS/////////////////////////////////////////////
+
 
 			// getencomiendas: form => {
 			// 	const store = getStore();
