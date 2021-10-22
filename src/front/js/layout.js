@@ -20,6 +20,7 @@ import { NavbarSell } from "./component/ navbarSell";
 import { Sidebar } from "./component/sidebar";
 import { SellerDetail } from "./pages/sellerDetail";
 import { NEWSidebar } from "./component/NewSidebar";
+import { PasswordRecovery } from "./component/PasswordRecovery";
 
 //create your first component
 const Layout = () => {
@@ -63,6 +64,9 @@ const Layout = () => {
 						<Route exact path="/DashTrans">
 							<NavbarSell />
 							<DashTrans />
+						</Route>
+						<Route exact path="/PasswordRecovery">
+							<PasswordRecovery />
 						</Route>
 						<Route exact path="/signup">
 							<Signup />
