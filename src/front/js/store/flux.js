@@ -14,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			perfil: [],
 			datos: [],
 			mensaje: [],
+			estado: null,
+			sidebar: null,
 			demo: [
 				{
 					title: "FIRST",
@@ -294,7 +296,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-teal-horse-roe1rwgk.ws-us18.gitpod.io", requestOptions)
+				fetch("https://3001-jade-wildfowl-9d67vhyb.ws-us17.gitpod.io/api/tarifas", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
@@ -371,6 +373,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ registro: false });
 			},
 			/////////////////FINALIZACIÓN FUNCIONES PARA REGISTROS DE USUARIO/////////////////////////////////////////////
+
+			//bOLEANO INICIO DE SESSION
+			iniciarsessionvendedor: () => {
+				setStore({ session: true });
+			},
+
+			iniciarsessiontransportista: () => {
+				setStore({ session: false });
+			},
+
+			//JUEGO DE BOLEANOS QUE RENDERIZAN COMPONENTEAS VISTA SELLER
+			estadoperfilvendedor: () => {
+				setStore({ estado: false });
+			},
+
+			estadoperfilpedido: () => {
+				setStore({ estado: true });
+			},
+
+			//Boleano sidebar
+			renderizarsidebar: () => {
+				setStore({ sidebar: true });
+			},
+
+			renderizarsidebar2: () => {
+				setStore({ sidebar: false });
+			},
+
+			renderizarsidebar3: () => {
+				setStore({ sidebar: null });
+			},
 
 			/////////////////////COMIENZO FUNCIONES PARA MANDAR Y OBTENER LAS ENCOMIENDAS/////////////////////////////////////////////
 
