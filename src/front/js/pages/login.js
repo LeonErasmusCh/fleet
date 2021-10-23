@@ -75,6 +75,8 @@ export const Login = () => {
 							Registrate para obtener los beneficios de Fleet!
 						</h5>
 						<a href="/signup">Registrarse</a>
+						<br />
+						<a href="/PasswordRecovery">¿Olvidaste tu contraseña?</a>
 					</div>
 
 					{/* <Link to="/signup">
