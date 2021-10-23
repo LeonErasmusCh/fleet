@@ -1,76 +1,88 @@
-import React from "react";
-import "../../styles/home.scss";
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/index.scss";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-export const NEWSidebar = () => {
+import { Context } from "../store/appContext";
+
+export const NewSidebar = () => {
+	const { store, actions } = useContext(Context);
+
+	//BUTTON 1
+	const traelink = () => {
+		actions.renderizarsidebar();
+	};
+
+	//BUTTON 2
+	const traelink2 = () => {
+		actions.renderizarsidebar2();
+	};
+
+	//BUTTON 3
+	const traelink3 = () => {
+		actions.renderizarsidebar2();
+	};
+
 	return (
-		<div className="area">
-			<nav className="main-menu">
-				<ul>
-					<li>
-						<a href="http://justinfarrow.com">
-							<i className="fa fa-home fa-2x" />
-							<span className="nav-text">Dashboard</span>
-						</a>
-					</li>
-					<li className="has-subnav">
-						<a href="#">
-							<i className="fa fa-laptop fa-2x" />
-							<span className="nav-text">Stars Components</span>
-						</a>
-					</li>
-					<li className="has-subnav">
-						<a href="#">
-							<i className="fa fa-list fa-2x" />
-							<span className="nav-text">Forms</span>
-						</a>
-					</li>
-					<li className="has-subnav">
-						<a href="#">
-							<i className="fa fa-folder-open fa-2x" />
-							<span className="nav-text">Pages</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<i className="fa fa-bar-chart-o fa-2x" />
-							<span className="nav-text">Graphs and Statistics</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<i className="fa fa-font fa-2x" />
-							<span className="nav-text">Quotes</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<i className="fa fa-table fa-2x" />
-							<span className="nav-text">Tables</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<i className="fa fa-map-marker fa-2x" />
-							<span className="nav-text">Maps</span>
-						</a>
-					</li>
-					<li>
-						<a href="#">
-							<i className="fa fa-info fa-2x" />
-							<span className="nav-text">Documentation</span>
-						</a>
-					</li>
-				</ul>
+		<>
+			<div className="row">
+				<div className="col col-2">
+					<nav className="sidebar">
+						<div className="sidebar-link">
+							<div className="sidebar-link-left">
+								<div className="icon icon-orange icon-rounded icon-small" />
 
-				<ul className="logout">
-					<li>
-						<a href="#">
-							<i className="fa fa-power-off fa-2x" />
-							<span className="nav-text">Logout</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
+								<button onClick={traelink3}>Perfil</button>
+							</div>
+							<div className="sidebar-link-right">
+								<div className="icon icon-triangle" />
+							</div>
+						</div>
+
+						<div className="sidebar-link">
+							<div className="sidebar-link-left">
+								<div className="icon icon-orange icon-rounded icon-small" />
+								<button onClick={traelink2}>Perfil2</button>
+							</div>
+							<div className="sidebar-link-right">
+								<div className="icon icon-triangle" />
+							</div>
+						</div>
+
+						<div className="sidebar-link">
+							<div className="sidebar-link-left">
+								<div className="icon icon-orange icon-rounded icon-small" />
+								<button onClick={traelink}>Perfil3</button>
+							</div>
+						</div>
+
+						<div className="sidebar-link">
+							<div className="sidebar-link-left">
+								<div className="icon icon-orange icon-rounded icon-small" />
+								<span>Link-4</span>
+							</div>
+						</div>
+
+						<div className="sidebar-link">
+							<div className="sidebar-link-left">
+								<div className="icon icon-orange icon-rounded icon-small" />
+								<span>Link-5</span>
+							</div>
+						</div>
+						<Link to="/">
+							<button
+								id="signupButton"
+								type="submit"
+								style={{ marginTop: "120px" }}
+								className="btn btn-primary">
+								Volver a Inicio
+							</button>
+						</Link>
+					</nav>
+				</div>
+			</div>
+		</>
 	);
 };

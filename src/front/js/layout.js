@@ -20,7 +20,11 @@ import { NavbarSell } from "./component/ navbarSell";
 import { Sidebar } from "./component/sidebar";
 import { SellerDetail } from "./pages/sellerDetail";
 import { NEWSidebar } from "./component/NewSidebar";
+
 import { PasswordRecovery } from "./component/PasswordRecovery";
+
+import { Calendario } from "./component/calendario";
+
 
 //create your first component
 const Layout = () => {
@@ -41,7 +45,7 @@ const Layout = () => {
 
 						<Route exact path="/seller">
 							<NavbarSell />
-							<NEWSidebar />
+
 							<Seller />
 							<Footer />
 						</Route>
@@ -52,6 +56,9 @@ const Layout = () => {
 						<Route exact path="/sellerdetail">
 							<NavbarSell />
 							<SellerDetail />
+						</Route>
+						<Route exact path="/calendario">
+							<Calendario />
 						</Route>
 
 						<Route exact path="/map">
