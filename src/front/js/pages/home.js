@@ -11,6 +11,7 @@ import leon from "../../img/leon.jpeg";
 import rigo from "../../img/rigo-baby.jpg";
 import connie from "../../img/connie.jpeg";
 import seba from "../../img/seba.jpeg";
+import { PasswordRecovery } from "../component/PasswordRecovery";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
