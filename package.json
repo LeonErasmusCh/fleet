@@ -78,6 +78,7 @@
 	"dependencies": {
 		"@react-google-maps/api": "^2.2.0",
 		"bootstrap": "^5.1.1",
+		"calendar": "^0.1.1",
 		"prop-types": "^15.6.1",
 		"react": "^16.14.0",
 		"react-calendar": "^3.4.0",
