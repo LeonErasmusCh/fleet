@@ -97,7 +97,7 @@ export const Seller = () => {
 									</div>
 								</div>
 								<div className="projects-section-footer">
-									<div>{store.sidebar ? <Calendario /> : <TodoList />}</div>
+									<div>{store.sidebar ? <Calendario /> : ""}</div>
 								</div>
 							</div>
 							<div className="col col-3 messages-section">
@@ -106,9 +106,7 @@ export const Seller = () => {
 								</div>
 								<div className="messages">
 									<div className="message-box">Favoritos</div>
-									<div className="message-box">
-										<TodoList />
-									</div>
+									<div className="message-box" />
 									<div className="message-box">
 										<Calendario />
 									</div>

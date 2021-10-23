@@ -21,10 +21,9 @@ import { Sidebar } from "./component/sidebar";
 import { SellerDetail } from "./pages/sellerDetail";
 import { NEWSidebar } from "./component/NewSidebar";
 
-import { PasswordRecovery } from "./component/PasswordRecovery";
+import { Password } from "./pages/password";
 
 import { Calendario } from "./component/calendario";
-
 
 //create your first component
 const Layout = () => {
@@ -60,6 +59,9 @@ const Layout = () => {
 						<Route exact path="/calendario">
 							<Calendario />
 						</Route>
+						<Route exact path="/password">
+							<Password />
+						</Route>
 
 						<Route exact path="/map">
 							{/*<NavbarDelivery />*/}
@@ -72,9 +74,7 @@ const Layout = () => {
 							<NavbarSell />
 							<DashTrans />
 						</Route>
-						<Route exact path="/PasswordRecovery">
-							<PasswordRecovery />
-						</Route>
+
 						<Route exact path="/signup">
 							<Signup />
 						</Route>
