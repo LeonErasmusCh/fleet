@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
+import santiago from "../../img/Comunas_de_Santiago.png";
 
 export const DashTrans = () => {
 	const { store, actions } = useContext(Context);
@@ -10,6 +11,7 @@ export const DashTrans = () => {
 	const [price, setPrice] = useState("");
 	const [count, setCount] = useState(0);
 	const [encomiendas, setEncomiendas] = useState("");
+	const [estado, setEstado] = useState(false);
 
 	useEffect(() => {
 		actions.traerusuario();
@@ -40,6 +42,13 @@ export const DashTrans = () => {
 		console.log(zone, zoneDestino, price);
 	};
 
+	//const handleEncomienda = index => {
+	//e.preventDefault();
+	//console.log("You clicked submit", index);
+	//setEstado(true);
+	//console.log(estado);
+	//};
+
 	useEffect(() => {
 		actions.loadtrans();
 	}, []);
@@ -60,11 +69,25 @@ export const DashTrans = () => {
 				<div className="row mt-5">
 					<div className="container bg-light col-10 col-md-8">
 						<div className="">
-							<h3>Aqui voy a dejar los precios ingresados</h3>
+							<img
+								src={santiago}
+								style={{ width: "80%", height: "50%", padding: "8%", margin: "0 10%" }}
+							/>
 						</div>
+
+						<Link to="/">
+							<button type="button" className="btn btn-secondary btn-md btn-block m-2">
+								inicio
+							</button>
+						</Link>
+						<Link to="/map">
+							<button type="button" className="btn btn-secondary btn-md btn-block m-2">
+								ver pedidos aceptados en mapa
+							</button>
+						</Link>
 					</div>
 
-					<div className="container bg-light col-10 col-md-3 ">
+					<div className="container bg-light col-10 col-md-3 pt-5 ">
 						<h5 className="text-center m-3">Ingresar valores de servicio</h5>
 						<form onSubmit={e => handlersubmit3(e)}>
 							<div className="row p-3">
@@ -185,9 +208,17 @@ export const DashTrans = () => {
 												<td>{index.mensaje}</td>
 												<td>
 													<div className="d-flex align-items-center">
-														<button type="button" className="btn btn-success btn-sm">
-															<i className="fas fa-check " />
-															aceptar
+														<button
+															type="submit"
+															className="btn btn-success btn-sm"
+															onClick={() => {
+																console.log("index", index);
+																setEstado(true);
+																console.log(estado);
+																//setEncomiendas([index.dimensions == 12]);
+																actions.encomiendaEstado(index);
+															}}>
+															<i className="fas fa-check " /> aceptar
 														</button>
 													</div>
 												</td>
@@ -197,23 +228,6 @@ export const DashTrans = () => {
 								: console.log("Failed to load encomiendas hook")}
 						</tbody>
 					</table>
-					<div className="container col-10 col-md-8">
-						<Link to="/">
-							<button type="button" className="btn btn-secondary btn-md btn-block m-2">
-								inicio
-							</button>
-						</Link>
-						<Link to="/map">
-							<button type="button" className="btn btn-secondary btn-md btn-block m-2">
-								ver pedidos aceptados en mapa
-							</button>
-						</Link>
-						<Link to="/">
-							<button type="button" className="btn btn-secondary btn-md btn-block m-2">
-								solicitudes
-							</button>
-						</Link>
-					</div>
 				</div>
 			</div>
 		</>

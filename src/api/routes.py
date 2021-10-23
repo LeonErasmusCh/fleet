@@ -257,12 +257,32 @@ def post_encomiendas():
         return "Mensaje no puede estar vacío",400
 
 
-    newEncomiendas= Encomiendas (originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], weight=body['weight'], dimensions=body['dimensions'], mensaje=body['mensaje'], phone_seller= body['phone_seller'], id_seller= body['id_seller'], name_seller= body['name_seller'])
+    newEncomiendas= Encomiendas (originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], weight=body['weight'], dimensions=body['dimensions'], mensaje=body['mensaje'], phone_seller= body['phone_seller'], id_seller= body['id_seller'], name_seller= body['name_seller'], estado= body['estado'])
     # (status=body['status'], originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], zone=body['zone'], zoneDestino=body['zoneDestino'], weight=body['weight'], dimensions=body['dimensions'], mensaje=body['mensaje'], id_transport= body['id_transport'],  name_transport= body['name_transport'], phone_transport= body['phone_transport'], id_seller= body['id_seller'], name_seller= body['name_seller'], phone_seller= body['phone_seller'], rating= body['rating'], price=body['price'])
     db.session.add(newEncomiendas)
     db.session.commit()
     response_body={
         "msg": "Encomienda Registradaaaaa"
+    }
+    return jsonify(response_body),200 
+
+
+
+    # Update estado encomienda
+@api.route('encomiendas/status', methods=['PUT'])
+def update_encomiendas():    
+    body=request.get_json()
+    # if body is None:
+    #     return "The request body is null", 400
+    if 'estado' not in body:
+        return "Estado no puede estar vacío",400
+
+
+    newEstado= Encomiendas (originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], weight=body['weight'], dimensions=body['dimensions'], mensaje=body['mensaje'], phone_seller= body['phone_seller'], id_seller= body['id_seller'], name_seller= body['name_seller'], estado= body['estado'])
+    db.session.add(newEstado)
+    db.session.commit()
+    response_body={
+        "msg": "Estado Cambiado"
     }
     return jsonify(response_body),200 
 

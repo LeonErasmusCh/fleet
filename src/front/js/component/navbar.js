@@ -1,16 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import fleet from "../../img/fleet-logo.png";
 
 export const Navbar = () => {
 	return (
 		<nav className="navbar navbar-expand-lg fixed-top">
 			<div className="container">
 				<a className="navbar-brand text-white" href="#">
-					<span className="fleet">
+					{/**
+					 <span className="fleet">
 						<i className="fas fa-box-open ">
 							<em style={{ fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif" }}>Fleet</em>
 						</i>
 					</span>
+
+					 */}
+
+					<img src={fleet} style={{ height: "50px", marginBottom: "0", marginTop: "10px" }} />
 				</a>
 				<button
 					className="navbar-toggler navbar-dark"
