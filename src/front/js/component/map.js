@@ -6,8 +6,8 @@ import { Context } from "../store/appContext";
 
 /* Tamaño del mapa */
 const containerStyle = {
-	width: "100vw",
-	height: "100vh",
+	width: "90vw",
+	height: "90vh",
 	margin: "0 auto"
 };
 
@@ -36,7 +36,7 @@ export const Map = () => {
 	});
 	useEffect(() => {
 		setEncomiendascoords(store.encomiendasCoords);
-		console.log("encomiendacoords", encomiendacoords);
+		console.log("encomiendacoords componente", encomiendacoords);
 	});
 
 	const getUserLocation = () => {
