@@ -76,7 +76,7 @@ export const Login = () => {
 						</h5>
 						<a href="/signup">Registrarse</a>
 						<br />
-						<a href="/PasswordRecovery">¿Olvidaste tu contraseña?</a>
+						<a href="/password">¿Olvidaste tu contraseña?</a>
 					</div>
 
 					{/* <Link to="/signup">
