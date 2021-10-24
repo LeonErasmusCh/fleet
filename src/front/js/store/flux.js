@@ -502,30 +502,91 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			/////////////////FINALIZACIÓN FUNCIONES PARA MANDAR Y OBTENER LAS ENCOMIENDAS/////////////////////////////////////////////
 
-			//Traer todos Vendedores desde nuestro api
-			loadAllVendedores: () => {
+			// fetch encomiendas
+			loadEncomiendas: () => {
 				const store = getStore();
-				fetch(store.endpoint + "/api/Vendedor")
+				fetch(store.endpoint + "/api/encomiendas")
 					.then(response => response.json())
 					.then(result => {
-						setStore({ allVendedores: result });
-						console.log("*** allVendedores ***", store.allVendedores);
+						setStore({ encomiendas: result });
+						//console.log("loadEncomiendas => ", result);
+						console.log("store.encomiendas => ", store.encomiendas);
 					})
 					.catch(error => console.log("error", error));
 			},
+
+			//
+			encomiendasCoords: () => {
+				const store = getStore();
+				let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+				let country = "&components=country:CL";
+				let googleKey = "&key=AIzaSyDdZ6PVKhfCJCw2rt23cHautMx2DONNmzk";
+				console.log("store.encomiendas", store.encomiendas);
+				for (let i = 0; i < store.encomiendas.length; i++) {
+					console.log(
+						" /////   destinationAddress en encomiendas: /////" + store.encomiendas[i].originAddress
+					);
+					// Remove , and " "
+					let initialString = store.encomiendas[i].originAddress.replace(/ /g, "+");
+					let concatString = initialString.replace(/,/g, "");
+					//console.log(concatString);
+					// Concatenate
+					let geoCoded = url + concatString + country + googleKey;
+					console.log("geoCoded url encomiendas:" + geoCoded);
+					// Save in store
+					setStore({ encomiendasUrl: [store.encomiendasUrl, geoCoded] });
+					// Remove undefined values && flatten array
+					var filtered = store.encomiendasUrl.filter(e => e !== undefined);
+					setStore({ encomiendasUrl: filtered.flat() });
+					console.log("store.encomiendasUrl Array", store.encomiendasUrl);
+				}
+			},
+
+			fetchUrlEncomiendas: () => {
+				const store = getStore();
+				for (let i = 0; i < store.encomiendasUrl.length; i++) {
+					console.log("fetch url encomiendas-->", store.encomiendasUrl[i]);
+					fetch(store.encomiendasUrl[i])
+						.then(response => response.json())
+						.then(result => {
+							console.log(result);
+							setStore({
+								encomiendasCoords: [store.encomiendasCoords, result.results[0].geometry.location]
+							});
+							// Remove undefined values && flatten array
+							var filtered = store.encomiendasCoords.filter(e => e !== undefined);
+							setStore({ encomiendasCoords: filtered.flat() });
+						})
+						.catch(error => console.log("error", error));
+					console.log("encomiendasCoords flux", store.encomiendasCoords);
+				}
+			},
+
+			//Traer todos Vendedores desde nuestro api
+
+			//loadAllVendedores: () => {
+			//	const store = getStore();
+			//	fetch(store.endpoint + "/api/Vendedor")
+			//		.then(response => response.json())
+			//		.then(result => {
+			//			setStore({ allVendedores: result });
+			//			console.log("*** allVendedores ***", store.allVendedores);
+			//		})
+			//		.catch(error => console.log("error", error));
+			//},
 
 			//funcion para convertir direccciones a LAT LNG
 			addressToLatLong: () => {
 				const store = getStore();
 				let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 				let country = "&components=country:CL";
-				let googleKey = "&key=AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0";
+				let googleKey = "&key=AIzaSyDdZ6PVKhfCJCw2rt23cHautMx2DONNmzk";
 				//CONCATENATE URL + ADDRESS + APIkey  TO DO GEOCODING
 
-				for (let i = 0; i < store.allVendedores.length; i++) {
-					console.log("ALL VENDEDORES DIRECCIONES: " + store.allVendedores[i].initialAddress);
+				for (let i = 0; i < store.encomiendas.length; i++) {
+					console.log("ALL VENDEDORES DIRECCIONES: " + store.encomiendas[i].destinationAddress);
 					// Remove , and " "
-					let initialString = store.allVendedores[i].initialAddress.replace(/ /g, "+");
+					let initialString = store.encomiendas[i].destinationAddress.replace(/ /g, "+");
 					let concatString = initialString.replace(/,/g, "");
 					//console.log(concatString);
 					// Concatenate
@@ -557,63 +618,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					//console.log("Nombre: ", store.allVendedores[0].name);
 					//console.log("Fetch de geocode url para cada allVendedores array", store.allVendedores);
 					console.log("test", store.test);
-				}
-			},
-
-			// fetch encomiendas
-			loadEncomiendas: () => {
-				const store = getStore();
-				fetch(store.endpoint + "/api/encomiendas")
-					.then(response => response.json())
-					.then(result => {
-						setStore({ encomiendas: result });
-						//console.log("loadEncomiendas => ", result);
-						console.log("store.encomiendas => ", store.encomiendas);
-					})
-					.catch(error => console.log("error", error));
-			},
-
-			//
-			encomiendasCoords: () => {
-				const store = getStore();
-				let url = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-				let country = "&components=country:CL";
-				let googleKey = "&key=AIzaSyB1GucpRkmWB21geTiUfWGORwEt1E3utC0";
-				console.log("store.encomiendas", store.encomiendas);
-				for (let i = 0; i < store.encomiendas.length; i++) {
-					console.log("destinationAddress en encomiendas: " + store.encomiendas[i].destinationAddress);
-					// Remove , and " "
-					let initialString = store.encomiendas[i].destinationAddress.replace(/ /g, "+");
-					let concatString = initialString.replace(/,/g, "");
-					//console.log(concatString);
-					// Concatenate
-					let geoCoded = url + concatString + country + googleKey;
-					console.log("geoCoded url encomiendas:" + geoCoded);
-					// Save in store
-					setStore({ encomiendasUrl: [store.encomiendasUrl, geoCoded] });
-					// Remove undefined values && flatten array
-					var filtered = store.encomiendasUrl.filter(e => e !== undefined);
-					setStore({ encomiendasUrl: filtered.flat() });
-					console.log("store.encomiendasUrl Array", store.encomiendasUrl);
-				}
-			},
-
-			fetchUrlEncomiendas: () => {
-				const store = getStore();
-				for (let i = 0; i < store.encomiendasUrl.length; i++) {
-					console.log("fetch url encomiendas-->", store.encomiendasUrl[i]);
-					fetch(store.encomiendasUrl, [i])
-						.then(response => response.json())
-						.then(result => {
-							setStore({
-								encomiendasCoords: [store.encomiendasCoords, result.results[0].geometry.location]
-							});
-							// Remove undefined values && flatten array
-							var filtered = store.encomiendasCoords.filter(e => e !== undefined);
-							setStore({ encomiendasCoords: filtered.flat() });
-						})
-						.catch(error => console.log("error", error));
-					console.log("encomiendasCoords", store.encomiendasCoords);
 				}
 			},
 
