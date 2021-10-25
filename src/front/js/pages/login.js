@@ -86,19 +86,7 @@ export const Login = () => {
 							</button>
 						</Link>
 					</div>
-
-					{/* <Link to="/signup">
-								<button
-									type="submit"
-									className="btn btn-primary"
-									// value={register}
-									name="register">
-									Registrarse
-								</button>
-							</Link> */}
 				</div>
-				{/* </div> */}
-				{/* </div> */}
 			</div>
 		</>
 	);
