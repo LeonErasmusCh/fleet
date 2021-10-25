@@ -28,89 +28,80 @@ export const Seller = () => {
 	return (
 		<>
 			<div className="app-container">
-				<div className="row">
-					<div className="col col-2">
-						<NewSidebar />
-					</div>
-
-					<div className="col col-10">
-						<div className="row app-content">
-							<div className="col col-8 projects-section">
-								<div className="row projects-section-header m-5">
-									<div className="col col-6">
-										<h5>
-											Bienvenido
-											<br />
-											<span> {store.info_user.name} </span>
-										</h5>
-									</div>
-									<div className="col col-4">
-										<span>Pendiente traer fecha actual</span>
-									</div>
-									<div className="projects-status">
-										<div className="item-status">
-											<span className="status-number">10</span>
-											<span className="status-type">Ventas</span>
-										</div>
-										<div className="item-status">
-											<span className="status-number">24</span>
-											<span className="status-type">Pendientes</span>
-										</div>
-									</div>
+				<div className="app-content">
+					<div className="projects-section">
+						<div className="row projects-section-header m-5">
+							<div className="col col-6 col-sm-4">
+								<h2>
+									Bienvenido
+									<br />
+									<span> {store.info_user.name} </span>
+								</h2>
+							</div>
+							<div className="col col-4 col-sm-2">
+								<span>Pendiente traer fecha actual</span>
+							</div>
+							<div className="projects-status">
+								<div className="item-status">
+									<span className="status-number">10</span>
+									<span className="status-type">Ventas</span>
 								</div>
-
-								<div className="projects-section-line">
-									<div className="row">
-										<div className="card text-center">
-											<div className="card-header">
-												<ul className="nav nav-pills card-header-pills">
-													<li className="nav-item">
-														<button
-															id="perfilV"
-															className="btn "
-															onClick={traerestado}
-															style={{ color: "black", border: "white" }}>
-															pedido
-														</button>
-													</li>
-													<li className="nav-item">
-														<button
-															id="perfilV"
-															className="btn "
-															onClick={traerestado2}
-															style={{ color: "black", border: "white" }}>
-															perfil
-														</button>
-													</li>
-												</ul>
-											</div>
-											<div className="card-body">
-												<h5 className="card-title">Mis actividades </h5>
-												<p className="card-text">
-													<div>{store.estado ? <Selector /> : <Vistasell />}</div>{" "}
-												</p>
-												<a href="#" className="btn btn-primary">
-													Go somewhere
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="projects-section-footer">
-									<div>{store.sidebar ? <Calendario /> : ""}</div>
+								<div className="item-status">
+									<span className="status-number">24</span>
+									<span className="status-type">Pendientes</span>
 								</div>
 							</div>
-							<div className="col col-3 messages-section">
-								<div className="projects-section-header">
-									<p>Mi tablero</p>
+						</div>
+
+						<div className="projects-section-line">
+							<div className="card text-center mt-5">
+								<div className="card-header col-12">
+									<ul className="nav nav-pills card-header-pills">
+										<li className="nav-item">
+											<button
+												id="perfilV"
+												className="btn "
+												onClick={traerestado}
+												style={{ color: "black", border: "white" }}>
+												pedido
+											</button>
+										</li>
+										<li className="nav-item">
+											<button
+												id="perfilV"
+												className="btn "
+												onClick={traerestado2}
+												style={{ color: "black", border: "white" }}>
+												perfil
+											</button>
+										</li>
+									</ul>
 								</div>
-								<div className="messages">
-									<div className="message-box">Favoritos</div>
-									<div className="message-box" />
-									<div className="message-box">
-										<Calendario />
-									</div>
+								<div className="card-body">
+									<h5 className="card-title">Mis actividades </h5>
+									<p className="card-text">
+										<div>{store.estado ? <Selector /> : <Vistasell />}</div>{" "}
+									</p>
+									<a href="#" className="btn btn-primary">
+										Go somewhere
+									</a>
 								</div>
+							</div>
+						</div>
+
+						<div className="projects-section-footer">
+							<div>{store.sidebar ? <Calendario /> : ""}</div>
+						</div>
+					</div>
+					<div className="col col-3 messages-section">
+						<div className="projects-section-header">
+							<p>Mi tablero</p>
+						</div>
+						<div className="messages">
+							<div className="message-box">Favoritos</div>
+							<div className="message-box" />
+							<div className="message-box">
+								<Calendario />
 							</div>
 						</div>
 					</div>

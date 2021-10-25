@@ -257,7 +257,7 @@ def post_encomiendas():
         return "Mensaje no puede estar vacío",400
 
 
-    newEncomiendas= Encomiendas (originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], weight=body['weight'], dimensions=body['dimensions'], mensaje=body['mensaje'], phone_seller= body['phone_seller'], id_seller= body['id_seller'], name_seller= body['name_seller'], estado= body['estado'])
+    newEncomiendas= Encomiendas (originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], weight=body['weight'], dimensions=body['dimensions'], mensaje=body['mensaje'], phone_seller= body['phone_seller'], id_seller= body['id_seller'], name_seller= body['name_seller'])
     # (status=body['status'], originAddress=body['originAddress'], destinationAddress=body['destinationAddress'], zone=body['zone'], zoneDestino=body['zoneDestino'], weight=body['weight'], dimensions=body['dimensions'], mensaje=body['mensaje'], id_transport= body['id_transport'],  name_transport= body['name_transport'], phone_transport= body['phone_transport'], id_seller= body['id_seller'], name_seller= body['name_seller'], phone_seller= body['phone_seller'], rating= body['rating'], price=body['price'])
     db.session.add(newEncomiendas)
     db.session.commit()

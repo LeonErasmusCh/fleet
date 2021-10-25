@@ -20,54 +20,51 @@ export const Selector = () => {
 
 	return (
 		<>
-			<div className="card-body">
-				<h5 className="card-title">Solicitar pedido </h5>
-				<div className="card-text">
-					<div className="selector">
-						<div className="select-container">
-							<select name="plan" value={filter} onChange={handleChange}>
-								<option value="Norte"> Norte</option>
-								<option value="Centro"> Centro</option>
-								<option value="Sur"> Sur</option>
-								<option value="Oeste"> Oeste</option>
-								<option value="Periferia"> Periferia</option>
-							</select>
+			<div className="container mt-5 col-10 col-md-10 justify-content-center">
+				<div className="selector">
+					<div className="select-container">
+						<select name="plan" value={filter} onChange={handleChange}>
+							<option value="Norte"> Norte</option>
+							<option value="Centro"> Centro</option>
+							<option value="Sur"> Sur</option>
+							<option value="Oeste"> Oeste</option>
+							<option value="Periferia"> Periferia</option>
+						</select>
 
-							<table className="table">
-								<thead>
-									<tr>
-										<th>Pyme Transportista</th>
-										<th>Zona de Origen</th>
-										<th>Zona de Destino</th>
-										<th>Tarifa</th>
-									</tr>
-								</thead>
-								<tbody>
-									{datosVendedor
-										? datosVendedor.map((value, posicion) => {
-												console.log("tarfias", value);
-												return (
-													<>
-														{value.zoneDestino === filter ? (
-															<tr>
-																<td>{value.name_transport}</td>
-																<td>{value.zone}</td>
-																<td>{value.zoneDestino}</td>
-																<td>{value.price}</td>
-																<td>
-																	<ModalExample datosVendedor={value} />
-																</td>
-															</tr>
-														) : (
-															""
-														)}
-													</>
-												);
-										  })
-										: console.log("esta vacia")}
-								</tbody>
-							</table>
-						</div>
+						<table className="table">
+							<thead>
+								<tr>
+									<th>Pyme Transportista</th>
+									<th>Zona de Origen</th>
+									<th>Zona de Destino</th>
+									<th>Tarifa</th>
+								</tr>
+							</thead>
+							<tbody>
+								{datosVendedor
+									? datosVendedor.map((value, posicion) => {
+											console.log("tarfias", value);
+											return (
+												<>
+													{value.zoneDestino === filter ? (
+														<tr>
+															<td>{value.name_transport}</td>
+															<td>{value.zone}</td>
+															<td>{value.zoneDestino}</td>
+															<td>{value.price}</td>
+															<td>
+																<ModalExample datosVendedor={value} />
+															</td>
+														</tr>
+													) : (
+														""
+													)}
+												</>
+											);
+									  })
+									: console.log("esta vacia")}
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
