@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
 
-			endpoint: "https://3001-peach-toad-ordklkxy.ws-us17.gitpod.io",
+			endpoint: "https://3001-lime-bovid-yqluquj7.ws-us17.gitpod.io",
 
 			token: null,
 			message: null,
@@ -298,7 +298,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-peach-toad-ordklkxy.ws-us17.gitpod.io/api/tarifas", requestOptions)
+				fetch("https://3001-lime-bovid-yqluquj7.ws-us17.gitpod.io/api/tarifas", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un error", error));
@@ -335,7 +335,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-peach-toad-ordklkxy.ws-us17.gitpod.io/api/register", requestOptions)
+				fetch("https://3001-lime-bovid-yqluquj7.ws-us17.gitpod.io/api/register", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un erroooooor", error));
@@ -361,7 +361,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-peach-toad-ordklkxy.ws-us17.gitpod.io/api/register2", requestOptions)
+				fetch("https://3001-lime-bovid-yqluquj7.ws-us17.gitpod.io/api/register2", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("Ah ocurrido un errooooor", error));
@@ -459,7 +459,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-peach-toad-ordklkxy.ws-us17.gitpod.io/api/encomiendas", requestOptions)
+				fetch("https://3001-lime-bovid-yqluquj7.ws-us17.gitpod.io/api/encomiendas", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("ay no, no se mandó la encomiendaaa", error));
@@ -662,7 +662,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 
-				fetch("https://3001-peach-toad-ordklkxy.ws-us17.gitpod.io/api/encomiendas/status/", requestOptions)
+				fetch("https://3001-lime-bovid-yqluquj7.ws-us17.gitpod.io/api/encomiendas/status/", requestOptions)
 					.then(response => response.text())
 					.then(result => console.log(result))
 					.catch(error => console.log("error", error));

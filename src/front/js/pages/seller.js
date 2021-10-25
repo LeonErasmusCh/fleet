@@ -32,28 +32,43 @@ export const Seller = () => {
 		<>
 			<div className="container">
 				<div className="row text-center mt-3 divGrande">
-					<h4 className="text-secondary" style={{ borderRadius: "15px" }}>
-						Bienvenid@ <span> {store.info_user.name} </span>
-					</h4>
-				</div>
-				<div className="row mt-5">
-					<div className="container bg-light col-10 col-md-8" style={{ borderRadius: "15px" }}>
-						<div className="container mt-5 col-10 col-md-10">
-							<div className="row">
-								<div className="row div-filtro">
-									<div className="col-11">
-										<Selector />
-									</div>{" "}
-								</div>
-							</div>{" "}
+					<h2 className="text-secondary mt-5" style={{ borderRadius: "15px" }}>
+						Bienvenid@ <span> {store.info_user.name} </span>{" "}
+					</h2>
+
+					<div className="row mt-5">
+						<div className="container bg-light col-10 col-md-8" style={{ borderRadius: "15px" }}>
+							<div className="container mt-5 col-10 col-md-10">
+								<button
+									id="perfilV"
+									className="btn "
+									onClick={traerestado}
+									style={{ color: "black", border: "white" }}>
+									Solicitar Pedido
+								</button>
+								<button
+									id="perfilV"
+									className="btn "
+									onClick={traerestado2}
+									style={{ color: "black", border: "white" }}>
+									Mis pedidos
+								</button>
+								<div className="row">
+									<div className="row div-filtro">
+										<div className="col">
+											<div>{store.estado ? <Selector /> : <Vistasell />}</div>
+										</div>{" "}
+									</div>
+								</div>{" "}
+							</div>
 						</div>
-					</div>
-					<div className="container bg-light col-10 col-md-3 pt-5 " style={{ borderRadius: "15px" }}>
-						<div className="col-11" style={{ textAlign: "center" }}>
-							Delimitación de Zonas <i className="fas fa-chevron-down" />
-							<Link to="/zones">
-								<img src={mapa} style={{ width: "70%" }} />
-							</Link>
+						<div className="container bg-light col-10 col-md-3 pt-5" style={{ borderRadius: "15px" }}>
+							<div className="col-12 mb-5" style={{ textAlign: "center" }}>
+								Delimitación de Zonas <i className="fas fa-chevron-down" />
+								<Link to="/zones">
+									<img src={mapa} style={{ width: "70%" }} />
+								</Link>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -254,6 +254,7 @@ a.nav-link.active{
         color: white;
       }
 
+      
       .zonas {
         background: radial-gradient(circle, rgb(90, 61, 129) 0%, rgb(32, 1, 53) 100%);
       }
@@ -262,6 +263,7 @@ a.nav-link.active{
         // background: radial-gradient(circle, rgb(219, 201, 248) 98%, rgb(116, 78, 141) 2%);
         background: radial-gradient(circle, rgb(252, 252, 252) 0%, rgb(205, 188, 212) 100%);
         border-radius: 15px;
+        
       }
       .divChico {
         // background: radial-gradient(circle, rgb(219, 201, 248) 98%, rgb(116, 78, 141) 2%);
@@ -275,12 +277,14 @@ a.nav-link.active{
         border-radius: 25px;
         margin-left: 35px;
       }
+      
+      /*
       .div-zonas {
         // background: radial-gradient(circle, rgb(219, 201, 248) 98%, rgb(116, 78, 141) 2%);
         background: radial-gradient(circle, rgb(255, 1, 221) 0%rgb(55, 5, 70) 100%);
         border-radius: 15px;
         
-      }
+      }*/
     
 
     .table{

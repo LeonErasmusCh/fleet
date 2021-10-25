@@ -6,11 +6,11 @@ import "../../styles/home.scss";
 export const Mapa = () => {
 	return (
 		<>
-			<div className="row zonas " style={{ textAlign: "center", alignContent: "center" }}>
+			<div className="row zonas mt-5" style={{ textAlign: "center", alignContent: "center" }}>
 				<h1 style={{ color: "#CF32DF" }}>Delimitación de Zonas</h1>
 
-				<div className="col-8 div-mapa">
-					<img src={mapaZonas} style={{ width: "65%" }} />
+				<div className="col-8 col-md-sm-10 div-mapa">
+					<img src={mapaZonas} style={{ width: "100%" }} />
 				</div>
 				<div className="col-3 div-zonas" style={{ color: "white", textAlign: "left", marginTop: "45px" }}>
 					<h4>

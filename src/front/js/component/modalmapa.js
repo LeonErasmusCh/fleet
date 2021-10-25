@@ -26,7 +26,7 @@ export const ModalExample = props => {
 				/>
 				<ModalHeader toggle={toggle}>Solicitud pedido</ModalHeader>
 				<ModalBody size="lg">
-					<SellerDetailComponent datosVendedor={props.datosVendedor} />
+					<Map/>
 				</ModalBody>
 			</Modal>
 		</div>

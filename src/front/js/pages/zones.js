@@ -4,7 +4,7 @@ import { Mapa } from "../component/mapaZonas";
 export const Zones = () => {
 	return (
 		<>
-			<div>
+			<div className="container bg-light col-12 col-md-8">
 				<Mapa />
 			</div>
 		</>

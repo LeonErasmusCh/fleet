@@ -23,7 +23,7 @@ export const Selector = () => {
 	return (
 		<>
 			<div className="card-body">
-				<h5 className="card-title">Dónde quieres enviar tu pedido? </h5>
+				<h5 className="card-title">¿Dónde quieres enviar tu pedido? </h5>
 				<div className="card-text">
 					<div className="selector">
 						<div className="select-container">
@@ -38,42 +38,44 @@ export const Selector = () => {
 								<option value="Oriente"> Oriente</option>
 							</select>
 
-							<table className="table form-control">
-								<thead>
-									<tr>
-										<th>Transportista</th>
-										<th>Zona de Origen</th>
-										<th>Zona de Destino</th>
-										<th>Tarifa</th>
-									</tr>
-								</thead>
-								<tbody>
-									{datosVendedor
-										? datosVendedor.map((value, posicion) => {
-												console.log("tarfias", value);
-												return (
-													<>
-														{value.zoneDestino === filter ? (
-															<tr>
-																<td>{value.name_transport}</td>
-																<td>{value.zone}</td>
-																<td>{value.zoneDestino}</td>
-																<td>{value.price}</td>
-																<td>
-																	<Link to="/sellerDetail">
-																		<Button color="success">Solicitar</Button>
-																	</Link>
-																</td>
-															</tr>
-														) : (
-															""
-														)}
-													</>
-												);
-										  })
-										: console.log("esta vacia")}
-								</tbody>
-							</table>
+							<div className="table-responsive-md">
+								<table className="table form-control">
+									<thead>
+										<tr>
+											<th>Transportista</th>
+											<th>Origen</th>
+											<th>Destino</th>
+											<th>Tarifa</th>
+										</tr>
+									</thead>
+									<tbody>
+										{datosVendedor
+											? datosVendedor.map((value, posicion) => {
+													console.log("tarfias", value);
+													return (
+														<>
+															{value.zoneDestino === filter ? (
+																<tr>
+																	<td>{value.name_transport}</td>
+																	<td>{value.zone}</td>
+																	<td>{value.zoneDestino}</td>
+																	<td>{value.price}</td>
+																	<td>
+																		<Link to="/sellerDetail">
+																			<Button color="success">Solicitar</Button>
+																		</Link>
+																	</td>
+																</tr>
+															) : (
+																""
+															)}
+														</>
+													);
+											  })
+											: console.log("esta vacia")}
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
