@@ -46,7 +46,7 @@ export const Login = () => {
 				{/* <div id="divSignin"> */}
 				<div className="signinBox">
 					{/* <div id="loginBox"> */}
-					<h1 style={{ color: "white" }}>Selecciona tu Perfil</h1>
+					<h1 style={{ color: "#ff1dff" }}>Selecciona tu Perfil</h1>
 					<br />
 					<br />
 					<div className="botones">
@@ -77,20 +77,16 @@ export const Login = () => {
 						<a href="/signup">Registrarse</a>
 						<br />
 						<a href="/password">¿Olvidaste tu contraseña?</a>
+						<br />
+						<Link to="/">
+							<button
+								style={{ backgroundColor: "#ff1dff", marginLeft: "10px" }}
+								className="btn btn-primary">
+								Volver
+							</button>
+						</Link>
 					</div>
-
-					{/* <Link to="/signup">
-								<button
-									type="submit"
-									className="btn btn-primary"
-									// value={register}
-									name="register">
-									Registrarse
-								</button>
-							</Link> */}
 				</div>
-				{/* </div> */}
-				{/* </div> */}
 			</div>
 		</>
 	);

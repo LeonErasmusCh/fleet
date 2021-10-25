@@ -110,12 +110,6 @@ a.nav-link.active{
 
 .dispatchstatus {background-color: purple}
 
-.table{
-    background-color: rgb(184, 137, 184);
-    margin-top: 50px;
-    padding:5px;
-
-}
 
 
 
@@ -259,5 +253,50 @@ a.nav-link.active{
       {
         color: white;
       }
+
+      .zonas {
+        background: radial-gradient(circle, rgb(90, 61, 129) 0%, rgb(32, 1, 53) 100%);
+      }
+
+    .divGrande {
+        // background: radial-gradient(circle, rgb(219, 201, 248) 98%, rgb(116, 78, 141) 2%);
+        background: radial-gradient(circle, rgb(252, 252, 252) 0%, rgb(205, 188, 212) 100%);
+        border-radius: 15px;
+      }
+      .divChico {
+        // background: radial-gradient(circle, rgb(219, 201, 248) 98%, rgb(116, 78, 141) 2%);
+        background: radial-gradient(circle, rgb(255, 1, 221) 0%rgb(55, 5, 70) 100%);
+        border-radius: 15px;
+        margin-left: 5px;
+      }
+      .div-mapa {
+        // background: radial-gradient(circle, rgb(219, 201, 248) 98%, rgb(116, 78, 141) 2%);
+        background: rgb(248, 233, 248);
+        border-radius: 25px;
+        margin-left: 35px;
+      }
+      .div-zonas {
+        // background: radial-gradient(circle, rgb(219, 201, 248) 98%, rgb(116, 78, 141) 2%);
+        background: radial-gradient(circle, rgb(255, 1, 221) 0%rgb(55, 5, 70) 100%);
+        border-radius: 15px;
+        
+      }
+    
+
+    .table{
+        // background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+        margin-top: 50px;
+        padding:5px;
+        border-radius: 15px;
+    
+    }
+    
+body {
+   
+    background: rgb(44,6,89);
+    background: radial-gradient(circle, rgba(44,6,89,1) 0%, rgba(5,6,6,1) 100%);
+    height: 100vh;
+}
+    
       
  

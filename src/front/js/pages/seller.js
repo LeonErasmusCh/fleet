@@ -8,6 +8,9 @@ import { TodoList } from "../component/todolist";
 import { Calendario } from "../component/calendario";
 import { Vistasell } from "../component/vistasell";
 import { NewSidebar } from "../component/NewSidebar";
+import mapa from "../../img/mapa.png";
+// import { Mapa } from "../component/mapaZonas";
+
 //npm install react-calendar
 export const Seller = () => {
 	const { store, actions } = useContext(Context);
@@ -27,95 +30,34 @@ export const Seller = () => {
 
 	return (
 		<>
-			<div className="app-container">
-				<div className="row">
-					<div className="col col-2">
-						<NewSidebar />
+			<div className="container">
+				<div className="row text-center mt-3 divGrande">
+					<h4 className="text-secondary" style={{ borderRadius: "15px" }}>
+						Bienvenid@ <span> {store.info_user.name} </span>
+					</h4>
+				</div>
+				<div className="row mt-5">
+					<div className="container bg-light col-10 col-md-8" style={{ borderRadius: "15px" }}>
+						<div className="container mt-5 col-10 col-md-10">
+							<div className="row">
+								<div className="row div-filtro">
+									<div className="col-11">
+										<Selector />
+									</div>{" "}
+								</div>
+							</div>{" "}
+						</div>
 					</div>
-
-					<div className="col col-10">
-						<div className="row app-content">
-							<div className="col col-8 projects-section">
-								<div className="row projects-section-header m-5">
-									<div className="col col-6">
-										<h5>
-											Bienvenido
-											<br />
-											<span> {store.info_user.name} </span>
-										</h5>
-									</div>
-									<div className="col col-4">
-										<span>Pendiente traer fecha actual</span>
-									</div>
-									<div className="projects-status">
-										<div className="item-status">
-											<span className="status-number">10</span>
-											<span className="status-type">Ventas</span>
-										</div>
-										<div className="item-status">
-											<span className="status-number">24</span>
-											<span className="status-type">Pendientes</span>
-										</div>
-									</div>
-								</div>
-
-								<div className="projects-section-line">
-									<div className="row">
-										<div className="card text-center">
-											<div className="card-header">
-												<ul className="nav nav-pills card-header-pills">
-													<li className="nav-item">
-														<button
-															id="perfilV"
-															className="btn "
-															onClick={traerestado}
-															style={{ color: "black", border: "white" }}>
-															pedido
-														</button>
-													</li>
-													<li className="nav-item">
-														<button
-															id="perfilV"
-															className="btn "
-															onClick={traerestado2}
-															style={{ color: "black", border: "white" }}>
-															perfil
-														</button>
-													</li>
-												</ul>
-											</div>
-											<div className="card-body">
-												<h5 className="card-title">Mis actividades </h5>
-												<p className="card-text">
-													<div>{store.estado ? <Selector /> : <Vistasell />}</div>{" "}
-												</p>
-												<a href="#" className="btn btn-primary">
-													Go somewhere
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className="projects-section-footer">
-									<div>{store.sidebar ? <Calendario /> : ""}</div>
-								</div>
-							</div>
-							<div className="col col-3 messages-section">
-								<div className="projects-section-header">
-									<p>Mi tablero</p>
-								</div>
-								<div className="messages">
-									<div className="message-box">Favoritos</div>
-									<div className="message-box" />
-									<div className="message-box">
-										<Calendario />
-									</div>
-								</div>
-							</div>
+					<div className="container bg-light col-10 col-md-3 pt-5 " style={{ borderRadius: "15px" }}>
+						<div className="col-11" style={{ textAlign: "center" }}>
+							Delimitación de Zonas <i className="fas fa-chevron-down" />
+							<Link to="/zones">
+								<img src={mapa} style={{ width: "70%" }} />
+							</Link>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>{" "}
 		</>
 	);
 };
