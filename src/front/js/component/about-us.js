@@ -6,12 +6,12 @@ export const TeamMembers = props => {
 		<div id="who-we-are" className="col-8 col-md-3 m-4">
 			<div className="row d-flex justify-content-around">
 				<img alt="..." className="rounded-circle img-thumbnail m-3" src={props.imagen} />
-				<h5>
+				<h5 style={{ color: "#ff1dff" }}>
 					Hola! Soy
 					{props.name}
 				</h5>
-				<p>Fullstack developer 4Geeks...</p>
-				<p>
+				<p style={{ color: "white" }}>Fullstack developer 4Geeks...</p>
+				<p style={{ color: "white" }}>
 					Integrante de este equipo, socio de este gran proyecto llamado Fleet. Somos un agente económico
 					conformado por programadores, que a través de la tecnólogia y la misma programación en si, creamos
 					una aplicación y/o pagina web con el fin de generar un vinculo seguro y confiable entre empresas

@@ -432,7 +432,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const seller = JSON.parse(localStorage.getItem("seller"));
 				console.log("ENCOMIENDA:");
 				var raw = JSON.stringify({
-					// estado: estado,
+					estado: false,
 					originAddress: originAddress,
 					destinationAddress: destinationAddress,
 					weight: weight,
