@@ -75,7 +75,10 @@ export const SellerDetail = () => {
 
 	return (
 		<>
-			<form className="container bg-light col-12 col-md-8" onSubmit={e => enviarSolicitud(e)}>
+			<form
+				className="container bg-light col-12 col-md-8"
+				style={{ borderRadius: "15px" }}
+				onSubmit={e => enviarSolicitud(e)}>
 				<div className="col-10 col-md-9 mx-auto">
 					<h3 className="text-center text-secondary p-4">Solicitud de Servicio</h3>
 
@@ -315,15 +318,22 @@ export const SellerDetail = () => {
 									onChange={e => setMensaje(e.target.value)}
 								/>
 							</div>
-							<div className="border-bottom border-light m-3" />
-							{/* {count ? (
+							<div className="border-bottom border-light m-3" style={{ alignContent: "center" }}>
+								{/* {count ? (
 								<h6 className="text-success text-center p-2">
 									{count} ingresado <i className="fas fa-check-circle" />
 								</h6>
 							) : null} */}
-							<button className="btn btn-primary my-3" type="submit" onSubmit={e => enviarSolicitud(e)}>
-								enviar
-							</button>
+								<button
+									className="btn btn-primary my-3"
+									type="submit"
+									onSubmit={e => enviarSolicitud(e)}>
+									enviar
+								</button>{" "}
+								<br />
+								<a href="javascript: history.go(-1)">Volver </a>
+								<br />
+							</div>
 						</div>
 					</div>
 				</div>

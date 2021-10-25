@@ -58,7 +58,7 @@ export const LoginVendedor = () => {
 				</div>
 				<button
 					type="submit"
-					style={{ backgroundColor: "transparent", marginLeft: "10px", marginBottom: "10px" }}
+					style={{ backgroundColor: "#ff1dff", marginLeft: "10px", marginBottom: "10px" }}
 					className="btn btn-primary"
 					onClick={handleClick}>
 					Iniciar Sesión

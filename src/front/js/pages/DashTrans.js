@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import santiago from "../../img/Comunas_de_Santiago.png";
+import mapa from "../../img/mapa.png";
 
 export const DashTrans = () => {
 	const { store, actions } = useContext(Context);
@@ -61,25 +62,68 @@ export const DashTrans = () => {
 	return (
 		<>
 			<div className="container">
-				<div className="row text-center mt-3">
-					<h4 className="text-secondary">
-						Bienvenido <span> {store.info_user.name} </span>
+				<div className="row text-center mt-3 divGrande">
+					<h4 className="text-secondary" style={{ borderRadius: "15px" }}>
+						Bienvenid@ <span> {store.perfil.name} </span>
 					</h4>
 				</div>
 				<div className="row mt-5">
-					<div className="container bg-light col-10 col-md-8">
-						<div className="">
-							<img
-								src={santiago}
-								style={{ width: "80%", height: "50%", padding: "8%", margin: "0 10%" }}
-							/>
+					<div className="container bg-light col-10 col-md-8" style={{ borderRadius: "15px" }}>
+						<div className="container mt-5 col-10 col-md-10">
+							<div className="row">
+								<h5 className="text-center m-3">Pedidos disponible</h5>
+								<table className="table table-light">
+									<thead>
+										<tr>
+											<th scope="col">Origen</th>
+											<th scope="col">Destino</th>
+											<th scope="col">Dimenciones</th>
+											<th scope="col">Peso</th>
+											<th scope="col">Mensaje</th>
+											<th scope="col">Aceptar</th>
+										</tr>
+									</thead>
+									<tbody>
+										{encomiendas
+											? encomiendas.map((index, key) => {
+													console.log("map", index, " key", key);
+													return (
+														<tr key={{ key }}>
+															<td>{index.originAddress}</td>
+															<td>{index.destinationAddress}</td>
+															<td>{index.dimensions} cm</td>
+															<td>{index.weight} kg</td>
+															<td>{index.mensaje}</td>
+															<td>
+																<div className="d-flex align-items-center">
+																	<button
+																		type="submit"
+																		className="btn btn-success btn-sm"
+																		onClick={() => {
+																			console.log("index", index);
+																			setEstado(true);
+																			console.log(estado);
+																			//setEncomiendas([index.dimensions == 12]);
+																			actions.encomiendaEstado(index);
+																		}}>
+																		<i className="fas fa-check " /> aceptar
+																	</button>
+																</div>
+															</td>
+														</tr>
+													);
+											  })
+											: console.log("Failed to load encomiendas hook")}
+									</tbody>
+								</table>
+							</div>
 						</div>
 
-						<Link to="/">
+						{/* <Link to="/">
 							<button type="button" className="btn btn-secondary btn-md btn-block m-2">
 								inicio
 							</button>
-						</Link>
+						</Link> */}
 						<Link to="/map">
 							<button type="button" className="btn btn-secondary btn-md btn-block m-2">
 								ver pedidos aceptados en mapa
@@ -87,7 +131,13 @@ export const DashTrans = () => {
 						</Link>
 					</div>
 
-					<div className="container bg-light col-10 col-md-3 pt-5 ">
+					<div className="container bg-light col-10 col-md-3 pt-5 " style={{ borderRadius: "15px" }}>
+						<div className="col-11" style={{ textAlign: "center" }}>
+							Delimitación de Zonas <i className="fas fa-chevron-down" />
+							<Link to="/zones">
+								<img src={mapa} style={{ width: "70%" }} />
+							</Link>
+						</div>
 						<h5 className="text-center m-3">Ingresar valores de servicio</h5>
 						<form onSubmit={e => handlersubmit3(e)}>
 							<div className="row p-3">
@@ -102,20 +152,20 @@ export const DashTrans = () => {
 										<option disable selected="true" value="" className="text-center">
 											-- Elegir Zona --
 										</option>
+										<option id="Cuidad" value="Poniente">
+											Poniente
+										</option>
+										<option id="Cuidad" value="Norte">
+											Norte
+										</option>
 										<option id="Cuidad" value="Centro">
 											Centro
 										</option>
 										<option id="Cuidad" value="Sur">
 											Sur
 										</option>
-										<option id="Cuidad" value="Oeste">
-											Oeste
-										</option>
-										<option id="Cuidad" value="Norte">
-											Norte
-										</option>
-										<option id="Cuidad" value="Periferia">
-											Periferia
+										<option id="Cuidad" value="Oriente">
+											Oriente
 										</option>
 									</select>
 								</div>
@@ -131,20 +181,20 @@ export const DashTrans = () => {
 										<option value="" className="text-center">
 											-- Elegir Zona --
 										</option>
+										<option id="Cuidad" value="Poniente">
+											Poniente
+										</option>
+										<option id="Cuidad" value="Norte">
+											Norte
+										</option>
 										<option id="Cuidad" value="Centro">
 											Centro
 										</option>
 										<option id="Cuidad" value="Sur">
 											Sur
 										</option>
-										<option id="Cuidad" value="Oeste">
-											Oeste
-										</option>
-										<option id="Cuidad" value="Norte">
-											Norte
-										</option>
-										<option id="Cuidad" value="Periferia">
-											Periferia
+										<option id="Cuidad" value="Oriente">
+											Oriente
 										</option>
 									</select>
 								</div>
@@ -178,56 +228,6 @@ export const DashTrans = () => {
 							</div>
 						</form>
 					</div>
-				</div>
-			</div>
-
-			<div className="container mt-5 col-10 col-md-10">
-				<div className="row">
-					<h5 className="text-center m-3">Pedidos disponible</h5>
-					<table className="table table-light">
-						<thead>
-							<tr>
-								<th scope="col">Origen</th>
-								<th scope="col">Destino</th>
-								<th scope="col">Dimenciones</th>
-								<th scope="col">Peso</th>
-								<th scope="col">Mensaje</th>
-								<th scope="col">Aceptar</th>
-							</tr>
-						</thead>
-						<tbody>
-							{encomiendas
-								? encomiendas.map((index, key) => {
-										console.log("map", index, " key", key);
-										return (
-											<tr key={{ key }}>
-												<td>{index.originAddress}</td>
-												<td>{index.destinationAddress}</td>
-												<td>{index.dimensions} cm</td>
-												<td>{index.weight} kg</td>
-												<td>{index.mensaje}</td>
-												<td>
-													<div className="d-flex align-items-center">
-														<button
-															type="submit"
-															className="btn btn-success btn-sm"
-															onClick={() => {
-																console.log("index", index);
-																setEstado(true);
-																console.log(estado);
-																//setEncomiendas([index.dimensions == 12]);
-																actions.encomiendaEstado(index);
-															}}>
-															<i className="fas fa-check " /> aceptar
-														</button>
-													</div>
-												</td>
-											</tr>
-										);
-								  })
-								: console.log("Failed to load encomiendas hook")}
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</>

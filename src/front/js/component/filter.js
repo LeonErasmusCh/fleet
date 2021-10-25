@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.scss";
 import { ModalExample } from "./modal";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export const Selector = () => {
 	const [filter, setFilter] = useState("");
@@ -21,22 +23,25 @@ export const Selector = () => {
 	return (
 		<>
 			<div className="card-body">
-				<h5 className="card-title">Solicitar pedido </h5>
+				<h5 className="card-title">Dónde quieres enviar tu pedido? </h5>
 				<div className="card-text">
 					<div className="selector">
 						<div className="select-container">
-							<select name="plan" value={filter} onChange={handleChange}>
+							<select name="plan" className="form-control" value={filter} onChange={handleChange}>
+								<option disable selected="true" value="" className="text-center">
+									-- Elegir Zona --
+								</option>
+								<option value="Poniente"> Poniente</option>
 								<option value="Norte"> Norte</option>
 								<option value="Centro"> Centro</option>
 								<option value="Sur"> Sur</option>
-								<option value="Oeste"> Oeste</option>
-								<option value="Periferia"> Periferia</option>
+								<option value="Oriente"> Oriente</option>
 							</select>
 
-							<table className="table">
+							<table className="table form-control">
 								<thead>
 									<tr>
-										<th>Pyme Transportista</th>
+										<th>Transportista</th>
 										<th>Zona de Origen</th>
 										<th>Zona de Destino</th>
 										<th>Tarifa</th>
@@ -55,7 +60,9 @@ export const Selector = () => {
 																<td>{value.zoneDestino}</td>
 																<td>{value.price}</td>
 																<td>
-																	<ModalExample datosVendedor={value} />
+																	<Link to="/sellerDetail">
+																		<Button color="success">Solicitar</Button>
+																	</Link>
 																</td>
 															</tr>
 														) : (
