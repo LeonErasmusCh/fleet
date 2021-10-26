@@ -6,8 +6,8 @@ import { Context } from "../store/appContext";
 
 /* Tamaño del mapa */
 const containerStyle = {
-	width: "100vw",
-	height: "100vh",
+	width: "90vw",
+	height: "90vh",
 	margin: "0 auto"
 };
 

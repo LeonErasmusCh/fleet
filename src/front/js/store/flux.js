@@ -3,7 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			//CAMBIAR CADA VEZ QUE TENGA SERVIDOR NUEVO
 
-			endpoint: "https://3001-lime-bovid-yqluquj7.ws-us17.gitpod.io",
+			endpoint: "https://3001-teal-horse-roe1rwgk.ws-us17.gitpod.io",
 
 			token: null,
 			message: null,
@@ -523,22 +523,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let googleKey = "&key=AIzaSyDdZ6PVKhfCJCw2rt23cHautMx2DONNmzk";
 				console.log("store.encomiendas", store.encomiendas);
 				for (let i = 0; i < store.encomiendas.length; i++) {
-					console.log(
-						" /////   destinationAddress en encomiendas: /////" + store.encomiendas[i].originAddress
-					);
-					// Remove , and " "
-					let initialString = store.encomiendas[i].originAddress.replace(/ /g, "+");
-					let concatString = initialString.replace(/,/g, "");
-					//console.log(concatString);
-					// Concatenate
-					let geoCoded = url + concatString + country + googleKey;
-					console.log("geoCoded url encomiendas:" + geoCoded);
-					// Save in store
-					setStore({ encomiendasUrl: [store.encomiendasUrl, geoCoded] });
-					// Remove undefined values && flatten array
-					var filtered = store.encomiendasUrl.filter(e => e !== undefined);
-					setStore({ encomiendasUrl: filtered.flat() });
-					console.log("store.encomiendasUrl Array", store.encomiendasUrl);
+					if (store.encomiendas[i].estado == "aceptado") {
+						console.log("not null => if statement in encomiendaCoords/flux", store.encomiendas[i]);
+
+						console.log(
+							" /////   destinationAddress en encomiendas: /////" + store.encomiendas[i].originAddress
+						);
+						// Remove , and " "
+						let initialString = store.encomiendas[i].originAddress.replace(/ /g, "+");
+						let concatString = initialString.replace(/,/g, "");
+						//console.log(concatString);
+						// Concatenate
+						let geoCoded = url + concatString + country + googleKey;
+						console.log("geoCoded url encomiendas:" + geoCoded);
+						// Save in store
+						setStore({ encomiendasUrl: [store.encomiendasUrl, geoCoded] });
+						// Remove undefined values && flatten array
+						var filtered = store.encomiendasUrl.filter(e => e !== undefined);
+						setStore({ encomiendasUrl: filtered.flat() });
+						console.log("store.encomiendasUrl Array", store.encomiendasUrl);
+					}
 				}
 			},
 
@@ -584,20 +588,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//CONCATENATE URL + ADDRESS + APIkey  TO DO GEOCODING
 
 				for (let i = 0; i < store.encomiendas.length; i++) {
-					console.log("ALL VENDEDORES DIRECCIONES: " + store.encomiendas[i].destinationAddress);
-					// Remove , and " "
-					let initialString = store.encomiendas[i].destinationAddress.replace(/ /g, "+");
-					let concatString = initialString.replace(/,/g, "");
-					//console.log(concatString);
-					// Concatenate
-					let geoCoded = url + concatString + country + googleKey;
-					console.log("geoCoded url:" + geoCoded);
-					// Save in store
-					setStore({ geocodedVendedores_url: [store.geocodedVendedores_url, geoCoded] });
-					// Remove undefined values && flatten array
-					var filtered = store.geocodedVendedores_url.filter(e => e !== undefined);
-					setStore({ geocodedVendedores_url: filtered.flat() });
-					console.log("store.geocodedVendedores_url Array", store.geocodedVendedores_url);
+					if (store.encomiendas[i].estado == "aceptado") {
+						console.log("ALL VENDEDORES DIRECCIONES: " + store.encomiendas[i].destinationAddress);
+						// Remove , and " "
+						let initialString = store.encomiendas[i].destinationAddress.replace(/ /g, "+");
+						let concatString = initialString.replace(/,/g, "");
+						//console.log(concatString);
+						// Concatenate
+						let geoCoded = url + concatString + country + googleKey;
+						console.log("geoCoded url:" + geoCoded);
+						// Save in store
+						setStore({ geocodedVendedores_url: [store.geocodedVendedores_url, geoCoded] });
+						// Remove undefined values && flatten array
+						var filtered = store.geocodedVendedores_url.filter(e => e !== undefined);
+						setStore({ geocodedVendedores_url: filtered.flat() });
+						console.log("store.geocodedVendedores_url Array", store.geocodedVendedores_url);
+					}
 				}
 			},
 
