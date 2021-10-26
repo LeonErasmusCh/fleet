@@ -110,26 +110,28 @@ export const SignupTransport = () => {
 						onChange={e => setPassword(e.target.value)}
 					/>
 					<br />
-					<input
-						style={{
-							// border: "2px",
-							borderRadius: "5px",
-							backgroundColor: "transparent"
-						}}
-						className="btn btn-primary"
-						type="submit"
-						name="ingresar"
-						value="Registrarse"
-						onSubmit={e => handlersubmit2(e)}
-					/>
+
+					<Link to="/login">
+						<input
+							style={{
+								// border: "2px",
+								borderRadius: "5px",
+								backgroundColor: "#ff1dff"
+							}}
+							className="btn btn-primary"
+							type="submit"
+							name="ingresar"
+							value="Registrarse"
+							onSubmit={e => handlersubmit2(e)}
+						/>
+					</Link>
 					<Link to="/login">
 						<button
-							type="submit"
-							style={{ backgroundColor: "transparent", marginLeft: "10px" }}
+							style={{ backgroundColor: "#614183", marginLeft: "10px" }}
 							className="btn btn-primary"
 							// value={register}
 							name="register">
-							Iniciar Sesión
+							Volver
 						</button>
 					</Link>
 				</form>

@@ -6,72 +6,58 @@ import "../../styles/home.scss";
 
 export const Vistasell = () => {
 	const { store, actions } = useContext(Context);
+	const [encomiendas, setEncomiendas] = useState("");
+	const [estado, setEstado] = useState(false);
+
+	useEffect(() => {
+		setEncomiendas(store.encomiendas);
+		console.log("======>>>>>>>", encomiendas);
+	});
+
 	const traerestado = () => {
 		actions.estadoperfilpedido();
 	};
 
 	return (
 		<>
-			<div className="row projects-section-line text-center mt-5">
-				<div className="col col-12 project-boxes jsGridView mt-5 mx-5">
-					<div className="project-box">
-						<div className="project-box-header">
-							<div className="more-wrapper" />
-						</div>
-						<div className="project-box-content-header">
-							<p className="box-content-header">Busca tu transportista favorito</p>
-							<p className="box-content-subheader">Solicitar despacho</p>
-						</div>
-						<div className="box-progress-wrapper">
-							<p className="box-progress-header">Progress</p>
-							<div className="box-progress-bar">
-								<span className="box-progress" />
-							</div>
-						</div>
-					</div>
-					<div className="project-box">
-						<div className="project-box-header">
-							<div className="more-wrapper" />
-						</div>
-						<div className="project-box-content-header">
-							<p className="box-content-header">Busca tu transportista favorito</p>
-							<p className="box-content-subheader">Solicitar despacho</p>
-						</div>
-						<div className="box-progress-wrapper">
-							<p className="box-progress-header">Progress</p>
-							<div className="box-progress-bar">
-								<span className="box-progress" />
-							</div>
-						</div>
-					</div>
-					<div className="project-box">
-						<div className="project-box-header">
-							<div className="more-wrapper" />
-						</div>
-						<div className="project-box-content-header">
-							<p className="box-content-header">Busca tu transportista favorito</p>
-							<p className="box-content-subheader">Solicitar despacho</p>
-						</div>
-						<div className="box-progress-wrapper">
-							<p className="box-progress-header">Progress</p>
-							<div className="box-progress-bar">
-								<span className="box-progress" />
-							</div>
-						</div>
-					</div>
-					<div className="project-box">
-						<div className="project-box-header">
-							<div className="more-wrapper" />
-						</div>
-						<div className="project-box-content-header">
-							<p className="box-content-header">Busca tu transportista favorito</p>
-							<p className="box-content-subheader">Solicitar despacho</p>
-						</div>
-						<div className="box-progress-wrapper">
-							<p className="box-progress-header">Progress</p>
-							<div className="box-progress-bar">
-								<span className="box-progress" />
-							</div>
+			<div className="card-body">
+				<h5 className="card-title">Mis pedidos</h5>
+				<div className="card-text">
+					<div className="row">
+						<div className="table-responsive">
+							<table className="table table-light">
+								<thead>
+									<tr>
+										<th scope="col">Transportista</th>
+										<th scope="col">Origen</th>
+										<th scope="col">Destino</th>
+										<th scope="col">Dimenciones</th>
+										<th scope="col">Peso</th>
+										<th scope="col">Mensaje</th>
+										<th scope="col">estado</th>
+										<th scope="col">Eliminar</th>
+									</tr>
+								</thead>
+								<tbody>
+									{encomiendas
+										? encomiendas.map((index, key) => {
+												console.log("map", index, " key", key);
+												return (
+													<tr key={{ key }}>
+														<td>{index.name_transport}</td>
+														<td>{index.originAddress}</td>
+														<td>{index.destinationAddress}</td>
+														<td>{index.dimensions} cm</td>
+														<td>{index.weight} kg</td>
+														<td>{index.mensaje}</td>
+														<td>{index.estado}</td>
+														<td>{index.estado}</td>
+													</tr>
+												);
+										  })
+										: console.log("Failed to load encomiendas hook")}
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

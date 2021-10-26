@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 
+import PropTypes from "prop-types";
+
 import { Link, useParams } from "react-router-dom";
 import { LeftSidebar } from "../component/left-sidebar";
 import { ReceiveMessage } from "../component/receiveMessage";
 
-export const SellerDetail = () => {
+export const SellerDetailComponent = () => {
 	const { store, actions } = useContext(Context);
 
 	// const [estado, setEstado] = useState("");
@@ -75,11 +77,8 @@ export const SellerDetail = () => {
 
 	return (
 		<>
-			<form
-				className="container bg-light col-12 col-md-8"
-				style={{ borderRadius: "15px" }}
-				onSubmit={e => enviarSolicitud(e)}>
-				<div className="col-10 col-md-9 mx-auto">
+			<form className="container bg-light col-12 col-md-12 col-sm-8" onSubmit={e => enviarSolicitud(e)}>
+				<div className="col-12 col-md-9 mx-auto">
 					<h3 className="text-center text-secondary p-4">Solicitud de Servicio</h3>
 
 					<div className="border-bottom border-light m-3" />
@@ -186,7 +185,7 @@ export const SellerDetail = () => {
 						<div className="border-bottom border-light m-3" />
 
 						<h5 className="text-secondary">
-							Dimenciones del encomienda
+							Dimeniones del encomienda
 							<i className="fas fa-box mx-3" />
 						</h5>
 						<footer className="blockquote-footer text-info py-2">
@@ -318,22 +317,15 @@ export const SellerDetail = () => {
 									onChange={e => setMensaje(e.target.value)}
 								/>
 							</div>
-							<div className="border-bottom border-light m-3" style={{ alignContent: "center" }}>
-								{/* {count ? (
+							<div className="border-bottom border-light m-3" />
+							{/* {count ? (
 								<h6 className="text-success text-center p-2">
 									{count} ingresado <i className="fas fa-check-circle" />
 								</h6>
 							) : null} */}
-								<button
-									className="btn btn-primary my-3"
-									type="submit"
-									onSubmit={e => enviarSolicitud(e)}>
-									enviar
-								</button>{" "}
-								<br />
-								<a href="javascript: history.go(-1)">Volver </a>
-								<br />
-							</div>
+							<button className="btn btn-primary my-3" type="submit" onSubmit={e => enviarSolicitud(e)}>
+								enviar
+							</button>
 						</div>
 					</div>
 				</div>

@@ -9,7 +9,6 @@ import { Signup } from "./pages/signup";
 import { TransportDetail } from "./pages/transportDetail";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Seller } from "./pages/seller";
@@ -20,8 +19,9 @@ import { NavbarSell } from "./component/ navbarSell";
 import { Sidebar } from "./component/sidebar";
 import { SellerDetail } from "./pages/sellerDetail";
 import { NEWSidebar } from "./component/NewSidebar";
+import { Zones } from "./pages/zones";
 
-import { PasswordRecovery } from "./component/PasswordRecovery";
+import { Password } from "./pages/password";
 
 import { Calendario } from "./component/calendario";
 
@@ -55,14 +55,24 @@ const Layout = () => {
 						<Route exact path="/sellerdetail">
 							<NavbarSell />
 							<SellerDetail />
+							<Footer />
 						</Route>
 						<Route exact path="/calendario">
 							<Calendario />
+						</Route>
+						<Route exact path="/password">
+							<Password />
+							<Footer />
+						</Route>
+						<Route exact path="/zones">
+							<Zones />
+							<Footer />
 						</Route>
 
 						<Route exact path="/map">
 							{/*<NavbarDelivery />*/}
 							<DeliveryMap />
+							<Footer />
 						</Route>
 						<Route exact path="/demo">
 							<Demo />
@@ -71,14 +81,14 @@ const Layout = () => {
 							<NavbarSell />
 							<DashTrans />
 						</Route>
-						<Route exact path="/PasswordRecovery">
-							<PasswordRecovery />
-						</Route>
+
 						<Route exact path="/signup">
 							<Signup />
+							<Footer />
 						</Route>
 						<Route exact path="/login">
 							<Login />
+							<Footer />
 						</Route>
 
 						<Route exact path="/single/:theid">
